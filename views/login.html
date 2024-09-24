@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="../styles/login.css">
+</head>
+<body>
+    <main class="cuerpo">
+        <section class="cuerpo__contenedor">
+            <form class="form-login">
+                <h2 class="form-login__titulo">INICIAR SESIÓN</h2>
+                <h3 class="form-login__subtitulos"> Usuario o Correo electrónico </h3>
+                <input class="form-login__control" type="email" placeholder="Ingrese su correo" required>
+                <h3 class="form-login__subtitulos"> Contraseña </h3>
+                <input class="form-login__control" type= "password" placeholder="Ingrese su contraseña" required>
+                <a class="form-login__recupContrasena" href="#">¿Olvidaste tu contraseña?</a>
+                <button class="form-login__btnIngresar" onclick="ingresar()"> Ingresar </button>
+                <p class="form-login__crearCuenta">¿No tienes una cuenta aún?</p>
+                <a class="form-login__crearCuenta__enlace" href="#">Crear una Cuenta</a>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

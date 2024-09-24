@@ -1,0 +1,75 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+  }
+
+.cuerpo {
+    background-image: url("../img/background-login.png");  
+}
+
+.cuerpo__contenedor {
+    display: flex;
+    justify-content: center;
+    font-family: Calibri;
+    height: 100vh;
+}
+
+.form-login {
+    background-color: #012340;
+    color: white;
+    width: 450px;
+    padding: 10px 70px 40px;
+    border-radius: 4px;
+    margin: auto;
+}
+
+.form-login__titulo {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 35px;
+}
+
+.form-login__subtitulos {
+    margin: 5px 0px;
+    font-weight: normal;
+    font-size: 18px;
+}
+
+.form-login__control {
+    width: 100%;
+    background:#A0CCF2;
+    padding: 6px;
+    border-radius: 4px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #A0CCF2;
+    font-size: 20px;
+}
+
+.form-login__recupContrasena {
+    text-decoration: none;
+    color: white;
+    padding: 5px;
+}
+
+.form-login__btnIngresar {
+    width: 100%;
+    background-color: #CD3346;
+    color: white;
+    font-size: 25px;
+    padding: 5px;
+    margin-top: 10px;
+}
+
+.form-login__crearCuenta {
+    padding: 20px;
+    text-align: center;
+}
+
+.form-login__crearCuenta__enlace {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
