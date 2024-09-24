@@ -55,6 +55,8 @@
 }
 
 .form-login__btnIngresar {
+    display: flex;
+    justify-content: center;
     width: 100%;
     background-color: #CD3346;
     color: white;
@@ -63,12 +65,19 @@
     margin-top: 10px;
 }
 
+.form-login__logPerson {
+    height: 30px;
+    margin-right: 5px;
+}
+
 .form-login__crearCuenta {
     padding: 20px;
     text-align: center;
 }
 
 .form-login__crearCuenta__enlace {
+    display: block;
+    text-align: center;
     text-decoration: none;
     color: white;
     font-size: 20px;
