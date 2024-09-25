@@ -1,0 +1,86 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+.cuerpo {
+    background-image: url("../img/backgraund-register.png");
+    background-size: cover;  
+}
+
+.cuerpo__contenedor_register {
+    display: flex;
+    flex-direction: column;  
+    justify-content: center;  
+    align-items: center; 
+    font-family: Calibri;
+    height: 100vh; 
+}
+
+.header {
+    height: 120px;
+    background:rgba(0, 77, 171, 100);
+}
+
+.header img {
+    height: 130px;
+    margin-left: 30px;
+    margin: auto;
+}
+
+.form-register_titulo{
+    text-align: center;
+    color: #012340;
+    margin-bottom: 20px;
+    font-size: 55px;
+    font-weight: bold;
+}
+
+.form-register {
+    background-color: rgb(161, 207, 241);
+    color: black;
+    width: 600px;
+    padding: 10px 70px 40px;
+    border-radius: 30px;
+    margin: auto;
+}
+
+.form-register img{
+    display: block; 
+    margin: 0 auto; 
+    height: 120px; 
+    margin-bottom: 0px; 
+    margin-top: 0px;
+}
+
+.form-register__subtitulos {
+    margin: 5px 0px;
+    font-weight: normal;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.form-register__control {
+    width: 100%;
+    background:white;
+    padding: 6px;
+    border-radius: 4px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    border: 1px solid #6497c4;
+    font-size: 20px;
+}
+
+.btnRegistrarse {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    border-radius: 30px;
+    background-color: rgba(0, 77, 171, 100);
+    color: white;
+    font-size: 25px;
+    padding: 5px;
+    margin-top: 10px;
+    font-size: 20px;
+}    
