@@ -8,7 +8,7 @@
 .cuerpo {
     background-image: url("../img/background-login.png");
     background-size: cover;  
-    background-position: center;
+    background-position: top;
 }
 
 .cuerpo__contenedor {
