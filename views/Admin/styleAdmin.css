@@ -6,13 +6,17 @@
     font-family: Calibri;
 }
 
+body {
+    background-image: url("../../img/Background_Admin.png");
+}
+
 .header {
     height: 120px;
     background:rgba(0, 77, 171, 100);
 }
 
 .header img {
-    height: 130px;
+    height: 115px;
     margin-left: 30px;
     margin: auto;
 }
@@ -24,6 +28,7 @@
     color: white;
     position: fixed;
     padding: 30px;
+    transition: all .2s ease;
 }
 
 .aside__head {
@@ -31,7 +36,7 @@
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
-    margin-bottom: 20px;
+    margin-bottom: 35px;
 }
 
 .aside__head__profile {
@@ -51,16 +56,33 @@
 .aside .aside__options .options {
     display: flex;
     align-items: center;
-    padding: 5px;
+    padding: 12px;
     cursor: pointer;
     border-radius: 10px;
-    border: solid 1px red;
     margin-bottom: 20px;
 }
 
 .aside .aside__options .options:hover {
-    background-color: aquamarine;
+    background-color: #b8d1e7;
 }
 
+.aside .iconOption {
+    margin-right: 20px;
+    font-size: 1.4rem;
+}
 
+/* MODIFICACIONES PARA EL MENU DESPLEGABLE */
 
+.aside.active {
+    width: 105px;
+    transition: all .4s ease;
+}
+
+.aside.active .option,
+.aside.active .aside__head__profile {
+    display: none;
+}
+
+.aside.active .aside__head .logMenu{
+    margin: auto;
+}
