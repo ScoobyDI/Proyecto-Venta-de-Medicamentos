@@ -4,7 +4,7 @@ require_once '../util/ConexionBD.php';
 
 class UsuarioDao {
 
-    public function estaRegistradoUsuario(UsuarioBean $usuobj) {
+    public function estaRegistradoUsuario (UsuarioBean $usuobj) {
         
         $objc = new ConexionBD();
         $con = $objc->getConexionBD();
@@ -24,6 +24,24 @@ class UsuarioDao {
             return false;
         }
     
+    }
+
+    public function registrarUsuario (UsuarioBean $usuobj) {
+        
+        try {
+            $sql="INSERT INTO usuario(Nombres,ApellidoPaterno,ApellidoMaterno,Celular,DNI,CorreoElectronico,Clave) 
+            
+            VALUES('$usuobj->nombres','$usuobj->apellidopaterno','$usuobj->apellidomaterno','$usuobj->celular','$usuobj->dni'),'$usuobj->correo'),'$usuobj->contrasenha')";
+            
+            $objc=new ConexionBD();
+            $cn=$objc->getConexionBD();
+            $rs=mysqli_query($cn,$sql);
+            mysqli_close($cn);
+        } catch (Exception $e) {
+    
+        }
+        return $rs;
+        
     }
 
 }

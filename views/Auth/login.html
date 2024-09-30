@@ -10,8 +10,7 @@
 
     <script>
         function ingresar(){
-
-            if( !document.form.correo.value || !document.form.contraseña.value ){ 
+            if(!document.form.reportValidity() ){                   //validar datos antes de enviar el formulario
                 return;
             }
             document.form.action = "../../controller/UsuarioControlador.php";
