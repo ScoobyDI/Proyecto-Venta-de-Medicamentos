@@ -29,11 +29,13 @@ case 1: {
 
     if ($rs) {
         // Redirigir a la página principal
+        echo" <script>alert('Ingreso con exito')</script>";
         header('Location: ../index.php');
         exit(); // Asegura que no se ejecuta más código después de la redirección
     } else {
         // Redirigir a la página de inicio de sesión si el usuario no es encontrado
-        header('Location: ../login.html?error=usuario_no_encontrado');
+        echo" <script>alert('Usuario incorrecto')</script>";
+        header('Location: ../views/Auth/login.html?error=usuario_no_encontrado');
     }
     break;
 }
