@@ -8,15 +8,17 @@
 
     <link rel="stylesheet" href="../../public/css/login.css">
 
-<script>
-    function ingresar(){
-        
-        document.form.action = "../../controller/UsuarioControlador.php";
-        document.form.method = "GET";
-        document.form.op.value = "1";
-        document.form.submit();    
-    }
-</script>
+    <script>
+        function ingresar(){
+            if(!document.form.reportValidity() ){                   //validar datos antes de enviar el formulario
+                return;
+            }
+            document.form.action = "../../controller/UsuarioControlador.php";
+            document.form.method = "GET";
+            document.form.op.value = "1";
+            document.form.submit();    
+        }
+    </script>
 </head>
 
 <body>
@@ -25,7 +27,7 @@
             <form name="form" class="form-login">
                 <input type="hidden" name="op">
                 <h2 class="form-login__titulo">INICIAR SESIÓN</h2>
-                <h3 class="form-login__subtitulos"> Usuario o Correo electrónico </h3>
+                <h3 class="form-login__subtitulos"> Correo electrónico </h3>
                 <input class="form-login__control" name="correo" type="email" placeholder="Ingrese su correo" required>
                 <h3 class="form-login__subtitulos"> Contraseña </h3>
                 <input class="form-login__control" name="contraseña" type="password" placeholder="Ingrese su contraseña" required>
