@@ -7,20 +7,32 @@
     <title>Login</title>
 
     <link rel="stylesheet" href="../../public/css/login.css">
+
+    <script>
+        function ingresar(){
+            if(!document.form.reportValidity() ){                   //validar datos antes de enviar el formulario
+                return;
+            }
+            document.form.action = "../../controller/UsuarioControlador.php";
+            document.form.method = "GET";
+            document.form.op.value = "1";
+            document.form.submit();    
+        }
+    </script>
 </head>
 
 <body>
     <main class="cuerpo">
         <section class="cuerpo__contenedor">
-            <form class="form-login">
+            <form name="form" class="form-login">
+                <input type="hidden" name="op">
                 <h2 class="form-login__titulo">INICIAR SESIÓN</h2>
-                <h3 class="form-login__subtitulos"> Usuario o Correo electrónico </h3>
-                <input class="form-login__control" type="email" placeholder="Ingrese su correo" required>
+                <h3 class="form-login__subtitulos"> Correo electrónico </h3>
+                <input class="form-login__control" name="correo" type="email" placeholder="Ingrese su correo" required>
                 <h3 class="form-login__subtitulos"> Contraseña </h3>
-                <input class="form-login__control" type="password" placeholder="Ingrese su contraseña" required>
+                <input class="form-login__control" name="contraseña" type="password" placeholder="Ingrese su contraseña" required>
                 <a class="form-login__recupContrasena" href="#">¿Olvidaste tu contraseña?</a>
-                <button class="form-login__btnIngresar" onclick="ingresar()"> <img class="form-login__logPerson"
-                        src="../../public/img/User.png" alt="log_user"> Ingresar </button>
+                <button class="form-login__btnIngresar" onclick="ingresar()" > <img class="form-login__logPerson"> Ingresar </button>
                 <p class="form-login__crearCuenta">¿Aún no tienes una cuenta?</p>
                 <a class="form-login__crearCuenta__enlace" href="../../views/Auth/register.html">Crear Cuenta</a>
             </form>
