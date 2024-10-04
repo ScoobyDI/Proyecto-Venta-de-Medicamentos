@@ -49,11 +49,12 @@ body {
     margin-right: 10px;
 }
 
-.aside .aside__options {
+.aside__list {
     list-style: none;
+    width: 100%;
 }
 
-.aside .aside__options .options {
+.aside__list__options {
     display: flex;
     align-items: center;
     padding: 12px;
@@ -62,7 +63,7 @@ body {
     margin-bottom: 20px;
 }
 
-.aside .aside__options .options:hover {
+.aside__list__options:hover {
     background-color: #b8d1e7;
     color: #012340;
 }
@@ -72,6 +73,52 @@ body {
     font-size: 1.4rem;
 }
 
+.aside .list__arrow {
+    margin-left: auto;
+}
+
+.aside__list__options__dropdown {
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.aside__list__button {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    cursor: pointer;
+    border-radius: 10px;  /*borre el margi botton*/
+}
+
+.aside__list__button:hover {
+    background-color: #b8d1e7;
+    color: #012340;
+}
+
+.aside__list__show {
+    
+    margin: auto;
+    list-style: none;
+    text-align: center;
+    border-left: 2px solid white;
+    transition: height .4s;
+    height: 0;
+}
+
+.aside__list__inside {
+    display: flex;
+    justify-content: center;
+    padding: 12px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.aside__list__inside:hover {
+    background-color: #b8d1e7;
+    color: #012340;
+}
+
+
 /* MODIFICACIONES PARA EL MENU DESPLEGABLE */
 
 .aside.active {
@@ -80,10 +127,20 @@ body {
 }
 
 .aside.active .option,
+.aside.active .list__arrow,
 .aside.active .aside__head__profile {
     display: none;
 }
 
 .aside.active .aside__head .logMenu{
     margin: auto;
+    transition: transform .3s;
+}
+
+.aside.active .iconOption {
+    margin-right: 0px;
+}
+
+.arrow .list__arrow {
+    transform: rotate(180deg);
 }
