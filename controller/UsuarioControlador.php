@@ -7,13 +7,13 @@ $op = $_GET['op'];
 switch($op) {
 
     case 1: {
-
-        $correo = $_GET['correo'];
-        $contraseña = $_GET['contraseña'];
+        //Verificar usuario
+        $correo = $_GET['Correo'];
+        $contrasena = $_GET['Contrasena'];
         
         $objUsuarioBean = new UsuarioBean();
         $objUsuarioBean->setCorreoElectronico($correo);
-        $objUsuarioBean->setClave($contraseña);
+        $objUsuarioBean->setContrasena($contrasena);
 
         $objUsuarioDao = new UsuarioDao();
 
@@ -29,32 +29,35 @@ switch($op) {
     }
 
     case 2: {
-
+        //Agregar usuario
         $nombres = $_GET["Nombres"];
         $apellidopaterno = $_GET["ApellidoPaterno"];
         $apellidomaterno = $_GET["ApellidoMaterno"];
-        $celular = $_GET["telefono"];
+        $telefono = $_GET["Telefono"];
         $dni = $_GET["DNI"];
-        $correo = $_GET["Email"];
-        $contrasenha = $_GET["Password"];
-        
-        $objUsuarioBean = new UsuarioBean();
-        $objUsuarioBean->setNombres($Nombres);
-        $objUsuarioBean->setApellidoPaterno($ApellidoPaterno);
-        $objUsuarioBean->setApellidoMaterno($ApellidoMaterno);
-        $objUsuarioBean->setCelular($Celular);
-        $objUsuarioBean->setDNI($DNI);
-        $objUsuarioBean->setCorreoElectronico($CorreoElectronico);
-        $objUsuarioBean->setClave($Clave);
+        $correo = $_GET["Correo"];
+        $contrasena = $_GET["Contrasena"];
+        $direccion = $_GET["Direccion"];
 
-        $res = $objUsuarioBean->registrarUsuario($objUsuarioBean);
-        if ($res == 1) {
+        $objUsuarioBean = new UsuarioBean();
+        $objUsuarioBean->setNombres($nombres);
+        $objUsuarioBean->setApellidoPaterno($apellidopaterno);
+        $objUsuarioBean->setApellidoMaterno($apellidomaterno);
+        $objUsuarioBean->setTelefono($telefono);
+        $objUsuarioBean->setDNI($dni);
+        $objUsuarioBean->setCorreoElectronico($correo);
+        $objUsuarioBean->setContrasena($contrasena);
+        $objUsuarioBean->setDireccion($direccion);
+
+        $objUsuarioDao = new UsuarioDao();
+
+        $res = $objUsuarioDao->registrarUsuario($objUsuarioBean);
+        if ($res) {
             $men = "Usuario Registrado Correctamente";
+            $pagina = "../views/Auth/login.html";
         } else {
             $men = "Error al Registrar Usuario";
         }
-        $response["state"] = $men;
-        echo json_encode($response);
         break;
     }
     case 3:

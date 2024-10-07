@@ -5,12 +5,13 @@ class UsuarioBean {
     public $nombres;
     public $apellidopaterno;
     public $apellidomaterno;
-    public $celular;
+    public $telefono;
     public $correo;
-    public $contrasenha;
+    public $contrasena;
     public $nombreusuario;
     public $fechacreacion;
     public $estadoregistro;
+    public $direccion;
 
     // Métodos GET
     public function getIdUsuario(){
@@ -28,14 +29,14 @@ class UsuarioBean {
     public function getApellidoMaterno(){
         return $this->apellidomaterno;
     }
-    public function getCelular(){
-        return $this->celular;
+    public function getTelefono(){
+        return $this->telefono;
     }
     public function getCorreoElectronico(){
         return $this->correo;
     }
-    public function getClave(){
-        return $this->contrasenha;
+    public function getContrasena(){
+        return $this->contrasena;
     }
     public function getUsuarioCreacion(){
         return $this->nombreusuario;
@@ -45,6 +46,9 @@ class UsuarioBean {
     }
     public function getEstadoRegistro(){
         return $this->estadoregistro;
+    }
+    public function getDireccion(){
+        return $this->direccion;
     }
 
     // Métodos SET
@@ -63,14 +67,14 @@ class UsuarioBean {
     public function setApellidoMaterno($apellidomaterno){
         $this->apellidomaterno = $apellidomaterno;
     }
-    public function setCelular($celular){
-        $this->celular = $celular;
+    public function setTelefono($telefono){
+        $this->telefono = $telefono;
     }
     public function setCorreoElectronico($correo){
         $this->correo = $correo;
     }
-    public function setClave($contrasenha){
-        $this->contrasenha = $contrasenha;
+    public function setContrasena($contrasena){
+        $this->contrasena = $contrasena;
     }
     public function setUsuarioCreacion($nombreusuario){
         $this->nombreusuario = $nombreusuario;
@@ -80,6 +84,9 @@ class UsuarioBean {
     }
     public function setEstadoRegistro($estadoregistro){
         $this->estadoregistro = $estadoregistro;
+    }
+    public function setDireccion($direccion){
+        $this->direccion = $direccion;
     }
 }
 ?>
