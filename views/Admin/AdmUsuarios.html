@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InicioAdmin</title>
+    <title>Administrar Usuarios</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="../../public/css/asideAndHeader.css">
-    <link rel="stylesheet" href="../../public/css/perfilAdmin.css">
+    <link rel="stylesheet" href="../../public/css/AdmUsuarios.css">
 </head>
 <body>
     <header class="header">
@@ -54,7 +54,6 @@
                             <span class="option"> Adm. Categorías </span>
                         </li>
                     </a>
-
                 </ul>
             </li>
             <a href="">
@@ -79,49 +78,46 @@
         <script src="../../public/js/aside.js"></script>
     </aside>
     <main class="main">
+        
         <div class="section1">
-            <div class="section1__container__title">
-                <h1 class="section1__title">Perfil del Usuario</h1>
+            <h1 class="section1__title">Administrar Usuarios</h1>
+            <div class="section1__content">
+                <div class="section1__filter">
+                    <label>Buscar:</label>
+                    <input class="control"  name="Filtrar" placeholder="Filtrar por ID" required>
+                    <button class="section1__filter__btn" id="btnFilter" onclick="">Buscar</button>
+                </div>
+                <div class="section1__addUser">
+                    <button class="section1__addUser__btn" id="btnAddUser" onclick="">Nuevo Usuario</button>
+                </div>
             </div>
-            <div class="section1__container__datos">
-                <table class="section1__datos">
-                    <tr>
-                        <th>Nombres</th>
-                        <td>José Luis</td>
-                    </tr>
-                    <tr>
-                        <th>Apellido Paterno</th>
-                        <td>De la Cruz</td>
-                    </tr>
-                    <tr>
-                        <th>Apellido Materno</th>
-                        <td>Iñigo</td>
-                    </tr>
-                    <tr>
-                        <th>DNI</th>
-                        <td>23451321</td>
-                    </tr>
-                    <tr>
-                        <th>Teléfono</th>
-                        <td>942247123</td>
-                    </tr>
-                    <tr>
-                        <th>Dirección</th>
-                        <td>...</td>
-                    </tr>
-                    <tr>
-                        <th>Tipo de Usuario</th>
-                        <td>Administrador</td>
-                    </tr>
-                    <tr>
-                        <th>Correo Registrado</th>
-                        <td>...</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="section1__container__button">
-                <button class="section1__button__actDatos"> Actualizar Datos</button>
-            </div>
+        </div>
+
+        <div class="section2">
+            <table class="section2__table">
+                <tr>
+                    <th class="section2__table__idUser">Id Usuario</th>
+                    <th class="section2__table__nombres">Nombres</th>
+                    <th class="section2__table__apellidos">Apellidos</th>
+                    <th class="section2__table__celular">Celular</th>
+                    <th class="section2__table__correo">Correo Electrónico</th>
+                    <th class="section2__table__tipoUsuario">Tipo de Usuario</th>
+                    <th class="section2__table__estadoRegistro">Estado Registro</th>
+                    <th class="section2__table__editar">Editar</th>
+                    <th class="section2__table__eliminar">Eliminar</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><img src="../../public/img/btnEditar.png" height="28px" alt="bntEditar"></td>
+                    <td><img src="../../public/img/BtnEliminar.png" height="30px" alt="btnEliminar"></td>
+                </tr>
+            
+            </table>
         </div>
     </main>
 </body>
