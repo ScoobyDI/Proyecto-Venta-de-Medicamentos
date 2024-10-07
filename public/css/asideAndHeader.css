@@ -11,8 +11,10 @@ body {
 }
 
 .header {
+    width: 100%;
     height: 120px;
     background:rgba(0, 77, 171, 100);
+    position: fixed;
 }
 
 .header img {
@@ -22,6 +24,7 @@ body {
 }
 
 .aside {
+    margin-top: 120px;
     height: 100vh;
     width: 300px;
     background-color: #012340;
@@ -118,6 +121,10 @@ body {
     color: #012340;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
 
 /* MODIFICACIONES PARA EL MENU DESPLEGABLE */
 
@@ -143,4 +150,8 @@ body {
 
 .arrow .list__arrow {
     transform: rotate(180deg);
+}
+
+.aside.active ~ main {
+    margin-left: 180px; /* Ajusta el espacio cuando el menú está colapsado */
 }

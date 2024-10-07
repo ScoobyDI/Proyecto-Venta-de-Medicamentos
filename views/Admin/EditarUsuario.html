@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InicioAdmin</title>
+    <title>Editar Usuario</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="../../public/css/asideAndHeader.css">
-    <link rel="stylesheet" href="../../public/css/perfilAdmin.css">
+    <link rel="stylesheet" href="../../public/css/EditarUsuario.css">
 </head>
 <body>
     <header class="header">
@@ -54,7 +54,6 @@
                             <span class="option"> Adm. Categorías </span>
                         </li>
                     </a>
-
                 </ul>
             </li>
             <a href="">
@@ -80,49 +79,62 @@
     </aside>
     <main class="main">
         <div class="section1">
-            <div class="section1__container__title">
-                <h1 class="section1__title">Perfil del Usuario</h1>
-            </div>
-            <div class="section1__container__datos">
-                <table class="section1__datos">
-                    <tr>
-                        <th>Nombres</th>
-                        <td>José Luis</td>
-                    </tr>
-                    <tr>
-                        <th>Apellido Paterno</th>
-                        <td>De la Cruz</td>
-                    </tr>
-                    <tr>
-                        <th>Apellido Materno</th>
-                        <td>Iñigo</td>
-                    </tr>
-                    <tr>
-                        <th>DNI</th>
-                        <td>23451321</td>
-                    </tr>
-                    <tr>
-                        <th>Teléfono</th>
-                        <td>942247123</td>
-                    </tr>
-                    <tr>
-                        <th>Dirección</th>
-                        <td>...</td>
-                    </tr>
-                    <tr>
-                        <th>Tipo de Usuario</th>
-                        <td>Administrador</td>
-                    </tr>
-                    <tr>
-                        <th>Correo Registrado</th>
-                        <td>...</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="section1__container__button">
-                <button class="section1__button__actDatos"> Actualizar Datos</button>
-            </div>
+            <h1 class="section1__title">Actualizar Usuario</h1>
+            <form class="section1__form">
+                <hr>
+                <div class="form__group">
+                    <div class="form__description">
+                        <legend>Datos Personales</legend>
+                    </div>
+                    <div class="form__content">
+                        <label>ID</label>
+                        <input class="control form_id" type="text" value="">
+                        <label>Nombres</label>
+                        <input class="control form__nombres" type="text" value="">
+                        <label>Apellido Paterno</label>
+                        <input class="control form__apellPater" type="text" value="">
+                        <label>Apellido Materno</label>
+                        <input class="control form__apellMater" type="text" value="">
+                        <label>DNI</label>
+                        <input class="control form__dni" type="text" value="">
+                    </div>
+                </div>
+                <hr>
+                <div class="form__group">
+                    <div class="form__description">
+                        <legend>Información del contacto</legend>
+                    </div>
+                    <div class="form__content">
+                        <label>Teléfono</label>
+                        <input class="control form__telefono" type="text" value="">
+                        <label>Correo</label>
+                        <input class="control form__email" type="email" value="">
+                        <label>Dirección</label>
+                        <input class="control form__adress" type="text" value="">
+                    </div>
+                </div>
+                <hr>
+                <div class="form__group">
+                    <div class="form__description">
+                        <legend>Cambiar Contraseña</legend>
+                    </div>
+                    <div class="form__content">
+                        <label>Contraseña</label>
+                        <input class="control form__password" type="password" value="">
+                        <label>Confirmar Contraseña</label>
+                        <input class="control form__password" type="password" value="">
+                    </div>
+                </div>
+                <hr>
+                <div class="form__content__buttons">
+                    <button class="form__button__cancel" onclick="">Cancelar</button>
+                    <button class="form__button__update" onclick="">Actualizar</button>
+                </div>
+
+            </form>
         </div>
+
+        
     </main>
 </body>
 </html>

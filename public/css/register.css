@@ -4,18 +4,14 @@
     box-sizing: border-box;
   }
 
-.cuerpo {
+body {
     background-image: url("../img/backgraund-register.png");
     background-size: cover;  
 }
 
 .cuerpo__contenedor_register {
-    display: flex;
-    flex-direction: column;  
-    justify-content: center;  
-    align-items: center; 
     font-family: Calibri;
-    height: 100vh; 
+    margin-bottom: 30px;
 }
 
 .header {

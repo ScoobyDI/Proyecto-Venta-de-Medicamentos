@@ -1,0 +1,129 @@
+.main {
+    margin-left: 350px;
+    padding-top: 120px;
+    display: flex;
+    flex-direction: column;
+}
+
+.section1 {
+    padding-top: 10px;
+    width: 95%;
+}
+
+.section1__title {
+    margin-bottom: 20px;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.section1__form {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form__group{
+    width: 700px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form__description {
+    width: 250px;
+}
+
+.form__description legend {
+    font-weight: bold;
+    font-size: 20px;
+} 
+
+.form__content {
+    width: 350px;
+}
+
+.form_id {
+    width: 70px;
+}
+
+.form__nombres {
+    width: 250px;
+}
+
+.form__apellPater,
+.form__apellMater {
+    width: 150px;
+}
+
+.form__telefono,
+.form__dni {
+    width: 200px;
+}
+
+.form__email {
+    width: 320px;
+}
+
+.form__email {
+    width: 320px;
+}
+
+.form__password {
+    width: 200px;
+}
+
+.form__adress {
+    width: 320px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    font-size: 20px;
+    padding: 5px;
+}
+
+.control {
+    background:#F4F5F3;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid black;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+hr {
+    width: 800px;
+    margin: 20px; 
+    border: 0.1px solid gray;
+    display: block;
+}
+
+.form__content__buttons{
+    display: flex;
+    width: 700px;
+    justify-content: end;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.form__button__update {
+    width: 150px;
+    padding: 10px;
+    background:orange;
+    border-radius: 4px;
+    border: 1px solid black;
+    font-size: 20px;
+    color:black;
+}
+
+.form__button__cancel {
+    width: 150px;
+    padding: 10px;
+    background:gray;
+    border-radius: 4px;
+    border: 1px solid black;
+    font-size: 20px;
+    color:black;
+}
+
