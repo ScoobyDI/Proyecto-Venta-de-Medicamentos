@@ -7,17 +7,26 @@
     <title>Register</title>
 
     <link rel="stylesheet" href="../../public/css/register.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 
     <script>
-        function registrarUsuario(){
-            if( !document.form.reportValidity() ){ 
+        function registrarUsuario() {
+            if (!document.form.reportValidity()) {
                 return;
             }
-            if(document.form.Contrasena.value != document.form.Contrasena2.value)
-            {
+            if (document.form.Contrasena.value != document.form.Contrasena2.value) {
                 alert("Las contraseñas no son iguales");
                 return;
             }
+
+            // Encriptar la contraseña con SHA-256
+            var password = document.form.Contrasena.value;
+            var encryptedPassword = CryptoJS.SHA256(password).toString();
+            
+            // Reemplazar el valor de la contraseña y el confirmar contraseña con la encriptada antes de enviarla 
+            document.form.Contrasena.value = encryptedPassword;
+            document.form.Contrasena2.value = encryptedPassword;
+
             document.form.action = "../../controller/UsuarioControlador.php";
             document.form.op.value = "2";
             document.form.method = "GET";
@@ -54,10 +63,9 @@
                 <input class="form-register__control" type="password" name="Contrasena" placeholder="Ingrese su contraseña" required>
                 <h3 class="form-register__subtitulos"> Confirmar contraseña </h3>
                 <input class="form-register__control" type="password" name="Contrasena2" placeholder="Confirmar su contraseña" required>
-                <button class="btnRegistrarse" onclick="registrarUsuario()">Registrar</button>
+                <button class="btnRegistrarse" type="button" onclick="registrarUsuario()">Registrar</button>
             </form>
         </section>
     </main>
 </body>
-
 </html>
