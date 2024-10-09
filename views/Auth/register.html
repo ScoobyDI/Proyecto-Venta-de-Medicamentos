@@ -23,7 +23,7 @@
             var password = document.form.Contrasena.value;
             var encryptedPassword = CryptoJS.SHA256(password).toString();
             
-            // Reemplazar el valor de la contraseña con la encriptada antes de enviarla
+            // Reemplazar el valor de la contraseña y el confirmar contraseña con la encriptada antes de enviarla 
             document.form.Contrasena.value = encryptedPassword;
             document.form.Contrasena2.value = encryptedPassword;
 
