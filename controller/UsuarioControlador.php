@@ -60,9 +60,11 @@ switch($op) {
         }
         break;
     }
+
     case 3:
     {
-
+        // Listar usuario por ID
+        
     }
 
 }

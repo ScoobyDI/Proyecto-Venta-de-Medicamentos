@@ -1,6 +1,6 @@
 <?php
 require_once 'UsuarioBean.php';
-require_once '../util/ConexionBD.php';
+require_once __DIR__ . '/../util/ConexionBD.php';
 
 class UsuarioDao {
 
@@ -56,5 +56,48 @@ class UsuarioDao {
         }
         return $rs;
     }
+    
+    public function filtrarUsuarioPorId($id){
+        $list = array();
+        try {
+            $sql = "SELECT * FROM usuario WHERE idUsuario = ?";
+            $objc = new ConexionBD();
+            $cn = $objc->getConexionBD();
+    
+            // Usando consultas preparadas para evitar inyección SQL
+            $stmt = $cn->prepare($sql);
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+    
+            while ($row = $result->fetch_assoc()) {
+                array_push($list, array(
+                    'IdUsuario' => $row['IdUsuario'],
+                    'DNI' => $row['DNI'],
+                    'Nombres' => $row['Nombres'],
+                    'ApellidoPaterno' => $row['ApellidoPaterno'],
+                    'ApellidoMaterno' => $row['ApellidoMaterno'],
+                    'Telefono' => $row['Telefono'],
+                    'Direccion' => $row['Direccion'],
+                    'CorreoElectronico' => $row['CorreoElectronico'],
+                    'Contrasena' => $row['Contrasena'],
+                    'UsuarioCreacion' => $row['UsuarioCreacion'],
+                    'FechaCreacion' => $row['FechaCreacion'],
+                    'UsuarioModificacion' => $row['UsuarioModificacion'],
+                    'FechaModificacion' => $row['FechaModificacion'],
+                    'EstadoRegistro' => $row['EstadoRegistro']
+                ));
+            }
+    
+            $stmt->close();
+            $cn->close();
+        } catch (Exception $e) {
+            // Aquí puedes registrar el error o mostrar un mensaje
+            error_log($e->getMessage());
+        }
+    
+        return $list;
+    }
+
 }
 ?>
