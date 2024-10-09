@@ -13,7 +13,7 @@
             if( !document.form.reportValidity() ){ 
                 return;
             }
-            if(document.form.Contrasena != document.form.Contrasena2)
+            if(document.form.Contrasena.value != document.form.Contrasena2.value)
             {
                 alert("Las contraseñas no son iguales");
                 return;

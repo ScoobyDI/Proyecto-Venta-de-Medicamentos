@@ -100,11 +100,10 @@ hr {
 }
 
 .form__content__buttons{
+    width: 95%;
     display: flex;
-    width: 700px;
-    justify-content: end;
-    gap: 30px;
-    margin-bottom: 30px;
+    justify-content: center;
+    margin-bottom: 15px;
 }
 
 .form__button__update {
