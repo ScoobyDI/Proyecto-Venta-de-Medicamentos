@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,7 +10,26 @@
     <link rel="stylesheet" href="../../public/css/asideAndHeader.css">
     <link rel="stylesheet" href="../../public/css/EditarUsuario.css">
 </head>
+
+
 <body>
+    <?php
+    include_once '../../model/UsuarioDao.php';
+
+    // Obtener el idUsuario desde la URL
+    $idUsuario = isset($_GET['idUsuario']) ? $_GET['idUsuario'] : '';
+
+    $usuario = null;
+    if ($idUsuario) {
+        $usuarioDao = new UsuarioDao();
+        $resultado = $usuarioDao->filtrarUsuarioPorId($idUsuario);
+    
+        if (!empty($resultado)) {
+            $usuario = $resultado[0];
+        }
+    }
+    ?>
+
     <header class="header">
         <img src="../../public/img/logo.png">
     </header>
@@ -36,7 +56,7 @@
                     <span class="material-symbols-outlined list__arrow ">keyboard_arrow_down</span>
                 </div>
                 <ul class="aside__list__show">
-                    <a href="AdmUsuarios.html">
+                    <a href="AdmUsuarios.php">
                         <li class="aside__list__inside">
                             <span class="material-symbols-outlined iconOption ">groups</span>
                             <span class="option"> Adm. Usuarios </span>
@@ -88,15 +108,15 @@
                     </div>
                     <div class="form__content">
                         <label>ID</label>
-                        <input class="control form_id" type="text" value="">
+                        <input class="control form_id" type="text" value="<?php echo $usuario ? htmlspecialchars($usuario['IdUsuario']) : ''; ?>" disabled>
                         <label>Nombres</label>
-                        <input class="control form__nombres" type="text" value="">
+                        <input class="control form__nombres" type="text" value="<?php echo $usuario ? htmlspecialchars($usuario['Nombres']) : ''; ?>">
                         <label>Apellido Paterno</label>
-                        <input class="control form__apellPater" type="text" value="">
+                        <input class="control form__apellPater" type="text" value="<?php echo $usuario ? htmlspecialchars($usuario['ApellidoPaterno']) : ''; ?>">
                         <label>Apellido Materno</label>
-                        <input class="control form__apellMater" type="text" value="">
+                        <input class="control form__apellMater" type="text" value="<?php echo $usuario ? htmlspecialchars($usuario['ApellidoMaterno']) : ''; ?>">
                         <label>DNI</label>
-                        <input class="control form__dni" type="text" value="">
+                        <input class="control form__dni" type="text" value="<?php echo $usuario ? htmlspecialchars($usuario['DNI']) : ''; ?>">
                     </div>
                 </div>
                 <hr>
@@ -106,11 +126,11 @@
                     </div>
                     <div class="form__content">
                         <label>Teléfono</label>
-                        <input class="control form__telefono" type="text" value="">
+                        <input class="control form__telefono" type="text" value="<?php echo $usuario ? htmlspecialchars($usuario['Telefono']) : ''; ?>">
                         <label>Correo</label>
-                        <input class="control form__email" type="email" value="">
+                        <input class="control form__email" type="email" value="<?php echo $usuario ? htmlspecialchars($usuario['CorreoElectronico']) : ''; ?>">
                         <label>Dirección</label>
-                        <input class="control form__adress" type="text" value="">
+                        <input class="control form__adress" type="text" value="<?php echo $usuario ? htmlspecialchars($usuario['Direccion']) : ''; ?>">
                     </div>
                 </div>
                 <hr>
@@ -119,18 +139,20 @@
                         <legend>Cambiar Contraseña</legend>
                     </div>
                     <div class="form__content">
-                        <label>Contraseña</label>
-                        <input class="control form__password" type="password" value="">
+                    <label>Contraseña</label>
+                        <input class="control form__password" type="password" value="<?php echo $usuario ? htmlspecialchars($usuario['Contrasena']) : ''; ?>">
                         <label>Confirmar Contraseña</label>
-                        <input class="control form__password" type="password" value="">
+                        <input class="control form__password" type="password" value="<?php echo $usuario ? htmlspecialchars($usuario['Contrasena']) : ''; ?>">
                     </div>
                 </div>
                 <hr>
-                <div class="form__content__buttons">
-                    <button class="form__button__cancel" onclick="">Cancelar</button>
-                    <button class="form__button__update" onclick="">Actualizar</button>
-                </div>
+                    <div class="form__content__buttons">
+                        <button class="form__button__update" onclick="">Actualizar</button>   
+                    </div>
             </form>
+            <div class="form__content__buttons">
+                <button class="form__button__cancel" onclick="location.href='AdmUsuarios.php'">Cancelar</button>
+            </div>
         </div>
     </main>
 </body>

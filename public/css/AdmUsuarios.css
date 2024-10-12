@@ -71,6 +71,9 @@ label {
     display: block;
     font-size: 20px;
 }
+ .section2 {
+    width: 95%;
+ }
 
 .section2__table {
     width: 95%;
@@ -118,4 +121,3 @@ tbody tr:hover {
 .section2__table__eliminar{
     width: 80px;
 }
-
