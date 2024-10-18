@@ -32,6 +32,14 @@ class UsuarioDao {
     public function registrarUsuario (UsuarioBean $usuobj) {
         
         try {
+<<<<<<< HEAD
+            $hashedPassword = password_hash($usuobj->contrasenha, PASSWORD_DEFAULT);
+            $sql="INSERT INTO usuario(Nombres,ApellidoPaterno,ApellidoMaterno,Celular,DNI,CorreoElectronico,Clave) 
+            
+            VALUES('$usuobj->nombres','$usuobj->apellidopaterno','$usuobj->apellidomaterno','$usuobj->celular','$usuobj->dni'),'$usuobj->correo'),'$usuobj->contrasenha')";
+            
+=======
+>>>>>>> 76f865e9a68e5faaff317146d830b0a7a2910906
             $objc=new ConexionBD();
             $con=$objc->getConexionBD();
 
