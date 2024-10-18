@@ -19,6 +19,10 @@
             document.form.submit();    
         }
     </script>
+    <?php
+        session_start();
+        $_SESSION['previous_page'] = $_SERVER['REQUEST_URI'];       // Almacena la URL actual
+    ?>
 </head>
 
 <body>
@@ -34,7 +38,7 @@
                 <a class="form-login__recupContrasena" href="#">¿Olvidaste tu contraseña?</a>
                 <button class="form-login__btnIngresar" onclick="ingresar()" > <img class="form-login__logPerson"> Ingresar </button>
                 <p class="form-login__crearCuenta">¿Aún no tienes una cuenta?</p>
-                <a class="form-login__crearCuenta__enlace" href="../../views/Auth/register.html">Crear Cuenta</a>
+                <a class="form-login__crearCuenta__enlace" href="../../views/Auth/register.php">Crear Cuenta</a>
             </form>
         </section>
     </main>

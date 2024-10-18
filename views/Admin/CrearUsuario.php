@@ -1,21 +1,21 @@
-
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Usuario</title>
+    <title>Crear Usuario</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="../../public/css/asideAndHeader.css">
-    <link rel="stylesheet" href="../../public/css/EditarUsuario.css">
+    <link rel="stylesheet" href="../../public/css/CrearUsuario.css">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script>
 
-        function actualizarUsuario() {
+    <script>
+        function registrarUsuario() {
             if (!document.form.reportValidity()) {
                 return;
             }
@@ -25,15 +25,15 @@
             }
 
             document.form.action = "../../controller/UsuarioControlador.php";
-            document.form.op.value = "3";
+            document.form.op.value = "2";
             document.form.method = "GET";
             document.form.submit();
         }
-
+        
         function confirmarCancelar() {
             Swal.fire({
             title: '¿Estás seguro?',
-            text: "Se perderán los datos que halla actualizado",
+            text: "Se perderán los datos ingresados",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -47,29 +47,15 @@
             });
         }
     </script>
+    
 </head>
 
 <body>
-    <?php
-    include_once '../../model/UsuarioDao.php';
-
-    // Obtener el idUsuario desde la URL
-    $idUsuario = isset($_GET['idUsuario']) ? $_GET['idUsuario'] : '';
-
-    $usuario = null;
-    if ($idUsuario) {
-        $usuarioDao = new UsuarioDao();
-        $resultado = $usuarioDao->filtrarUsuarioPorId($idUsuario);
     
-        if (!empty($resultado)) {
-            $usuario = $resultado[0];
-        }
-    }
-    ?>
-
     <header class="header">
         <img src="../../public/img/logo.png">
     </header>
+    
     <aside class="aside" id="aside">
         <div class="aside__head">
             <div class="aside__head__profile">
@@ -134,29 +120,28 @@
         </ul>
         <script src="../../public/js/aside.js"></script>
     </aside>
+
     <main class="main">
         <div class="section1">
-            <h1 class="section1__title">Actualizar Usuario</h1>
+            <h1 class="section1__title">Crear Nuevo Usuario</h1>
             <form name="form" class="section1__form">
-                <input type="hidden" name="op">
+            <input type="hidden" name="op">
                 <hr>
                 <div class="form__group">
                     <div class="form__description">
                         <legend>Datos Personales</legend>
                     </div>
                     <div class="form__content">
-                        <label>ID</label>
-                        <input class="control form_id" type="text" name="IdUsuario" value="<?php echo $usuario ? htmlspecialchars($usuario['IdUsuario']) : ''; ?>">
                         <label>Nombres</label>
-                        <input class="control form__nombres" type="text" name="Nombres" value="<?php echo $usuario ? htmlspecialchars($usuario['Nombres']) : ''; ?>">
+                        <input class="control form__nombres" type="text" name="Nombres" required>
                         <label>Apellido Paterno</label>
-                        <input class="control form__apellPater" type="text" name="ApellidoPaterno" value="<?php echo $usuario ? htmlspecialchars($usuario['ApellidoPaterno']) : ''; ?>">
+                        <input class="control form__apellPater" type="text" name="ApellidoPaterno" required>
                         <label>Apellido Materno</label>
-                        <input class="control form__apellMater" type="text" name="ApellidoMaterno" value="<?php echo $usuario ? htmlspecialchars($usuario['ApellidoMaterno']) : ''; ?>">
+                        <input class="control form__apellMater" type="text" name="ApellidoMaterno" required>
                         <label>DNI</label>
-                        <input class="control form__dni" type="text" name="DNI" value="<?php echo $usuario ? htmlspecialchars($usuario['DNI']) : ''; ?>">
+                        <input class="control form__dni" type="text" name="DNI" required>
                         <label>Fecha Nacimiento</label>
-                        <input class="control form__fechaNacim" type="date" name="FechaNacimiento" value="<?php echo $usuario ? htmlspecialchars($usuario['FechaNacimiento']) : ''; ?>">
+                        <input class="control form__fechanacimiento" type="date" name="FechaNacimiento" required>
                     </div>
                 </div>
                 <hr>
@@ -166,9 +151,9 @@
                     </div>
                     <div class="form__content">
                         <label>Teléfono</label>
-                        <input class="control form__telefono" type="text" name="Telefono" value="<?php echo $usuario ? htmlspecialchars($usuario['Telefono']) : ''; ?>">
+                        <input class="control form__telefono" type="text" name="Telefono" required>
                         <label>Correo</label>
-                        <input class="control form__email" type="email" name="Correo" value="<?php echo $usuario ? htmlspecialchars($usuario['CorreoElectronico']) : ''; ?>">
+                        <input class="control form__email" type="email" name="Correo" required>
                         <label>Distrito</label>
                         <select class="control form__district" name="Distrito" required>
                             <option value ="" disabled selected="">Seleccione una opción</option>
@@ -176,37 +161,32 @@
                             <option value="2">Ancon</option>
                             <option value="3">Barranco</option>
                             <option value="4">Breña</option>
-                        </select>  
+                        </select>     
                         <label>Dirección</label>
-                        <input class="control form__adress" type="text" name="Direccion" value="<?php echo $usuario ? htmlspecialchars($usuario['Direccion']) : ''; ?>" required>
-                        <label>Perfil</label>
-                        <select class="control form__perfil" required>
-                            <option value ="" disable selected="">Seleccione una opción</option>
-                            <option value="1">Administrador</option>
-                            <option value="2">Vendedor</option>
-                            <option value="3">Cliente</option>
-                        </select> 
+                        <input class="control form__adress" type="text" name="Direccion" required>
                     </div>
                 </div>
                 <hr>
                 <div class="form__group">
                     <div class="form__description">
-                        <legend>Cambiar Contraseña</legend>
+                        <legend>Crear Contraseña</legend>
                     </div>
                     <div class="form__content">
-                    <label>Contraseña</label>
-                        <input class="control form__password" type="password" name="Contrasena" value="<?php echo $usuario ? htmlspecialchars($usuario['Contrasena']) : ''; ?>">
+                        <label>Contraseña</label>
+                        <input class="control form__password" type="password" name="Contrasena" required>
                         <label>Confirmar Contraseña</label>
-                        <input class="control form__password" type="password" name="Contrasena2" value="<?php echo $usuario ? htmlspecialchars($usuario['Contrasena']) : ''; ?>">
+                        <input class="control form__password" type="password"  name="Contrasena2" required>
                     </div>
                 </div>
                 <hr>
-                    <div class="form__content__buttons">
-                        <button class="form__button__cancel" type="button" onclick="confirmarCancelar()">Cancelar</button>
-                        <button class="form__button__update" onclick="actualizarUsuario()">Actualizar</button>  
-                    </div>
+                <div class="form__content__buttons">
+                    <button class="form__button__cancel" type="button" onclick="confirmarCancelar()">Cancelar</button>
+                    <button class="form__button__update" onclick="registrarUsuario()">Crear Usuario</button>
+                </div>
+
             </form>
         </div>
+
     </main>
 </body>
 </html>

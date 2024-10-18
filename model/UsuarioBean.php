@@ -5,6 +5,7 @@ class UsuarioBean {
     public $nombres;
     public $apellidopaterno;
     public $apellidomaterno;
+    public $fechanacimiento;
     public $telefono;
     public $correo;
     public $contrasena;
@@ -12,6 +13,7 @@ class UsuarioBean {
     public $fechacreacion;
     public $estadoregistro;
     public $direccion;
+    public $distrito;
 
     // Métodos GET
     public function getIdUsuario(){
@@ -28,6 +30,9 @@ class UsuarioBean {
     }
     public function getApellidoMaterno(){
         return $this->apellidomaterno;
+    }
+    public function getFechaNacimiento(){
+        return $this->fechanacimiento;
     }
     public function getTelefono(){
         return $this->telefono;
@@ -50,6 +55,9 @@ class UsuarioBean {
     public function getDireccion(){
         return $this->direccion;
     }
+    public function getDistrito(){
+        return $this->distrito;
+    }
 
     // Métodos SET
     public function setIdUsuario($id){
@@ -66,6 +74,9 @@ class UsuarioBean {
     }
     public function setApellidoMaterno($apellidomaterno){
         $this->apellidomaterno = $apellidomaterno;
+    }
+    public function setFechaNacimiento($fechanacimiento){
+        $this->fechanacimiento = $fechanacimiento;
     }
     public function setTelefono($telefono){
         $this->telefono = $telefono;
@@ -87,6 +98,9 @@ class UsuarioBean {
     }
     public function setDireccion($direccion){
         $this->direccion = $direccion;
+    }
+    public function setDistrito($distrito){
+        $this->distrito = $distrito;
     }
 }
 ?>

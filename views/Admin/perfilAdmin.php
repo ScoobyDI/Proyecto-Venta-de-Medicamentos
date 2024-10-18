@@ -3,13 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Usuario</title>
+    <title>InicioAdmin</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="../../public/css/asideAndHeader.css">
-    <link rel="stylesheet" href="../../public/css/CrearUsuario.css">
+    <link rel="stylesheet" href="../../public/css/perfilAdmin.css">
 
+    <?php
+    include_once '../../model/UsuarioDao.php';
 
+    session_start();
+
+    $correo = $_SESSION['CorreoElectronico'];
+
+    $usuario = null;
+    
+    $usuarioDao = new usuarioDao();
+
+    $resultado = $usuarioDao->filtrarUsuarioPorCorreo($correo);
+
+    if (!empty($resultado)) {
+        $usuario = $resultado[0];
+    }
+    
+    ?>
 </head>
 <body>
     <header class="header">
@@ -25,7 +42,7 @@
         </div>
             
         <ul class="aside__list">
-            <a href="perfilAdmin.html">
+            <a href="perfilAdmin.php">
                 <li class="aside__list__options">
                     <span class="material-symbols-outlined iconOption">account_circle</span>
                     <span class="option"> Perfil </span>
@@ -38,7 +55,7 @@
                     <span class="material-symbols-outlined list__arrow ">keyboard_arrow_down</span>
                 </div>
                 <ul class="aside__list__show">
-                    <a href="AdmUsuarios.html">
+                    <a href="AdmUsuarios.php">
                         <li class="aside__list__inside">
                             <span class="material-symbols-outlined iconOption ">groups</span>
                             <span class="option"> Adm. Usuarios </span>
@@ -47,15 +64,16 @@
                     <a href="">
                         <li class="aside__list__inside">
                             <span class="material-symbols-outlined iconOption ">medication</span>
-                            <span class="option"> Adm. Productos </span>
+                            <span class="option"> Adm. Perfiles</span>
                         </li>
                     </a>
                     <a href="">
                         <li class="aside__list__inside">
                             <span class="material-symbols-outlined iconOption ">category</span>
-                            <span class="option"> Adm. Categorías </span>
+                            <span class="option"> Adm. Distritos </span>
                         </li>
                     </a>
+                    
                 </ul>
             </li>
             <a href="">
@@ -81,60 +99,49 @@
     </aside>
     <main class="main">
         <div class="section1">
-            <h1 class="section1__title">Crear Nuevo Usuario</h1>
-            <form class="section1__form">
-                <hr>
-                <div class="form__group">
-                    <div class="form__description">
-                        <legend>Datos Personales</legend>
-                    </div>
-                    <div class="form__content">
-                        <label>Nombres</label>
-                        <input class="control form__nombres" type="text" value="">
-                        <label>Apellido Paterno</label>
-                        <input class="control form__apellPater" type="text" value="">
-                        <label>Apellido Materno</label>
-                        <input class="control form__apellMater" type="text" value="">
-                        <label>DNI</label>
-                        <input class="control form__dni" type="text" value="">
-                    </div>
-                </div>
-                <hr>
-                <div class="form__group">
-                    <div class="form__description">
-                        <legend>Información del contacto</legend>
-                    </div>
-                    <div class="form__content">
-                        <label>Teléfono</label>
-                        <input class="control form__telefono" type="text" value="">
-                        <label>Correo</label>
-                        <input class="control form__email" type="email" value="">
-                        <label>Dirección</label>
-                        <input class="control form__adress" type="text" value="">
-                    </div>
-                </div>
-                <hr>
-                <div class="form__group">
-                    <div class="form__description">
-                        <legend>Crear Contraseña</legend>
-                    </div>
-                    <div class="form__content">
-                        <label>Contraseña</label>
-                        <input class="control form__password" type="password" value="">
-                        <label>Confirmar Contraseña</label>
-                        <input class="control form__password" type="password" value="">
-                    </div>
-                </div>
-                <hr>
-                <div class="form__content__buttons">
-                    <button class="form__button__cancel" onclick="">Cancelar</button>
-                    <button class="form__button__update" onclick="">Crear Usuario</button>
-                </div>
-
-            </form>
+            <div class="section1__container__title">
+                <h1 class="section1__title">Perfil del Usuario</h1>
+            </div>
+            <div class="section1__container__datos">
+                <table class="section1__datos">
+                    <tr>
+                        <th>Nombres</th>
+                        <td><?php echo $usuario ? htmlspecialchars($usuario['Nombres']) : ''; ?></td>
+                    </tr>
+                    <tr>
+                        <th>Apellido Paterno</th>
+                        <td><?php echo $usuario ? htmlspecialchars($usuario['ApellidoPaterno']) : ''; ?></td>
+                    </tr>
+                    <tr>
+                        <th>Apellido Materno</th>
+                        <td><?php echo $usuario ? htmlspecialchars($usuario['ApellidoMaterno']) : ''; ?></td>
+                    </tr>
+                    <tr>
+                        <th>DNI</th>
+                        <td><?php echo $usuario ? htmlspecialchars($usuario['DNI']) : ''; ?></td>
+                    </tr>
+                    <tr>
+                        <th>Teléfono</th>
+                        <td><?php echo $usuario ? htmlspecialchars($usuario['Telefono']) : ''; ?></td>
+                    </tr>
+                    <tr>
+                        <th>Dirección</th>
+                        <td><?php echo $usuario ? htmlspecialchars($usuario['Direccion']) : ''; ?></td>
+                    </tr>
+                    <tr>
+                        <th>Tipo de Usuario</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>Correo Registrado</th>
+                        <td><?php echo $usuario ? htmlspecialchars($usuario['CorreoElectronico']) : ''; ?></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="section1__container__button">
+                <button class="section1__button__actDatos"> Actualizar Datos</button>
+            </div>
         </div>
-
-        
     </main>
 </body>
 </html>

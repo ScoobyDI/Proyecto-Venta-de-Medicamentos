@@ -56,6 +56,10 @@
     width: 200px;
 }
 
+.form__fechanacimiento {
+    width: 160px;
+}
+
 .form__email {
     width: 320px;
 }

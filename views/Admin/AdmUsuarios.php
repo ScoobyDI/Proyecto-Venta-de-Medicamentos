@@ -10,12 +10,10 @@
     <link rel="stylesheet" href="../../public/css/AdmUsuarios.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
 </head>
-
-<script>
-
-
-</script>
-
+    <?php
+        session_start();
+        $_SESSION['previous_page'] = $_SERVER['REQUEST_URI']; // Almacena la URL actual
+    ?>
 <body>
     <header class="header">
         <img src="../../public/img/logo.png">
@@ -30,7 +28,7 @@
         </div>
             
         <ul class="aside__list">
-            <a href="perfilAdmin.html">
+            <a href="perfilAdmin.php">
                 <li class="aside__list__options">
                     <span class="material-symbols-outlined iconOption">account_circle</span>
                     <span class="option"> Perfil </span>
@@ -96,7 +94,7 @@
                     </div>
                 </div>
                 <div class="section1__addUser">
-                    <button class="section1__addUser__btn" id="btnAddUser" onclick="location.href='CrearUsuario.html'">Nuevo Usuario</button>
+                    <button class="section1__addUser__btn" id="btnAddUser" onclick="location.href='CrearUsuario.php'">Nuevo Usuario</button>
                 </div>
             </div>
         </div>
