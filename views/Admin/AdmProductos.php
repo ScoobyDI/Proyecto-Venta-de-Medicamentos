@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrar Perfiles</title>
+    <title>Administrar Productos</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="../../public/css/asideAndHeader.css">
-    <link rel="stylesheet" href="../../public/css/AdmPerfiles.css">
+    <link rel="stylesheet" href="../../public/css/AdmProductos.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
 </head>
 
@@ -105,30 +105,33 @@
     <main class="main">
 
         <div class="section1">
-            <h1 class="section1__title">Administrar Perfiles</h1>
+            <h1 class="section1__title">Administrar Productos</h1>
             <div class="section1__content">
                 <div class="section1__filter">
                     <div class="form-buscar-id">
                         <label>Buscar:</label>
-                        <input class="control" id="searchIdUsuario" placeholder="Filtrar" required>
+                        <input class="control" placeholder="Filtrar" required>
                         <button class="section1__filter__btn" onclick="">Buscar</button>
                     </div>
                 </div>
                 <div class="section1__options">
-                    <button class="section1__addPerfil__btn" onclick="location.href='AnadirPerfil.php'">Nuevo Perfil</button>
+                    <button class="section1__addProduct__btn" onclick="location.href='AnadirProducto.php'">Nuevo Producto</button>
                 </div>
             </div>
         </div>
 
         <div class="section2">
-            <table id="perfilesTable" class="section2__table">
+            <table id="productosTable" class="section2__table">
                 <thead>
                     <tr>
-                        <th class="section2__table__id">Id Perfil</th>
-                        <th class="section2__table__nombre">Nombres</th>
-                        <th class="section2__table__descripcion">Descripción</th>
-                        <th class="section2__table__edit">Editar</th>
-                        <th class="section2__table__deshabilitar">Deshabilitar</th>
+                        <th class="section2__table">Id Producto</th>
+                        <th class="section2__table">Nombre</th>
+                        <th class="section2__table">Descripción</th>
+                        <th class="section2__table">Categoría</th>
+                        <th class="section2__table">Sucategoría</th>
+                        <th class="section2__table">Precio </th>
+                        <th class="section2__table">Stock</th>
+                        <th class="section2__table">Fecha de Vencimiento</th>
                     </tr>
                 </thead>
                 <tbody>

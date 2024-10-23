@@ -29,43 +29,12 @@
     gap: 40px;
 }
 
-.section1__addUser__btn {
-    cursor: pointer;
-    width: 180px;
-    padding: 10px;
-    background:green;
-    border-radius: 4px;
-    border: 1px solid black;
-    font-size: 20px;
-    color:white;
-}
-
-.section1__userOff__btn {
-    cursor: pointer;
-    width: 180px;
-    padding: 10px;
-    background:red;
-    border-radius: 4px;
-    border: 1px solid black;
-    font-size: 20px;
-    color:white;
-}
-
 .section1__filter {
     display: flex;
     align-items: center;
     gap: 40px;
     font-size: 20px;
     margin: 10px 0;
-}
-
-.control {
-    width: 380px;
-    background:#F4F5F3;
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid black;
-    font-size: 20px;
 }
 
 .section1__filter__btn {
@@ -78,6 +47,26 @@
     color:black;
 }
 
+.section1__addProduct__btn {
+    cursor: pointer;
+    width: 180px;
+    padding: 10px;
+    background:green;
+    border-radius: 4px;
+    border: 1px solid black;
+    font-size: 20px;
+    color:white;
+}
+
+.control {
+    width: 380px;
+    background:#F4F5F3;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid black;
+    font-size: 20px;
+}
+
 label {
     font-weight: bold;
     display: block;
@@ -86,10 +75,12 @@ label {
 
 .section2 {
     width: 95%;
+    display: flex;
+    justify-content: center;
 }
 
 .section2__table {
-    width: 95%;
+    width: 900px;
     border: 1px solid black;
 }
 
@@ -102,50 +93,26 @@ th {
 td {
     padding: 8px;
     /* border: 0.1px solid gray; */
+    text-align: center;
     background-color: white;
-
 }
 
 tbody tr:hover {
     background: rgba(99, 98, 98, 0.4);
 }
 
-.section2__table__idUser {
+.section2__table__id {
     width: 80px;
 }
 
-.section2__table__nombres{
-    width: 160px;
-}
-
-.section2__table__apellidos{
+.section2__table__nombre {
     width: 200px;
 }
 
-.section2__table__estadoRegistro{
+.section2__table__edit {
     width: 80px;
 }
 
-.section2__table__editar{
-    width: 80px;
-}
-
-.section2__table__eliminar{
-    width: 80px;
-}
-
-.imgBtnActualizar {
-    height: 28px;
-}
-
-.btnHabDesh {
-    margin: auto;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
-    width: 50px;
-    height: 30px;
-    background-color: red;
+.section2__table__deshabilitar {
+    width: 100px;
 }

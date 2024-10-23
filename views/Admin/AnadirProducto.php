@@ -1,27 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrar Perfiles</title>
+    <title>Añadir Producto</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="../../public/css/asideAndHeader.css">
-    <link rel="stylesheet" href="../../public/css/AdmPerfiles.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="../../public/css/AnadirProducto.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
-    <?php
-        session_start();
-        $_SESSION['previous_page'] = $_SERVER['REQUEST_URI']; // Almacena la URL actual
-    ?>
-
 <body>
-
+    
     <header class="header">
         <img src="../../public/img/logo.png">
     </header>
-
+    
     <aside class="aside" id="aside">
         <div class="aside__head">
             <div class="aside__head__profile">
@@ -101,42 +99,34 @@
         </div>
         <script src="../../public/js/aside.js"></script>
     </aside>
-    
+
     <main class="main">
-
         <div class="section1">
-            <h1 class="section1__title">Administrar Perfiles</h1>
-            <div class="section1__content">
-                <div class="section1__filter">
-                    <div class="form-buscar-id">
-                        <label>Buscar:</label>
-                        <input class="control" id="searchIdUsuario" placeholder="Filtrar" required>
-                        <button class="section1__filter__btn" onclick="">Buscar</button>
+            <h1 class="section1__title">Añadir Productos</h1>
+            <div class="form__container">
+                <form name="form" class="section1__form">
+                    <input type="hidden" name="op">
+                        <label>Nombre:</label>
+                        <input class="control form__" type="text" name="" required>
+                        <label>Descripción:</label>
+                        <input class="control form__" type="text" name="" required>
+                        <label>Categoría:</label>
+                        <input class="control form__" type="text" name="" required>
+                        <label>Subcategoría:</label>
+                        <input class="control form__" type="text" name="" required>
+                        <label>Precio:</label>
+                        <input class="control form__" type="text" name="" required>
+                        <label>Stock:</label>
+                        <input class="control form__" type="text" name="" required>
+                        <label>Fecha de Vencimiento:</label>
+                        <input class="control form__" type="date" name="" required>
+                    <hr></hr>
+                    <div class="form__content__buttons">
+                        <button class="form__button__cancel" type="button" onclick="">Cancelar</button>
+                        <button class="form__button__anadir" onclick="">Añadir Producto</button>
                     </div>
-                </div>
-                <div class="section1__options">
-                    <button class="section1__addPerfil__btn" onclick="location.href='AnadirPerfil.php'">Nuevo Perfil</button>
-                </div>
+                </form>
             </div>
-        </div>
-
-        <div class="section2">
-            <table id="perfilesTable" class="section2__table">
-                <thead>
-                    <tr>
-                        <th class="section2__table__id">Id Perfil</th>
-                        <th class="section2__table__nombre">Nombres</th>
-                        <th class="section2__table__descripcion">Descripción</th>
-                        <th class="section2__table__edit">Editar</th>
-                        <th class="section2__table__deshabilitar">Deshabilitar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        
-                    </tr>
-                </tbody>
-            </table>
         </div>
     </main>
 </body>

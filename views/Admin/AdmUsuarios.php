@@ -115,8 +115,7 @@
                     </div>
                 </div>
                 <div class="section1__options">
-                    <!-- <button class="section1__userOff__btn" onclick="">Deshabilitados</button> -->
-                    <button class="section1__addUser__btn" id="btnAddUser" onclick="location.href='CrearUsuario.php'">Nuevo Usuario</button>
+                    <button class="section1__addUser__btn" id="btnAddUser" onclick="location.href='AnadirUsuario.php'">Nuevo Usuario</button>
                 </div>
             </div>
         </div>
