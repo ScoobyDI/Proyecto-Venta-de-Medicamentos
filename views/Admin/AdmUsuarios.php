@@ -9,15 +9,20 @@
     <link rel="stylesheet" href="../../public/css/asideAndHeader.css">
     <link rel="stylesheet" href="../../public/css/AdmUsuarios.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
-</head>
+
     <?php
         session_start();
         $_SESSION['previous_page'] = $_SERVER['REQUEST_URI']; // Almacena la URL actual
     ?>
+
+</head>
+
 <body>
+
     <header class="header">
         <img src="../../public/img/logo.png">
     </header>
+
     <aside class="aside" id="aside">
         <div class="aside__head">
             <div class="aside__head__profile">
@@ -47,15 +52,27 @@
                             <span class="option"> Adm. Usuarios </span>
                         </li>
                     </a>
-                    <a href="">
+                    <a href="AdmPerfiles.php">
+                        <li class="aside__list__inside">
+                            <span class="material-symbols-outlined iconOption">assignment_ind</span>
+                            <span class="option"> Adm. Perfiles </span>
+                        </li>
+                    </a>
+                    <a href="AdmDistritos.php">
+                        <li class="aside__list__inside">
+                            <span class="material-symbols-outlined iconOption">location_city</span>
+                            <span class="option"> Adm. Distritos </span>
+                        </li>
+                    </a>
+                    <a href="AdmProductos.php">
                         <li class="aside__list__inside">
                             <span class="material-symbols-outlined iconOption">medication</span>
                             <span class="option"> Adm. Productos </span>
                         </li>
                     </a>
-                    <a href="">
+                    <a href="AdmCategorias.php">
                         <li class="aside__list__inside">
-                            <span class="material-symbols-outlined iconOption">category</span>
+                        <span class="material-symbols-outlined iconOption">category</span>
                             <span class="option"> Adm. Categorías </span>
                         </li>
                     </a>
@@ -80,8 +97,12 @@
                 </li>
             </a>
         </ul>
+        <div class="aside__down">
+            <button class="aside__btnLogOut">Cerrar Sesión</button>
+        </div>
         <script src="../../public/js/aside.js"></script>
     </aside>
+    
     <main class="main">
         <div class="section1">
             <h1 class="section1__title">Administrar Usuarios</h1>
@@ -89,11 +110,12 @@
                 <div class="section1__filter">
                     <div class="form-buscar-id">
                         <label>Buscar:</label>
-                        <input class="control" id="searchIdUsuario" placeholder="Filtrar por ID" required>
+                        <input class="control" id="searchIdUsuario" placeholder="Filtrar" required>
                         <button class="section1__filter__btn" onclick="buscarPorId()">Buscar</button>
                     </div>
                 </div>
-                <div class="section1__addUser">
+                <div class="section1__options">
+                    <!-- <button class="section1__userOff__btn" onclick="">Deshabilitados</button> -->
                     <button class="section1__addUser__btn" id="btnAddUser" onclick="location.href='CrearUsuario.php'">Nuevo Usuario</button>
                 </div>
             </div>
@@ -104,21 +126,24 @@
                 include_once '../../util/ConexionBD.php';
                 $objc = new ConexionBD();
                 $con = $objc->getConexionBD();
-                $sql = "SELECT IdUsuario, Nombres, CONCAT(ApellidoPaterno, ' ', ApellidoMaterno) AS Apellidos, Telefono, CorreoElectronico, EstadoRegistro FROM usuario";
+                $sql = "SELECT u.IdUsuario, u.DNI, u.Nombres, CONCAT(u.ApellidoPaterno, ' ', u.ApellidoMaterno) AS Apellidos, u.Telefono, u.CorreoElectronico, d.NombreDistrito, u.EstadoRegistro 
+        FROM usuario u INNER JOIN distrito d ON u.IdDistrito=d.IdDistrito";
                 $rs = mysqli_query($con, $sql);
             ?>
+
             <table id="usuariosTable" class="section2__table">
                 <thead>
                     <tr>
-                        <th class="section2__table__idUser">Id Usuario</th>
+                        <th class="section2__table__dni">DNI</th>
                         <th class="section2__table__nombres">Nombres</th>
                         <th class="section2__table__apellidos">Apellidos</th>
-                        <th class="section2__table__celular">Celular</th>
+                        <th class="section2__table__celular">Teléfono</th>
                         <th class="section2__table__correo">Correo Electrónico</th>
-                        <th class="section2__table__tipoUsuario">Tipo de Usuario</th>
+                        <th class="section2__table__correo">Distrito</th>
+                        <th class="section2__table__tipoUsuario">Perfil</th>
                         <th class="section2__table__estadoRegistro">Estado Registro</th>
                         <th class="section2__table__editar">Editar</th>
-                        <th class="section2__table__eliminar">Eliminar</th>
+                        <th class="section2__table__eliminar">Habilitar / Deshabilitar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -126,22 +151,25 @@
                         while($resultado = mysqli_fetch_array($rs)){
                     ?>
                     <tr>
-                        <td><?php echo $resultado['IdUsuario'] ?></td> <?php $link = "editarUsuario.php?idUsuario=" . $resultado['IdUsuario'];?>
+                        <?php $link = "editarUsuario.php?idUsuario=" . $resultado['IdUsuario'];?>           
+                        
+                        <td><?php echo $resultado['DNI'] ?></td>
                         <td><?php echo $resultado['Nombres'] ?></td>
                         <td><?php echo $resultado['Apellidos'] ?></td>
                         <td><?php echo $resultado['Telefono'] ?></td>
                         <td><?php echo $resultado['CorreoElectronico'] ?></td>
+                        <td><?php echo $resultado['NombreDistrito'] ?></td>
                         <td></td>
                         <td><?php echo $resultado['EstadoRegistro'] ?></td>
-                        <td><img src="../../public/img/btnEditar.png" onclick="location.href='<?php echo $link ?>'" height="28px" alt="bntEditar"></td>
-                        <td><img src="../../public/img/BtnEliminar.png" height="30px" alt="btnEliminar"></td>
+                        <td><img src="../../public/img/btnEditar.png" class="imgBtnActualizar" onclick="location.href='<?php echo $link ?>'"  alt="bntEditar"></td>
+                        <td><button class="btnHabDesh"><span class="material-symbols-outlined">radio_button_checked</span></button></td>
                     </tr>
                     <?php }?>
                 </tbody>
             </table>
         </div>
     </main>
-
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
     <script>

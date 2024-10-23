@@ -193,6 +193,7 @@ class UsuarioDao {
                     IdDistrito = ' $distrito',
                     DNI = '$dni',
                     CorreoElectronico = '$correo',
+                    $contrasena = password_hash($usuobj->getContrasena(), PASSWORD_DEFAULT);
                     Contrasena = '$contrasena'
                     WHERE IdUsuario = '$id'";
             $rs = mysqli_query($cn, $sql);

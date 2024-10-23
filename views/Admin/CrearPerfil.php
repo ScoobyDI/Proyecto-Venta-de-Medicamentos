@@ -1,39 +1,26 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InicioAdmin</title>
+    <title>Crear Perfiles</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="../../public/css/asideAndHeader.css">
-    <link rel="stylesheet" href="../../public/css/perfilAdmin.css">
+    <link rel="stylesheet" href="../../public/css/CrearPerfil.css">
 
-    <?php
-    include_once '../../model/UsuarioDao.php';
-
-    session_start();
-
-    $correo = $_SESSION['CorreoElectronico'];
-
-    $usuario = null;
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
-    $usuarioDao = new usuarioDao();
-
-    $resultado = $usuarioDao->filtrarUsuarioPorCorreo($correo);
-
-    if (!empty($resultado)) {
-        $usuario = $resultado[0];
-    }
-    
-    ?>
 </head>
-<body>
 
+<body>
+    
     <header class="header">
         <img src="../../public/img/logo.png">
     </header>
-
+    
     <aside class="aside" id="aside">
         <div class="aside__head">
             <div class="aside__head__profile">
@@ -113,51 +100,25 @@
         </div>
         <script src="../../public/js/aside.js"></script>
     </aside>
-    
+
     <main class="main">
         <div class="section1">
-            <div class="section1__container__title">
-                <h1 class="section1__title">Perfil del Usuario</h1>
+            <h1 class="section1__title">Crear Nuevo Perfil de Usuario</h1>
+            <div class="form__container">
+                <form name="form" class="section1__form">
+                    <input type="hidden" name="op">
+                        <label>Nombre de Perfil:</label>
+                        <input class="control form__nombre" type="text" name="Nombres" required>
+                        <label>Descripción:</label>
+                        <input class="control form__descripcion" type="text" name="ApellidoPaterno" required>
+                    <hr></hr>
+                    <div class="form__content__buttons">
+                        <button class="form__button__cancel" type="button" onclick="">Cancelar</button>
+                        <button class="form__button__update" onclick="">Crear Perfil</button>
+                    </div>
+                </form>
             </div>
-            <div class="section1__container__datos">
-                <table class="section1__datos">
-                    <tr>
-                        <th>Nombres</th>
-                        <td><?php echo $usuario ? htmlspecialchars($usuario['Nombres']) : ''; ?></td>
-                    </tr>
-                    <tr>
-                        <th>Apellido Paterno</th>
-                        <td><?php echo $usuario ? htmlspecialchars($usuario['ApellidoPaterno']) : ''; ?></td>
-                    </tr>
-                    <tr>
-                        <th>Apellido Materno</th>
-                        <td><?php echo $usuario ? htmlspecialchars($usuario['ApellidoMaterno']) : ''; ?></td>
-                    </tr>
-                    <tr>
-                        <th>DNI</th>
-                        <td><?php echo $usuario ? htmlspecialchars($usuario['DNI']) : ''; ?></td>
-                    </tr>
-                    <tr>
-                        <th>Teléfono</th>
-                        <td><?php echo $usuario ? htmlspecialchars($usuario['Telefono']) : ''; ?></td>
-                    </tr>
-                    <tr>
-                        <th>Dirección</th>
-                        <td><?php echo $usuario ? htmlspecialchars($usuario['Direccion']) : ''; ?></td>
-                    </tr>
-                    <tr>
-                        <th>Tipo de Usuario</th>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th>Correo Registrado</th>
-                        <td><?php echo $usuario ? htmlspecialchars($usuario['CorreoElectronico']) : ''; ?></td>
-                    </tr>
-                </table>
-            </div>
-            <div class="section1__container__button">
-                <button class="section1__button__actDatos"> Actualizar Datos</button>
-            </div>
+            
         </div>
     </main>
 </body>

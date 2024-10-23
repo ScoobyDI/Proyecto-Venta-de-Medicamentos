@@ -59,7 +59,7 @@
     <aside class="aside" id="aside">
         <div class="aside__head">
             <div class="aside__head__profile">
-                <img class="aside__head__profile__Userlogo " src="../../public/img/LogoPrueba.jpg" alt="logoUser">
+                <img class="aside__head__profile__Userlogo" src="../../public/img/LogoPrueba.jpg" alt="logoUser">
                 <p class="aside__head__nameUser">User</p>
             </div>
             <span class="material-symbols-outlined logMenu" id="menu">menu</span>
@@ -73,27 +73,39 @@
                 </li>
             </a>
             <li class="aside__list__options__dropdown">
-                <div class="aside__list__button ">
-                    <span class="material-symbols-outlined iconOption"> manufacturing </span>
+                <div class="aside__list__button">
+                    <span class="material-symbols-outlined iconOption">manufacturing</span>
                     <span class="option"> Administrar </span>
-                    <span class="material-symbols-outlined list__arrow ">keyboard_arrow_down</span>
+                    <span class="material-symbols-outlined list__arrow">keyboard_arrow_down</span>
                 </div>
                 <ul class="aside__list__show">
                     <a href="AdmUsuarios.php">
                         <li class="aside__list__inside">
-                            <span class="material-symbols-outlined iconOption ">groups</span>
+                            <span class="material-symbols-outlined iconOption">groups</span>
                             <span class="option"> Adm. Usuarios </span>
                         </li>
                     </a>
-                    <a href="">
+                    <a href="AdmPerfiles.php">
                         <li class="aside__list__inside">
-                            <span class="material-symbols-outlined iconOption ">medication</span>
+                            <span class="material-symbols-outlined iconOption">assignment_ind</span>
+                            <span class="option"> Adm. Perfiles </span>
+                        </li>
+                    </a>
+                    <a href="AdmDistritos.php">
+                        <li class="aside__list__inside">
+                            <span class="material-symbols-outlined iconOption">location_city</span>
+                            <span class="option"> Adm. Distritos </span>
+                        </li>
+                    </a>
+                    <a href="AdmProductos.php">
+                        <li class="aside__list__inside">
+                            <span class="material-symbols-outlined iconOption">medication</span>
                             <span class="option"> Adm. Productos </span>
                         </li>
                     </a>
-                    <a href="">
+                    <a href="AdmCategorias.php">
                         <li class="aside__list__inside">
-                            <span class="material-symbols-outlined iconOption ">category</span>
+                        <span class="material-symbols-outlined iconOption">category</span>
                             <span class="option"> Adm. Categorías </span>
                         </li>
                     </a>
@@ -118,6 +130,9 @@
                 </li>
             </a>
         </ul>
+        <div class="aside__down">
+            <button class="aside__btnLogOut">Cerrar Sesión</button>
+        </div>
         <script src="../../public/js/aside.js"></script>
     </aside>
 

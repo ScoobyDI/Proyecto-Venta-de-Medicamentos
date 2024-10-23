@@ -32,6 +32,9 @@ body {
     position: fixed;
     padding: 30px;
     transition: all .2s ease;
+    z-index: 2; /* Aparece por encima */
+    display: flex;
+    flex-direction: column;
 }
 
 .aside__head {
@@ -110,7 +113,9 @@ body {
 
 .aside__list__inside {
     display: flex;
+    align-items: center;
     justify-content: center;
+    margin: auto;
     padding: 12px;
     border-radius: 10px;
     cursor: pointer;
@@ -126,6 +131,26 @@ a {
     color: inherit;
 }
 
+.aside__down {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    justify-items: flex-end;
+    margin: auto auto 120px;
+}
+
+.aside__btnLogOut {
+    cursor: pointer;
+    width: 180px;
+    height: 50px;
+    padding: 10px;
+    background:#021526;
+    border-radius: 4px;
+    border: 1px solid black;
+    font-size: 20px;
+    color:white;
+}
+
 /* MODIFICACIONES PARA EL MENU DESPLEGABLE */
 
 .aside.active {
@@ -135,7 +160,8 @@ a {
 
 .aside.active .option,
 .aside.active .list__arrow,
-.aside.active .aside__head__profile {
+.aside.active .aside__head__profile,
+.aside.active .aside__down {
     display: none;
 }
 

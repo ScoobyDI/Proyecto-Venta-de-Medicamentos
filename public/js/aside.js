@@ -1,9 +1,13 @@
+//ASIDE DESPLEGABLE
+
 const   aside = document.getElementById('aside');
         menu = document.getElementById('menu');
 
 menu.onclick = () => {
     aside.classList.toggle('active');
 }
+
+//SUBMENUS
 
 const listElements = document.querySelectorAll('.aside__list__button');
 

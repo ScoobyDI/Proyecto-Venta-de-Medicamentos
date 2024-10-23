@@ -3,31 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InicioAdmin</title>
+    <title>Administrar Distritos</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="../../public/css/asideAndHeader.css">
-    <link rel="stylesheet" href="../../public/css/perfilAdmin.css">
+    <link rel="stylesheet" href="../../public/css/AdmDistritos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+</head>
 
     <?php
-    include_once '../../model/UsuarioDao.php';
-
-    session_start();
-
-    $correo = $_SESSION['CorreoElectronico'];
-
-    $usuario = null;
-    
-    $usuarioDao = new usuarioDao();
-
-    $resultado = $usuarioDao->filtrarUsuarioPorCorreo($correo);
-
-    if (!empty($resultado)) {
-        $usuario = $resultado[0];
-    }
-    
+        session_start();
+        $_SESSION['previous_page'] = $_SERVER['REQUEST_URI']; // Almacena la URL actual
     ?>
-</head>
+
 <body>
 
     <header class="header">
@@ -69,7 +57,7 @@
                             <span class="option"> Adm. Perfiles </span>
                         </li>
                     </a>
-                    <a href="AdmDistritos.php">
+                    <a href="AdmPerfiles.php">
                         <li class="aside__list__inside">
                             <span class="material-symbols-outlined iconOption">location_city</span>
                             <span class="option"> Adm. Distritos </span>
@@ -115,49 +103,39 @@
     </aside>
     
     <main class="main">
+
         <div class="section1">
-            <div class="section1__container__title">
-                <h1 class="section1__title">Perfil del Usuario</h1>
+            <h1 class="section1__title">Administrar Distritos</h1>
+            <div class="section1__content">
+                <div class="section1__filter">
+                    <div class="form-buscar-id">
+                        <label>Buscar:</label>
+                        <input class="control" id="searchIdUsuario" placeholder="Filtrar" required>
+                        <button class="section1__filter__btn" onclick="">Buscar</button>
+                    </div>
+                </div>
+                <div class="section1__options">
+                    <button class="section1__addDistri__btn" onclick="location.href='AnadirDistrito.php'">Nuevo Distrito</button>
+                </div>
             </div>
-            <div class="section1__container__datos">
-                <table class="section1__datos">
+        </div>
+
+        <div class="section2">
+            <table id="distritoTable" class="section2__table">
+                <thead>
                     <tr>
-                        <th>Nombres</th>
-                        <td><?php echo $usuario ? htmlspecialchars($usuario['Nombres']) : ''; ?></td>
+                        <th class="section2__table__id">Id Distrito</th>
+                        <th class="section2__table__nombre">Nombre del Distrito</th>
+                        <th class="section2__table__edit">Editar</th>
+                        <th class="section2__table__deshabilitar">Deshabilitar</th>
                     </tr>
+                </thead>
+                <tbody>
                     <tr>
-                        <th>Apellido Paterno</th>
-                        <td><?php echo $usuario ? htmlspecialchars($usuario['ApellidoPaterno']) : ''; ?></td>
+                        
                     </tr>
-                    <tr>
-                        <th>Apellido Materno</th>
-                        <td><?php echo $usuario ? htmlspecialchars($usuario['ApellidoMaterno']) : ''; ?></td>
-                    </tr>
-                    <tr>
-                        <th>DNI</th>
-                        <td><?php echo $usuario ? htmlspecialchars($usuario['DNI']) : ''; ?></td>
-                    </tr>
-                    <tr>
-                        <th>Teléfono</th>
-                        <td><?php echo $usuario ? htmlspecialchars($usuario['Telefono']) : ''; ?></td>
-                    </tr>
-                    <tr>
-                        <th>Dirección</th>
-                        <td><?php echo $usuario ? htmlspecialchars($usuario['Direccion']) : ''; ?></td>
-                    </tr>
-                    <tr>
-                        <th>Tipo de Usuario</th>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th>Correo Registrado</th>
-                        <td><?php echo $usuario ? htmlspecialchars($usuario['CorreoElectronico']) : ''; ?></td>
-                    </tr>
-                </table>
-            </div>
-            <div class="section1__container__button">
-                <button class="section1__button__actDatos"> Actualizar Datos</button>
-            </div>
+                </tbody>
+            </table>
         </div>
     </main>
 </body>

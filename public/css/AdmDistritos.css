@@ -29,22 +29,22 @@
     gap: 40px;
 }
 
-.section1__addUser__btn {
+.section1__distritosOff__btn {
     cursor: pointer;
     width: 180px;
     padding: 10px;
-    background:green;
+    background:red;
     border-radius: 4px;
     border: 1px solid black;
     font-size: 20px;
     color:white;
 }
 
-.section1__userOff__btn {
+.section1__addDistri__btn {
     cursor: pointer;
     width: 180px;
     padding: 10px;
-    background:red;
+    background:green;
     border-radius: 4px;
     border: 1px solid black;
     font-size: 20px;
@@ -86,10 +86,11 @@ label {
 
 .section2 {
     width: 95%;
+    display: flex;
+    justify-content: center;
 }
 
 .section2__table {
-    width: 95%;
     border: 1px solid black;
 }
 
@@ -102,50 +103,26 @@ th {
 td {
     padding: 8px;
     /* border: 0.1px solid gray; */
+    text-align: center;
     background-color: white;
-
 }
 
 tbody tr:hover {
     background: rgba(99, 98, 98, 0.4);
 }
 
-.section2__table__idUser {
+.section2__table__id {
     width: 80px;
 }
 
-.section2__table__nombres{
-    width: 160px;
+.section2__table__nombre {
+    width: 200px;
 }
 
-.section2__table__apellidos{
-    width: 300px;
-}
-
-.section2__table__estadoRegistro{
+.section2__table__edit {
     width: 80px;
 }
 
-.section2__table__editar{
-    width: 80px;
-}
-
-.section2__table__eliminar{
-    width: 80px;
-}
-
-.imgBtnActualizar {
-    height: 28px;
-}
-
-.btnHabDesh {
-    margin: auto;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
-    width: 50px;
-    height: 30px;
-    background-color: red;
+.section2__table__deshabilitar {
+    width: 100px;
 }

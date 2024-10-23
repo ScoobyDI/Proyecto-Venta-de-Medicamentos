@@ -47,29 +47,40 @@
             });
         }
     </script>
+
+    <?php
+        include_once '../../model/UsuarioDao.php';
+
+        // Obtener el idUsuario desde la URL
+        $idUsuario = isset($_GET['idUsuario']) ? $_GET['idUsuario'] : '';
+
+        $usuario = null;
+        if ($idUsuario) {
+            $usuarioDao = new UsuarioDao();
+            $resultado = $usuarioDao->filtrarUsuarioPorId($idUsuario);
+        
+            if (!empty($resultado)) {
+                $usuario = $resultado[0];
+            }
+        }
+    ?>
+
+    <?php
+        include_once '../../util/ConexionBD.php';
+        $objc = new ConexionBD();
+        $con = $objc->getConexionBD();
+        $sql = "SELECT * FROM distrito";
+        $rs = mysqli_query($con,$sql);
+    ?>
+    
 </head>
 
 <body>
-    <?php
-    include_once '../../model/UsuarioDao.php';
-
-    // Obtener el idUsuario desde la URL
-    $idUsuario = isset($_GET['idUsuario']) ? $_GET['idUsuario'] : '';
-
-    $usuario = null;
-    if ($idUsuario) {
-        $usuarioDao = new UsuarioDao();
-        $resultado = $usuarioDao->filtrarUsuarioPorId($idUsuario);
-    
-        if (!empty($resultado)) {
-            $usuario = $resultado[0];
-        }
-    }
-    ?>
 
     <header class="header">
         <img src="../../public/img/logo.png">
     </header>
+
     <aside class="aside" id="aside">
         <div class="aside__head">
             <div class="aside__head__profile">
@@ -79,7 +90,7 @@
             <span class="material-symbols-outlined logMenu" id="menu">menu</span>
         </div>
             
-        <ul class="aside__list">
+       <ul class="aside__list">
             <a href="perfilAdmin.php">
                 <li class="aside__list__options">
                     <span class="material-symbols-outlined iconOption">account_circle</span>
@@ -87,27 +98,39 @@
                 </li>
             </a>
             <li class="aside__list__options__dropdown">
-                <div class="aside__list__button ">
-                    <span class="material-symbols-outlined iconOption"> manufacturing </span>
+                <div class="aside__list__button">
+                    <span class="material-symbols-outlined iconOption">manufacturing</span>
                     <span class="option"> Administrar </span>
-                    <span class="material-symbols-outlined list__arrow ">keyboard_arrow_down</span>
+                    <span class="material-symbols-outlined list__arrow">keyboard_arrow_down</span>
                 </div>
                 <ul class="aside__list__show">
                     <a href="AdmUsuarios.php">
                         <li class="aside__list__inside">
-                            <span class="material-symbols-outlined iconOption ">groups</span>
+                            <span class="material-symbols-outlined iconOption">groups</span>
                             <span class="option"> Adm. Usuarios </span>
                         </li>
                     </a>
                     <a href="">
                         <li class="aside__list__inside">
-                            <span class="material-symbols-outlined iconOption ">medication</span>
+                            <span class="material-symbols-outlined iconOption">assignment_ind</span>
+                            <span class="option"> Adm. Perfiles </span>
+                        </li>
+                    </a>
+                    <a href="">
+                        <li class="aside__list__inside">
+                            <span class="material-symbols-outlined iconOption">location_city</span>
+                            <span class="option"> Adm. Distritos </span>
+                        </li>
+                    </a>
+                    <a href="">
+                        <li class="aside__list__inside">
+                            <span class="material-symbols-outlined iconOption">medication</span>
                             <span class="option"> Adm. Productos </span>
                         </li>
                     </a>
                     <a href="">
                         <li class="aside__list__inside">
-                            <span class="material-symbols-outlined iconOption ">category</span>
+                        <span class="material-symbols-outlined iconOption">category</span>
                             <span class="option"> Adm. Categorías </span>
                         </li>
                     </a>
@@ -134,6 +157,7 @@
         </ul>
         <script src="../../public/js/aside.js"></script>
     </aside>
+
     <main class="main">
         <div class="section1">
             <h1 class="section1__title">Actualizar Usuario</h1>
@@ -171,11 +195,17 @@
                         <input class="control form__email" type="email" name="Correo" value="<?php echo $usuario ? htmlspecialchars($usuario['CorreoElectronico']) : ''; ?>">
                         <label>Distrito</label>
                         <select class="control form__district" name="Distrito" required>
-                            <option value ="" disabled selected="">Seleccione una opción</option>
-                            <option value="1">Ate</option>
-                            <option value="2">Ancon</option>
-                            <option value="3">Barranco</option>
-                            <option value="4">Breña</option>
+                            <option value="" disabled selected>Seleccione un distrito</option>
+                            <?php 
+                            while($row = mysqli_fetch_array($rs))
+                            {
+                                $id= $row['IdDistrito'];
+                                $nombre = $row['NombreDistrito'];
+                            ?>
+                            <option value="<?php echo $id ?>"><?php echo $nombre ?></option>
+                            <?php
+                            }
+                            ?>
                         </select>  
                         <label>Dirección</label>
                         <input class="control form__adress" type="text" name="Direccion" value="<?php echo $usuario ? htmlspecialchars($usuario['Direccion']) : ''; ?>" required>

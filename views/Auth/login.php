@@ -19,10 +19,12 @@
             document.form.submit();    
         }
     </script>
+    
     <?php
         session_start();
         $_SESSION['previous_page'] = $_SERVER['REQUEST_URI'];       // Almacena la URL actual
     ?>
+    
 </head>
 
 <body>
