@@ -1,36 +1,55 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Añadir Producto</title>
+    <title>Administrar Productos</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="../../public/css/asideAndHeader.css">
-    <link rel="stylesheet" href="../../public/css/AnadirProducto.css">
+    <link rel="stylesheet" href="../../../public/css/asideAndHeader.css">
+    <link rel="stylesheet" href="../../../public/css/AdmProductos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <?php
+        include_once '../../../model/UsuarioDao.php';
+        session_start();
+        $_SESSION['previous_page'] = $_SERVER['REQUEST_URI']; // Almacena la URL actual
+        $correo = $_SESSION['CorreoElectronico'];
+        $usuario = null;
+        $usuarioDao = new usuarioDao();
+        $resultado = $usuarioDao->filtrarUsuarioPorCorreo($correo);
+
+        if (!empty($resultado)) {
+            $usuario = $resultado[0];
+        }
+    ?>
+
+    <script>
+        function cerrarSesion() {
+            window.location.href = "../../../controller/logout.php"; // Cambia la ruta según tu estructura de carpetas
+        }
+    </script>
+
 </head>
 
 <body>
-    
+
     <header class="header">
-        <img src="../../public/img/logo.png">
+        <img src="../../../public/img/logo.png">
     </header>
-    
+
     <aside class="aside" id="aside">
         <div class="aside__head">
             <div class="aside__head__profile">
-                <img class="aside__head__profile__Userlogo" src="../../public/img/LogoPrueba.jpg" alt="logoUser">
-                <p class="aside__head__nameUser">User</p>
+                <img class="aside__head__profile__Userlogo" src="../../../public/img/LogoPrueba.jpg" alt="logoUser">
+                <p class="aside__head__nameUser"><?php echo $usuario ? htmlspecialchars($usuario['Nombres']) : ''; ?></p>
             </div>
             <span class="material-symbols-outlined logMenu" id="menu">menu</span>
         </div>
             
         <ul class="aside__list">
-            <a href="perfilAdmin.php">
+            <a href="../perfilAdmin.php">
                 <li class="aside__list__options">
                     <span class="material-symbols-outlined iconOption">account_circle</span>
                     <span class="option"> Perfil </span>
@@ -94,39 +113,51 @@
                 </li>
             </a>
         </ul>
-        <div class="aside__down">
-            <button class="aside__btnLogOut">Cerrar Sesión</button>
-        </div>
-        <script src="../../public/js/aside.js"></script>
-    </aside>
 
+        <div class="aside__down">
+            <button class="aside__btnLogOut" onclick="cerrarSesion()">Cerrar Sesión</button>
+        </div>
+        
+        <script src="../../../public/js/aside.js"></script>
+    </aside>
+    
     <main class="main">
         <div class="section1">
-            <h1 class="section1__title">Añadir Productos</h1>
-            <div class="form__container">
-                <form name="form" class="section1__form">
-                    <input type="hidden" name="op">
-                        <label>Nombre:</label>
-                        <input class="control form__" type="text" name="" required>
-                        <label>Descripción:</label>
-                        <input class="control form__" type="text" name="" required>
-                        <label>Categoría:</label>
-                        <input class="control form__" type="text" name="" required>
-                        <label>Subcategoría:</label>
-                        <input class="control form__" type="text" name="" required>
-                        <label>Precio:</label>
-                        <input class="control form__" type="text" name="" required>
-                        <label>Stock:</label>
-                        <input class="control form__" type="text" name="" required>
-                        <label>Fecha de Vencimiento:</label>
-                        <input class="control form__" type="date" name="" required>
-                    <hr></hr>
-                    <div class="form__content__buttons">
-                        <button class="form__button__cancel" type="button" onclick="">Cancelar</button>
-                        <button class="form__button__anadir" onclick="">Añadir Producto</button>
+            <h1 class="section1__title">Administrar Productos</h1>
+            <div class="section1__content">
+                <div class="section1__filter">
+                    <div class="form-buscar-id">
+                        <label>Buscar:</label>
+                        <input class="control" placeholder="Filtrar" required>
+                        <button class="section1__filter__btn" onclick="">Buscar</button>
                     </div>
-                </form>
+                </div>
+                <div class="section1__options">
+                    <button class="section1__addProduct__btn" onclick="location.href='../Anadir/AnadirProducto.php'">Nuevo Producto</button>
+                </div>
             </div>
+        </div>
+
+        <div class="section2">
+            <table id="productosTable" class="section2__table">
+                <thead>
+                    <tr>
+                        <th class="section2__table">Id Producto</th>
+                        <th class="section2__table">Nombre</th>
+                        <th class="section2__table">Descripción</th>
+                        <th class="section2__table">Categoría</th>
+                        <th class="section2__table">Sucategoría</th>
+                        <th class="section2__table">Precio </th>
+                        <th class="section2__table">Stock</th>
+                        <th class="section2__table">Fecha de Vencimiento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </main>
 </body>

@@ -14,6 +14,7 @@ class UsuarioBean {
     public $estadoregistro;
     public $direccion;
     public $distrito;
+    public $perfil;
 
     // Métodos GET
     public function getIdUsuario(){
@@ -58,6 +59,9 @@ class UsuarioBean {
     public function getDistrito(){
         return $this->distrito;
     }
+    public function getPerfil(){
+        return $this->perfil;
+    }
 
     // Métodos SET
     public function setIdUsuario($id){
@@ -101,6 +105,9 @@ class UsuarioBean {
     }
     public function setDistrito($distrito){
         $this->distrito = $distrito;
+    }
+    public function setPerfil($perfil){
+        $this->perfil = $perfil;
     }
 }
 ?>

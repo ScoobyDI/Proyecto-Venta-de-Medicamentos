@@ -29,7 +29,7 @@
     gap: 40px;
 }
 
-.section1__perfilOff__btn {
+.section1__categoriasOff__btn {
     cursor: pointer;
     width: 180px;
     padding: 10px;
@@ -40,7 +40,7 @@
     color:white;
 }
 
-.section1__addPerfil__btn {
+.section1__addCategoria__btn {
     cursor: pointer;
     width: 180px;
     padding: 10px;
@@ -50,6 +50,18 @@
     font-size: 20px;
     color:white;
 }
+
+.section1__addSubcategoria__btn {
+    cursor: pointer;
+    width: 200px;
+    padding: 10px;
+    background:green;
+    border-radius: 4px;
+    border: 1px solid black;
+    font-size: 20px;
+    color:white;
+}
+
 
 .section1__filter {
     display: flex;
@@ -126,20 +138,4 @@ tbody tr:hover {
 
 .section2__table__deshabilitar {
     width: 100px;
-}
-
-.imgBtnActualizar {
-    height: 28px;
-}
-
-.btnHabDesh {
-    margin: auto;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
-    width: 50px;
-    height: 30px;
-    background-color: red;
 }

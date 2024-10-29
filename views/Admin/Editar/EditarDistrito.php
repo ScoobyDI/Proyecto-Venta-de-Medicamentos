@@ -4,27 +4,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Añadir Distrito</title>
+    <title>Editar Distrito</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="../../public/css/asideAndHeader.css">
-    <link rel="stylesheet" href="../../public/css/AnadirDistrito.css">
-
+    <link rel="stylesheet" href="../../../public/css/asideAndHeader.css">
+    <link rel="stylesheet" href="../../../public/css/EditarDisPerCatSubPro.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
+    <script>
+
+        function confirmarCancelar() {
+            Swal.fire({
+            title: '¿Estás seguro?',
+            text: "Se perderán los datos que halla actualizado",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, cancelar',
+            cancelButtonText: 'No, continuar'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                history.back(); // Redirige a la página anterior si confirma
+            }
+            });
+        }
+
+        function cerrarSesion() {
+            window.location.href = "../../../controller/logout.php"; // Cambia la ruta según tu estructura de carpetas
+        }
+
+    </script>
+
 </head>
 
 <body>
     
     <header class="header">
-        <img src="../../public/img/logo.png">
+        <img src="../../../public/img/logo.png">
     </header>
     
     <aside class="aside" id="aside">
         <div class="aside__head">
             <div class="aside__head__profile">
-                <img class="aside__head__profile__Userlogo" src="../../public/img/LogoPrueba.jpg" alt="logoUser">
+                <img class="aside__head__profile__Userlogo" src="../../../public/img/LogoPrueba.jpg" alt="logoUser">
                 <p class="aside__head__nameUser">User</p>
             </div>
             <span class="material-symbols-outlined logMenu" id="menu">menu</span>
@@ -44,31 +68,31 @@
                     <span class="material-symbols-outlined list__arrow">keyboard_arrow_down</span>
                 </div>
                 <ul class="aside__list__show">
-                    <a href="AdmUsuarios.php">
+                    <a href="../Administrar/AdmUsuarios.php">
                         <li class="aside__list__inside">
                             <span class="material-symbols-outlined iconOption">groups</span>
                             <span class="option"> Adm. Usuarios </span>
                         </li>
                     </a>
-                    <a href="AdmPerfiles.php">
+                    <a href="../Administrar/AdmPerfiles.php">
                         <li class="aside__list__inside">
                             <span class="material-symbols-outlined iconOption">assignment_ind</span>
                             <span class="option"> Adm. Perfiles </span>
                         </li>
                     </a>
-                    <a href="AdmDistritos.php">
+                    <a href="../Administrar/AdmDistritos.php">
                         <li class="aside__list__inside">
                             <span class="material-symbols-outlined iconOption">location_city</span>
                             <span class="option"> Adm. Distritos </span>
                         </li>
                     </a>
-                    <a href="AdmProductos.php">
+                    <a href="../Administrar/AdmProductos.php">
                         <li class="aside__list__inside">
                             <span class="material-symbols-outlined iconOption">medication</span>
                             <span class="option"> Adm. Productos </span>
                         </li>
                     </a>
-                    <a href="AdmCategorias.php">
+                    <a href="../Administrar/AdmCategorias.php">
                         <li class="aside__list__inside">
                         <span class="material-symbols-outlined iconOption">category</span>
                             <span class="option"> Adm. Categorías </span>
@@ -95,28 +119,31 @@
                 </li>
             </a>
         </ul>
-        <div class="aside__down">
-            <button class="aside__btnLogOut">Cerrar Sesión</button>
-        </div>
-        <script src="../../public/js/aside.js"></script>
-    </aside>
 
+        <div class="aside__down">
+            <button class="aside__btnLogOut" onclick="cerrarSesion()">Cerrar Sesión</button>
+        </div>
+
+        <script src="../../../public/js/aside.js"></script>
+    </aside>
+    
     <main class="main">
         <div class="section1">
-            <h1 class="section1__title">Añadir Distrito</h1>
+            <h1 class="section1__title">Actualizar Distrito</h1>
             <div class="form__container">
-                <form name="form" class="section1__form">
-                    <input type="hidden" name="op">
-                        <label>Nombre de Distrito:</label>
-                        <input class="control form__nombre" type="text" name="Nombres" required>
-                    <hr></hr>
-                    <div class="form__content__buttons">
-                        <button class="form__button__cancel" type="button" onclick="">Cancelar</button>
-                        <button class="form__button__anadir" onclick="">Añadir</button>
+            <form name="form" class="section1__form">
+                <input type="hidden" name="op">
+                    <div>
+                        <label>ID:</label>
+                        <input class="control form_id" type="text" name="" required>
+                        <label>Nombre del distrito:</label>
+                        <input class="control form__nombres" type="text" name="" required>
                     </div>
-                </form>
-            </div>
-            
+                    <div class="form__content__buttons">
+                        <button class="form__button__cancel" type="button" onclick="confirmarCancelar()">Cancelar</button>
+                        <button class="form__button__update" onclick="actualizarDistrito()">Actualizar</button>  
+                    </div>   
+            </form>      
         </div>
     </main>
 </body>

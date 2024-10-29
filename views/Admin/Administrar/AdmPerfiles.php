@@ -6,33 +6,49 @@
     <title>Administrar Perfiles</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="../../public/css/asideAndHeader.css">
-    <link rel="stylesheet" href="../../public/css/AdmPerfiles.css">
+    <link rel="stylesheet" href="../../../public/css/asideAndHeader.css">
+    <link rel="stylesheet" href="../../../public/css/AdmPerfiles.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
-</head>
 
     <?php
-        session_start();
-        $_SESSION['previous_page'] = $_SERVER['REQUEST_URI']; // Almacena la URL actual
+       include_once '../../../model/UsuarioDao.php';
+       session_start();
+       $_SESSION['previous_page'] = $_SERVER['REQUEST_URI']; // Almacena la URL actual
+       $correo = $_SESSION['CorreoElectronico'];
+       $usuario = null;
+       $usuarioDao = new usuarioDao();
+       $resultado = $usuarioDao->filtrarUsuarioPorCorreo($correo);
+
+       if (!empty($resultado)) {
+           $usuario = $resultado[0];
+       }
     ?>
+    <script>
+
+        function cerrarSesion() {
+            window.location.href = "../../../controller/logout.php"; // Cambia la ruta según tu estructura de carpetas
+        }
+    </script>
+
+</head>
 
 <body>
 
     <header class="header">
-        <img src="../../public/img/logo.png">
+        <img src="../../../public/img/logo.png">
     </header>
 
     <aside class="aside" id="aside">
         <div class="aside__head">
             <div class="aside__head__profile">
-                <img class="aside__head__profile__Userlogo" src="../../public/img/LogoPrueba.jpg" alt="logoUser">
-                <p class="aside__head__nameUser">User</p>
+                <img class="aside__head__profile__Userlogo" src="../../../public/img/LogoPrueba.jpg" alt="logoUser">
+                <p class="aside__head__nameUser"><?php echo $usuario ? htmlspecialchars($usuario['Nombres']) : ''; ?></p>
             </div>
             <span class="material-symbols-outlined logMenu" id="menu">menu</span>
         </div>
             
         <ul class="aside__list">
-            <a href="perfilAdmin.php">
+            <a href="../perfilAdmin.php">
                 <li class="aside__list__options">
                     <span class="material-symbols-outlined iconOption">account_circle</span>
                     <span class="option"> Perfil </span>
@@ -96,14 +112,15 @@
                 </li>
             </a>
         </ul>
+
         <div class="aside__down">
-            <button class="aside__btnLogOut">Cerrar Sesión</button>
+            <button class="aside__btnLogOut" onclick="cerrarSesion()">Cerrar Sesión</button>
         </div>
-        <script src="../../public/js/aside.js"></script>
+
+        <script src="../../../public/js/aside.js"></script>
     </aside>
     
     <main class="main">
-
         <div class="section1">
             <h1 class="section1__title">Administrar Perfiles</h1>
             <div class="section1__content">
@@ -115,25 +132,44 @@
                     </div>
                 </div>
                 <div class="section1__options">
-                    <button class="section1__addPerfil__btn" onclick="location.href='AnadirPerfil.php'">Nuevo Perfil</button>
+                    <button class="section1__addPerfil__btn" onclick="location.href='../Anadir/AnadirPerfil.php'">Nuevo Perfil</button>
                 </div>
             </div>
         </div>
 
         <div class="section2">
+            <?php
+                include_once '../../../util/ConexionBD.php';
+                $objc = new ConexionBD();
+                $con = $objc->getConexionBD();
+                $sql =  "SELECT IdPerfil, Nombre, Descripcion, EstadoRegistro FROM perfiles";
+                $rs = mysqli_query($con, $sql);
+            ?>
             <table id="perfilesTable" class="section2__table">
                 <thead>
                     <tr>
                         <th class="section2__table__id">Id Perfil</th>
                         <th class="section2__table__nombre">Nombres</th>
                         <th class="section2__table__descripcion">Descripción</th>
+                        <th class="section2__table__descripcion">Estado de Registro</th>
                         <th class="section2__table__edit">Editar</th>
                         <th class="section2__table__deshabilitar">Deshabilitar</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        
+                        <?php 
+                            while($resultado = mysqli_fetch_array($rs)){
+                        ?>
+                        <tr>
+                            <td><?php echo $resultado['IdPerfil'] ?></td>
+                            <td><?php echo $resultado['Nombre'] ?></td>
+                            <td><?php echo $resultado['Descripcion'] ?></td>
+                            <td><?php echo $resultado['EstadoRegistro'] ?></td>
+                            <td><img src="../../../public/img/btnEditar.png" class="imgBtnActualizar" onclick="location.href='<?php echo $link ?>'"  alt="bntEditar"></td>
+                            <td><button class="btnHabDesh"><span class="material-symbols-outlined">radio_button_checked</span></button></td>
+                        </tr>
+                        <?php }?>
                     </tr>
                 </tbody>
             </table>

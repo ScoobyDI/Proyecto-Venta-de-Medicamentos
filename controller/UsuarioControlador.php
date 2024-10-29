@@ -46,6 +46,7 @@ switch($op) {
         $direccion = $_GET["Direccion"];
         $distrito = $_GET["Distrito"];
 
+
         $objUsuarioBean = new UsuarioBean();
         $objUsuarioBean->setNombres($nombres);
         $objUsuarioBean->setApellidoPaterno($apellidopaterno);
@@ -57,6 +58,8 @@ switch($op) {
         $objUsuarioBean->setContrasena($contrasena);
         $objUsuarioBean->setDireccion($direccion);
         $objUsuarioBean->setDistrito($distrito);
+        $objUsuarioBean->setEstadoRegistro(1); 
+        $objUsuarioBean->setPerfil(3); 
 
         $objUsuarioDao = new UsuarioDao();
 
@@ -64,7 +67,7 @@ switch($op) {
         if ($res) {
             $men = "Usuario Registrado Correctamente";
             // Redirige a la página anterior almacenada en la sesión
-            $pagina = isset($_SESSION['previous_page']) ? $_SESSION['previous_page'] : "../views/Auth/login.html";
+            $pagina = isset($_SESSION['previous_page']) ? $_SESSION['previous_page'] : "../views/Auth/login.php";
         } else {
             $pagina = isset($_SESSION['previous_page']) ? $_SESSION['previous_page'] : "../views/index.php";
             $men = "Error al Registrar Usuario";
@@ -73,7 +76,7 @@ switch($op) {
     }
 
     case 3: {
-
+        //Editar Usuario
         $id = $_GET["IdUsuario"];
         $nombres = $_GET["Nombres"];
         $apellidopaterno = $_GET["ApellidoPaterno"];
@@ -85,6 +88,7 @@ switch($op) {
         $contrasena = $_GET["Contrasena"];
         $direccion = $_GET["Direccion"];
         $distrito = $_GET["Distrito"];
+        $perfil = $_GET["Perfil"];
 
         // Crear objeto UsuarioBean
         $objUsuarioBean = new UsuarioBean();
@@ -99,6 +103,7 @@ switch($op) {
         $objUsuarioBean->setContrasena($contrasena);
         $objUsuarioBean->setDireccion($direccion);
         $objUsuarioBean->setDistrito($distrito);
+        $objUsuarioBean->setPerfil($perfil);
 
         // Instanciar UsuarioDao para manejar la base de datos
         $objUserDao = new UsuarioDao();
@@ -114,6 +119,30 @@ switch($op) {
         }
     break;
 
+    }
+
+    case 4: {
+        // Cambiar estado de registro (habilitar/deshabilitar)
+        if (isset($_GET["IdUsuario"]) && isset($_GET["NuevoEstado"])) {
+            $idUsuario = intval($_GET["IdUsuario"]);
+            $nuevoEstado = ($_GET["NuevoEstado"] === "habilitado") ? 1 : 0;
+
+            $objUsuarioDao = new UsuarioDao();
+            $resultado = $objUsuarioDao->cambiarEstadoUsuario($idUsuario, $nuevoEstado); // Cambiar el estado del usuario
+
+            if ($resultado) {
+                $_SESSION['mensaje'] = "Estado de usuario cambiado correctamente";
+            } else {
+                $_SESSION['mensaje'] = "Error al cambiar el estado del usuario";
+            }
+
+            $pagina = isset($_SESSION['previous_page']) ? $_SESSION['previous_page'] : "../views/AdmUsuarios.php";
+        } else {
+            // Si faltan los parámetros
+            $_SESSION['mensaje'] = "Datos incompletos para cambiar el estado";
+            $pagina = "../views/AdmUsuarios.php";
+        }
+        break;
     }
        
 }

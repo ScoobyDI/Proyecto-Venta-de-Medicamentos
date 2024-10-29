@@ -61,12 +61,14 @@ class UsuarioDao {
             $dni = mysqli_real_escape_string($con, $usuobj->getDNI());
             $direccion = mysqli_real_escape_string($con, $usuobj->getDireccion());
             $distrito = mysqli_real_escape_string($con, $usuobj->getDistrito());
+            $estadoRegistro = 1;
+            $perfil = 3;
     
             // Hash the password
             $contrasena = password_hash($usuobj->getContrasena(), PASSWORD_DEFAULT);
     
-            $sql = "INSERT INTO usuario (Nombres, ApellidoPaterno, ApellidoMaterno, FechaNacimiento, Telefono, Direccion, IdDistrito, DNI, CorreoElectronico, Contrasena, FechaCreacion) 
-                    VALUES ('$nombres', '$apellidopaterno', '$apellidomaterno', '$fechanacimiento', '$telefono', '$direccion', '$distrito', '$dni', '$correo', '$contrasena', NOW())";
+            $sql = "INSERT INTO usuario (Nombres, ApellidoPaterno, ApellidoMaterno, FechaNacimiento, Telefono, Direccion, IdDistrito, DNI, CorreoElectronico, Contrasena, EstadoRegistro, FechaCreacion, IdPerfil) 
+                    VALUES ('$nombres', '$apellidopaterno', '$apellidomaterno', '$fechanacimiento', '$telefono', '$direccion', '$distrito', '$dni', '$correo', '$contrasena','$estadoRegistro', NOW(),'$perfil')";
     
             $rs = mysqli_query($con, $sql);
     
@@ -125,7 +127,10 @@ class UsuarioDao {
     public function filtrarUsuarioPorCorreo($correo){
         $list = array();
         try {
-            $sql = "SELECT * FROM usuario WHERE CorreoElectronico = ?";
+            $sql = "SELECT u.*, p.Nombre AS NombrePerfil
+            FROM usuario u
+            JOIN perfiles p ON u.IdPerfil = p.IdPerfil
+            WHERE u.CorreoElectronico = ?";
             $objc = new ConexionBD();
             $cn = $objc->getConexionBD();
     
@@ -152,7 +157,8 @@ class UsuarioDao {
                     'FechaCreacion' => $row['FechaCreacion'],
                     'UsuarioModificacion' => $row['UsuarioModificacion'],
                     'FechaModificacion' => $row['FechaModificacion'],
-                    'EstadoRegistro' => $row['EstadoRegistro']
+                    'EstadoRegistro' => $row['EstadoRegistro'],
+                    'NombrePerfil' => $row['NombrePerfil']
                 ));
             }
     
@@ -170,43 +176,83 @@ class UsuarioDao {
         try {
             $objc = new ConexionBD();
             $cn = $objc->getConexionBD();
-
+    
             $id = mysqli_real_escape_string($cn, $usuobj->getIdUsuario());
             $nombres = mysqli_real_escape_string($cn, $usuobj->getNombres());
             $apellidopaterno = mysqli_real_escape_string($cn, $usuobj->getApellidoPaterno());
             $apellidomaterno = mysqli_real_escape_string($cn, $usuobj->getApellidoMaterno());
             $fechanacimiento = mysqli_real_escape_string($cn, $usuobj->getFechaNacimiento());
             $correo = mysqli_real_escape_string($cn, $usuobj->getCorreoElectronico());
-            $contrasena = mysqli_real_escape_string($cn, $usuobj->getContrasena());
             $telefono = mysqli_real_escape_string($cn, $usuobj->getTelefono());
             $dni = mysqli_real_escape_string($cn, $usuobj->getDNI());
             $direccion = mysqli_real_escape_string($cn, $usuobj->getDireccion());
             $distrito = mysqli_real_escape_string($cn, $usuobj->getDistrito());
-
+            $perfil = mysqli_real_escape_string($cn, $usuobj->getPerfil());
+    
+            // Hash the password outside the SQL query
+            $contrasena = password_hash($usuobj->getContrasena(), PASSWORD_DEFAULT);
+    
+            // Correct SQL query
             $sql = "UPDATE usuario 
                     SET Nombres = '$nombres', 
                     ApellidoPaterno = '$apellidopaterno', 
-                    ApellidoMaterno = ' $apellidomaterno', 
+                    ApellidoMaterno = '$apellidomaterno', 
                     FechaNacimiento = '$fechanacimiento',
                     Telefono = '$telefono',
                     Direccion = '$direccion',
-                    IdDistrito = ' $distrito',
+                    IdDistrito = '$distrito',
                     DNI = '$dni',
+                    IdPerfil = '$perfil',
                     CorreoElectronico = '$correo',
-                    $contrasena = password_hash($usuobj->getContrasena(), PASSWORD_DEFAULT);
                     Contrasena = '$contrasena'
                     WHERE IdUsuario = '$id'";
+    
             $rs = mysqli_query($cn, $sql);
             mysqli_close($cn);
-
+    
+            return $rs;
+    
         } catch (Exception $e) {
-            // Aquí puedes registrar el error o mostrar un mensaje
+            // Registrar el error o mostrar un mensaje
             error_log($e->getMessage());
+            return false;
         }
-        return $rs;
     }
     
-
+    public function cambiarEstadoUsuario($idUsuario, $nuevoEstado) {
+        try {
+            $objc = new ConexionBD();
+            $con = $objc->getConexionBD();
+    
+            // Sanitizar el ID del usuario
+            $idUsuario = mysqli_real_escape_string($con, $idUsuario);
+    
+            // Preparar la consulta para cambiar el estado
+            $sql = "UPDATE usuario SET EstadoRegistro = ? WHERE IdUsuario = ?";
+            $stmt = $con->prepare($sql);
+    
+            if ($stmt === false) {
+                throw new Exception("Error al preparar la consulta: " . $con->error);
+            }
+    
+            // Bindear los parámetros (EstadoRegistro es un entero, IdUsuario también)
+            $stmt->bind_param("ii", $nuevoEstado, $idUsuario);
+    
+            // Ejecutar la consulta
+            if ($stmt->execute()) {
+                $stmt->close();
+                mysqli_close($con);
+                return true;
+            } else {
+                $stmt->close();
+                mysqli_close($con);
+                return false;
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+    }
 
 }
 ?>
