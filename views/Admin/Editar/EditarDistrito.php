@@ -13,6 +13,15 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <script>
+        function actualizarDistrito() {
+            if (!document.form.reportValidity()) {
+                return;
+            }
+            document.form.action = "../../../controller/DistritoControlador.php";
+            document.form.op.value = "3";
+            document.form.method = "GET";
+            document.form.submit();
+        }
 
         function confirmarCancelar() {
             Swal.fire({
@@ -34,9 +43,23 @@
         function cerrarSesion() {
             window.location.href = "../../../controller/logout.php"; // Cambia la ruta según tu estructura de carpetas
         }
-
     </script>
+    <?php
+        include_once '../../../model/DistritoDao.php';
 
+        // Obtener el idUsuario desde la URL
+        $id_Distrito = isset($_GET['idDistrito']) ? $_GET['idDistrito'] : '';
+
+        $distrito = null;
+        if ($id_Distrito) {
+            $distritoDao = new DistritoDao();
+            $resultado = $distritoDao->filtrarDistritoPorId($id_Distrito);
+        
+            if (!empty($resultado)) {
+                $distrito = $resultado[0];
+            }
+        }
+    ?>
 </head>
 
 <body>
@@ -134,10 +157,10 @@
             <form name="form" class="section1__form">
                 <input type="hidden" name="op">
                     <div>
-                        <label>ID:</label>
-                        <input class="control form_id" type="text" name="" required>
-                        <label>Nombre del distrito:</label>
-                        <input class="control form__nombres" type="text" name="" required>
+                        <label>ID</label>
+                        <input class="control form_id" type="text" name="id_Distrito" value="<?php echo $distrito ? htmlspecialchars($distrito['IdDistrito']) : ''; ?>">
+                        <label>Nombre del distrito</label>
+                        <input class="control form__nombres" type="text" name="nombre_Distrito" value="<?php echo $distrito ? htmlspecialchars($distrito['NombreDistrito']) : ''; ?>">
                     </div>
                     <div class="form__content__buttons">
                         <button class="form__button__cancel" type="button" onclick="confirmarCancelar()">Cancelar</button>

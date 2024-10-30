@@ -59,6 +59,20 @@
         $sql = "SELECT * FROM distrito";
         $rs = mysqli_query($con,$sql);
     ?>
+
+    <?php
+        include_once '../../../model/UsuarioDao.php';
+        session_start();
+        
+        $correo = $_SESSION['CorreoElectronico'];
+        $usuario = null;
+        $usuarioDao = new usuarioDao();
+        $resultado = $usuarioDao->filtrarUsuarioPorCorreo($correo);
+
+        if (!empty($resultado)) {
+            $usuario = $resultado[0];
+        }
+    ?>
     
 </head>
 

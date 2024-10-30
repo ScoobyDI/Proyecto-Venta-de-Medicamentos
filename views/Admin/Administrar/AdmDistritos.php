@@ -14,7 +14,7 @@
     <?php
         include_once '../../../model/UsuarioDao.php';
         session_start();
-        $_SESSION['previous_page'] = $_SERVER['REQUEST_URI']; // Almacena la URL actual
+        
         $correo = $_SESSION['CorreoElectronico'];
         $usuario = null;
         $usuarioDao = new usuarioDao();
@@ -150,7 +150,6 @@
                     <tr>
                         <th class="section2__table__id">Id Distrito</th>
                         <th class="section2__table__nombre">Nombre del Distrito</th>
-                        <th class="section2__table__edit">Estado de Registro</th>
                         <th class="section2__table__edit">Editar</th>
                         <th class="section2__table__deshabilitar">Deshabilitar</th>
                     </tr>
@@ -160,9 +159,10 @@
                         while($resultado = mysqli_fetch_array($rs)){
                     ?>
                     <tr>
+                        <?php $link = "../Editar/editarDistrito.php?idDistrito=" . $resultado['IdDistrito'];?>   
+
                         <td><?php echo $resultado['IdDistrito'] ?></td>
                         <td><?php echo $resultado['NombreDistrito'] ?></td>
-                        <td></td>
                         <td><img src="../../../public/img/btnEditar.png" class="imgBtnActualizar" onclick="location.href='<?php echo $link ?>'"  alt="bntEditar"></td>
                         <td><button class="btnHabDesh"><span class="material-symbols-outlined">radio_button_checked</span></button></td>
                     </tr>

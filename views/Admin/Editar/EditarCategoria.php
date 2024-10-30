@@ -14,6 +14,13 @@
     
     <script>
 
+        function actualizarCategoria() {
+            document.form.action = "../../../controller/CategoriaControlador.php";
+            document.form.op.value = "2";
+            document.form.method = "GET";
+            document.form.submit();
+        }
+
         function confirmarCancelar() {
             Swal.fire({
             title: '¿Estás seguro?',
@@ -36,6 +43,23 @@
         }
 
     </script>
+
+    <?php
+        include_once '../../../model/CategoriaDao.php';
+
+        // Obtener el idUsuario desde la URL
+        $id_Categoria = isset($_GET['idCategoria']) ? $_GET['idCategoria'] : '';
+
+        $categoria = null;
+        if ($id_Categoria) {
+            $categoriaDao = new CategoriaDao();
+            $resultado = $categoriaDao->filtrarCategoriaPorId($id_Categoria);
+        
+            if (!empty($resultado)) {
+                $categoria = $resultado[0];
+            }
+        }
+    ?>
 
 </head>
 
@@ -135,9 +159,11 @@
                 <input type="hidden" name="op">
                     <div>
                         <label>ID:</label>
-                        <input class="control form_id" type="text" name="" required>
+                        <input class="control form_id" type="text" name="IdCategoria" value="<?php echo $categoria ? htmlspecialchars($categoria['IdCategoria']) : ''; ?>" readonly >
                         <label>Nombre de categoría:</label>
-                        <input class="control form__nombre" type="text" name="" required>
+                        <input class="control form__nombre" type="text" name="NombreCategoria" value="<?php echo $categoria ? htmlspecialchars($categoria['NombreCategoria']) : ''; ?>" required>
+                        <label>Descripcion:</label>
+                        <input class="control form__descr" type="text" name="DescripcionCategoria" value="<?php echo $categoria ? htmlspecialchars($categoria['DescripcionCategoria']) : ''; ?>" required>
                     </div>
                     <div class="form__content__buttons">
                         <button class="form__button__cancel" type="button" onclick="confirmarCancelar()">Cancelar</button>
@@ -146,5 +172,6 @@
             </form>      
         </div>
     </main>
+
 </body>
 </html>

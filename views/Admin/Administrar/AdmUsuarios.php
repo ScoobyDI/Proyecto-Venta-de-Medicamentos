@@ -193,10 +193,19 @@
                         <td><?php echo $resultado['NombreDistrito'] ?></td>
                         <td><?php echo $resultado['Nombre'] ?></td>
                         <td><?php echo ($resultado['EstadoRegistro'] == 1) ? 'Habilitado' : 'Deshabilitado'; ?></td>
-                        <td><img src="../../../public/img/btnEditar.png" class="imgBtnActualizar" onclick="location.href='<?php echo $link ?>'" alt="bntEditar"></td>
-                        <td><button class="btnHabDesh" onclick="toggleUserStatus(<?php echo $resultado['IdUsuario']; ?>, '<?php echo ($resultado['EstadoRegistro'] == 1) ? 'Habilitado' : 'Deshabilitado'; ?>')">
-                            <span class="material-symbols-outlined">radio_button_checked</span>
-                        </button></td>
+                        <td>
+                            <button onclick="location.href='<?php echo $link ?>'" class="edit-btn">
+                            <span class="material-symbols-outlined">edit</span>
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btnHabDesh <?php echo ($resultado['EstadoRegistro'] == 1) ? 'habilitado' : 'deshabilitado'; ?> " 
+                            onclick="toggleUserStatus(<?php echo $resultado['IdUsuario']; ?>, '<?php echo ($resultado['EstadoRegistro'] == 1) ? 'Habilitado' : 'Deshabilitado'; ?>')">
+                                <span class="material-symbols-outlined">
+                                <?php echo ($resultado['EstadoRegistro'] == 1) ? 'toggle_on' : 'toggle_off'; ?>
+                                </span>
+                            </button>
+                        </td>
                     </tr>
                     <?php }?>
                 </tbody>
@@ -217,7 +226,7 @@
                 "dom": 'rtip' // Eliminar el campo de búsqueda global
             });
         });
-
+        
         function buscarPorId() {
             event.preventDefault();
             var id = $('#searchIdUsuario').val();

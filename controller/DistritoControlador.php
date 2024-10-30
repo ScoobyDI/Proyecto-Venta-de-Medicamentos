@@ -49,8 +49,8 @@ switch ($op) {
 
     case 3: {
         // Actualizar un distrito existente
-        $idDistrito = $_GET["idDistrito"];
-        $nombreDistrito = $_GET["nombreDistrito"];
+        $idDistrito = $_GET["id_Distrito"];
+        $nombreDistrito = $_GET["nombre_Distrito"];
 
         // Crear objeto DistritoBean
         $objDistritoBean = new DistritoBean();
@@ -61,7 +61,7 @@ switch ($op) {
         $objDistritoDao = new DistritoDao();
 
         // Actualizar el distrito
-        $rs = $objDistritoDao->actualizar($objDistritoBean);
+        $rs = $objDistritoDao->ActualizarDistrito($objDistritoBean);
 
         // Manejar el resultado de la actualización
         if ($rs) {

@@ -142,23 +142,58 @@
         </div>
 
         <div class="section2">
-            <table id="categoriasTable" class="section2__table">
+
+            <?php
+                include_once '../../../util/ConexionBD.php';
+                $objc = new ConexionBD();
+                $con = $objc->getConexionBD();
+                $sql =  "SELECT IdCategoria, NombreCategoria, DescripcionCategoria, EstadoCategoria FROM categoria";
+                $rs = mysqli_query($con, $sql);
+            ?>
+
+            <table id="categoriaTable" class="section2__table">
                 <thead>
                     <tr>
-                        <th class="section2__table__id">Id Categoría</th>
                         <th class="section2__table__nombre">Nombre</th>
+                        <th class="section2__table__descrip">Descripcion</th>
+                        <th class="section2__table__estadoCat">Estado Categoria</th>
                         <th class="section2__table__edit">Editar</th>
                         <th class="section2__table__deshabilitar">Deshabilitar</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <?php 
+                        while($resultado = mysqli_fetch_array($rs)){
+                    ?>
                     <tr>
                         
+                        <?php $link = "../Editar/editarCategoria.php?idCategoria=" . $resultado['IdCategoria'];?>
+
+                        <td><?php echo $resultado['NombreCategoria'] ?></td>
+                        <td><?php echo $resultado['DescripcionCategoria'] ?></td>
+                        <td class="tdCenter"><?php echo $resultado['EstadoCategoria'] ?></td>
+                        <td class="tdCenter"><img src="../../../public/img/btnEditar.png" class="imgBtnActualizar" onclick="location.href='<?php echo $link ?>'"  alt="bntEditar"></td>
+                        <td class="tdCenter"><button class="btnHabDesh"><span class="material-symbols-outlined">radio_button_checked</span></button></td>
                     </tr>
+                    <?php }?>
                 </tbody>
-            </table>
-                
+            </table>        
         </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#categoriaTable').DataTable({
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/Spanish.json",
+                        "emptyTable": "No se encontraron registros coincidentes",
+                        "zeroRecords": "No se encontraron registros coincidentes"
+                    },
+                    "dom": 'rtip' // Eliminar el campo de búsqueda global
+                });
+            });
+        </script>
 
         <div class="section1">
             <h1 class="section1__title">Administrar Subcategorías</h1>

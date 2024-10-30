@@ -42,21 +42,52 @@ class DistritoDao {
     }
 
     // Método para actualizar un distrito existente
-    public function actualizar($distritoBean) {
-        $db = new Database();
-        $conexion = $db->getConnection();
+    public function ActualizarDistrito(DistritoBean $distritoobj) {
+        try {
+        $objc = new ConexionBD();
+        $cn = $objc->getConexionBD();
 
-        $idDistrito = $distritoBean->getIdDistrito();
-        $nombreDistrito = $distritoBean->getNombreDistrito();
+        $idDistrito = mysqli_real_escape_string($cn, $distritoobj->getIdDistrito());
+        $nombreDistrito = mysqli_real_escape_string($cn, $distritoobj->getNombreDistrito());
 
-        $query = "UPDATE distrito SET nombreDistrito = ? WHERE idDistrito = ?";
-        $stmt = $conexion->prepare($query);
-        $stmt->bind_param('si', $nombreDistrito, $idDistrito);
-        $resultado = $stmt->execute();
+        $sql = "UPDATE distrito SET NombreDistrito = '$nombreDistrito' WHERE IdDistrito = '$idDistrito'";
+        $rs = mysqli_query($cn, $sql);
+            mysqli_close($cn);
+        } catch (Exception $e){
+            error_log($e->getMessage());
+            return false;
+        }
+        return $rs;
+    }
 
-        $stmt->close();
-        $conexion->close();
-        return $resultado;
+    public function filtrarDistritoPorId($idDistrito){
+        $list = array();
+        try {
+            $sql = "SELECT * FROM distrito WHERE IdDistrito = ?";
+            $objc = new ConexionBD();
+            $cn = $objc->getConexionBD();
+    
+            // Usando consultas preparadas para evitar inyección SQL
+            $stmt = $cn->prepare($sql);
+            $stmt->bind_param("i", $idDistrito);
+            $stmt->execute();
+            $result = $stmt->get_result();
+    
+            while ($row = $result->fetch_assoc()) {
+                array_push($list, array(
+                    'IdDistrito' => $row['IdDistrito'],
+                    'NombreDistrito' => $row['NombreDistrito']
+                ));
+            }
+    
+            $stmt->close();
+            $cn->close();
+        } catch (Exception $e) {
+            // Aquí puedes registrar el error o mostrar un mensaje
+            error_log($e->getMessage());
+        }
+    
+        return $list;
     }
 }
 ?>

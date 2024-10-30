@@ -188,7 +188,7 @@
                     </div>
                     <div class="form__content">
                         <label>ID</label>
-                        <input class="control form_id" type="text" name="IdUsuario" value="<?php echo $usuario ? htmlspecialchars($usuario['IdUsuario']) : ''; ?>">
+                        <input disabled class="control form_id" type="text" name="IdUsuario" value="<?php echo $usuario ? htmlspecialchars($usuario['IdUsuario']) : ''; ?>">
                         <label>Nombres</label>
                         <input class="control form__nombres" type="text" name="Nombres" value="<?php echo $usuario ? htmlspecialchars($usuario['Nombres']) : ''; ?>">
                         <label>Apellido Paterno</label>

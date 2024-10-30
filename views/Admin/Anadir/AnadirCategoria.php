@@ -16,7 +16,7 @@
     <?php
         include_once '../../../model/UsuarioDao.php';
         session_start();
-        $_SESSION['previous_page'] = $_SERVER['REQUEST_URI']; // Almacena la URL actual
+        
         $correo = $_SESSION['CorreoElectronico'];
         $usuario = null;
         $usuarioDao = new usuarioDao();
@@ -28,6 +28,13 @@
     ?>
 
     <script>
+
+        function anadirCategoria() {
+            document.form.action = "../../../controller/CategoriaControlador.php";
+            document.form.op.value = "1";
+            document.form.method = "GET";
+            document.form.submit();
+        }
 
         function confirmarCancelar() {
             Swal.fire({
@@ -149,11 +156,13 @@
                 <form name="form" class="section1__form">
                     <input type="hidden" name="op">
                         <label>Nombre de Categoría:</label>
-                        <input class="control form__nombre" type="text" name="" required>
+                        <input class="control form__nombre" type="text" name="NombreCategoria" required>
+                        <label>Descripcion:</label>
+                        <input class="control form__descripcionCat" type="text" name="DescripcionCategoria" required>
                     <hr></hr>
                     <div class="form__content__buttons">
                         <button class="form__button__cancel" type="button" onclick="confirmarCancelar()">Cancelar</button>
-                        <button class="form__button__update" onclick="">Crear Categoría</button>
+                        <button class="form__button__update" onclick="anadirCategoria()">Crear Categoría</button>
                     </div>
                 </form>
             </div>        
