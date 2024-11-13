@@ -166,7 +166,8 @@
                         <button class="form__button__cancel" type="button" onclick="confirmarCancelar()">Cancelar</button>
                         <button class="form__button__update" onclick="actualizarDistrito()">Actualizar</button>  
                     </div>   
-            </form>      
+            </form> 
+            </div> 
         </div>
     </main>
 </body>

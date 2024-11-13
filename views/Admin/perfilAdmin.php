@@ -158,7 +158,10 @@
                 </table>
             </div>
             <div class="section1__container__button">
-                <button class="section1__button__actDatos"> Actualizar Datos</button>
+                <!--CAMBIO-->
+                <?php $link = "Editar/EditarInfoPropUser.php?idUsuario=" . $usuario['IdUsuario'];?>
+                <button onclick="location.href='<?php echo $link ?>'" class="section1__button__actDatos">Actualizar Datos</button>
+                <!--FIN DEL CAMBIO-->
             </div>
         </div>
     </main>

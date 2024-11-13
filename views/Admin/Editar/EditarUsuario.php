@@ -168,7 +168,7 @@
             </a>
         </ul>
         
-        <script src="../../public/js/aside.js"></script>
+        <script src="../../../public/js/aside.js"></script>
 
         <div class="aside__down">
             <button class="aside__btnLogOut" onclick="cerrarSesion()">Cerrar Sesión</button>
@@ -188,7 +188,7 @@
                     </div>
                     <div class="form__content">
                         <label>ID</label>
-                        <input disabled class="control form_id" type="text" name="IdUsuario" value="<?php echo $usuario ? htmlspecialchars($usuario['IdUsuario']) : ''; ?>">
+                        <input readonly class="control form_id" type="text" name="IdUsuario" value="<?php echo $usuario ? htmlspecialchars($usuario['IdUsuario']) : ''; ?>">
                         <label>Nombres</label>
                         <input class="control form__nombres" type="text" name="Nombres" value="<?php echo $usuario ? htmlspecialchars($usuario['Nombres']) : ''; ?>">
                         <label>Apellido Paterno</label>
@@ -213,19 +213,19 @@
                         <input class="control form__email" type="email" name="Correo" value="<?php echo $usuario ? htmlspecialchars($usuario['CorreoElectronico']) : ''; ?>">
                         <label>Distrito</label>
                         <select class="control form__district" name="Distrito" required>
-                            <option value="" disabled selected>Seleccione un distrito</option>
+                            <option value="" selected>Seleccione un distrito</option>
                             <?php 
                                 while($row = mysqli_fetch_array($rs))
                                 {
-                                $id = $row['IdDistrito'];
-                                $nombre = $row['NombreDistrito'];
-                
-                                // Verificar si este es el distrito seleccionado del usuario
-                                if ($usuario['IdDistrito'] == $id) {
-                                echo "<option value='$id' selected>$nombre</option>"; // Marcar como seleccionado
-                                } else {
-                                echo "<option value='$id'>$nombre</option>"; // No seleccionado
-                                }
+                                    $id = $row['IdDistrito'];
+                                    $nombre = $row['NombreDistrito'];
+                    
+                                    // Verificar si este es el distrito seleccionado del usuario
+                                    if ($usuario['IdDistrito'] == $id) {
+                                    echo "<option value='$id' selected>$nombre</option>"; // Marcar como seleccionado
+                                    } else {
+                                    echo "<option value='$id'>$nombre</option>"; // No seleccionado
+                                    }
                                 }
                             ?>
                         </select>  
@@ -233,12 +233,12 @@
                         <input class="control form__adress" type="text" name="Direccion" value="<?php echo $usuario ? htmlspecialchars($usuario['Direccion']) : ''; ?>" required>
                         <label>Perfil</label>
                         <select class="control form__perfil" name="Perfil" required>
-                            <option value="" disabled selected>Seleccione un perfil</option>
+                            <option value="" selected>Seleccione un perfil</option>
                             <?php 
-                                while($row = mysqli_fetch_array($rs2))
+                                while($row2 = mysqli_fetch_array($rs2))
                                 {
-                                    $idPerfil= $row['IdPerfil'];
-                                    $nombrePerfil = $row['Nombre'];
+                                    $idPerfil= $row2['IdPerfil'];
+                                    $nombrePerfil = $row2['Nombre'];
 
                                     if ($usuario['IdPerfil'] == $idPerfil) {  // Ajuste de comparación correcto
                                         echo "<option value='$idPerfil' selected>$nombrePerfil</option>"; // Marcar como seleccionado

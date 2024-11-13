@@ -13,7 +13,15 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <script>
-
+        function actualizarPerfil() {
+            if (!document.form.reportValidity()) {
+                return;
+            }
+            document.form.action = "../../../controller/PerfilControlador.php";
+            document.form.op.value = "3";
+            document.form.method = "GET";
+            document.form.submit();
+        }
         function confirmarCancelar() {
             Swal.fire({
             title: '¿Estás seguro?',
@@ -34,8 +42,23 @@
         function cerrarSesion() {
             window.location.href = "../../../controller/logout.php"; // Cambia la ruta según tu estructura de carpetas
         }
-
     </script>
+    <?php
+        include_once '../../../model/PerfilDao.php';
+
+        // Obtener el idUsuario desde la URL
+        $id_Perfil = isset($_GET['idPerfil']) ? $_GET['idPerfil'] : '';
+
+        $perfil = null;
+        if ($id_Perfil) {
+            $PerfilDao = new PerfilDao();
+            $resultado = $PerfilDao->filtrarPerfilPorId($id_Perfil);
+        
+            if (!empty($resultado)) {
+                $perfil = $resultado[0];
+            }
+        }
+    ?>
 
 </head>
 
@@ -135,15 +158,15 @@
                 <input type="hidden" name="op">
                     <div>
                     <label>ID:</label>
-                    <input class="control form__" type="text" name="" required>
+                    <input readonly class="control form__" type="text" name="id_Perfil" value="<?php echo $perfil ? htmlspecialchars($perfil['IdPerfil']) : ''; ?>">
                     <label>Nombre del perfil:</label>
-                        <input class="control form__" type="text" name="" required>
+                        <input class="control form__" type="text" name="nombre_Perfil" value="<?php echo $perfil ? htmlspecialchars($perfil['Nombre']) : ''; ?>">
                         <label>Descripción:</label>
-                        <input class="control form__" type="text" name="" required>
+                        <input class="control form__" type="text" name="descripcion_Perfil" value="<?php echo $perfil ? htmlspecialchars($perfil['Descripcion']) : ''; ?>">
                     </div>
                     <div class="form__content__buttons">
                         <button class="form__button__cancel" type="button" onclick="confirmarCancelar()">Cancelar</button>
-                        <button class="form__button__update" onclick="actualizarProducto()">Actualizar</button>  
+                        <button class="form__button__update" onclick="actualizarPerfil()">Actualizar</button>  
                     </div>   
             </form>      
         </div>

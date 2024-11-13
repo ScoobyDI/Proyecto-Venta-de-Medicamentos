@@ -120,22 +120,22 @@
     </aside>
     
     <main class="main">
-
+        
         <div class="section1">
-                <h1 class="section1__title">Administrar Distritos</h1>
-                <div class="section1__content">
-                    <div class="section1__filter">
-                        <div class="form-buscar-id">
-                            <label>Buscar:</label>
-                            <input class="control" id="searchIdDistrito" placeholder="Filtrar" required>
-                            <button class="section1__filter__btn" onclick="buscarPorId()">Buscar</button>
-                        </div>
-                    </div>
-                    <div class="section1__options">
-                        <button class="section1__addDistri__btn" onclick="location.href='../Anadir/AnadirDistrito.php'">Nuevo Distrito</button>
+            <h1 class="section1__title">Administrar Distritos</h1>
+            <div class="section1__content">
+                <div class="section1__filter">
+                    <div class="form-buscar-id">
+                        <label>Buscar:</label>
+                        <input class="control" id="searchIdDistrito" placeholder="Filtrar" required>
+                        <button class="section1__filter__btn" onclick="buscarPorId()">Buscar</button>
                     </div>
                 </div>
+                <div class="section1__options">
+                    <button class="section1__addDistri__btn" onclick="location.href='../Anadir/AnadirDistrito.php'">Nuevo Distrito</button>
+                </div>
             </div>
+        </div>
 
         <div class="section2">
             <?php
@@ -163,7 +163,11 @@
 
                         <td><?php echo $resultado['IdDistrito'] ?></td>
                         <td><?php echo $resultado['NombreDistrito'] ?></td>
-                        <td><img src="../../../public/img/btnEditar.png" class="imgBtnActualizar" onclick="location.href='<?php echo $link ?>'"  alt="bntEditar"></td>
+                        <td>
+                            <button onclick="location.href='<?php echo $link ?>'" class="edit-btn">
+                            <span class="material-symbols-outlined">edit</span>
+                            </button>
+                        </td>
                         <td><button class="btnHabDesh"><span class="material-symbols-outlined">radio_button_checked</span></button></td>
                     </tr>
                     <?php }?>

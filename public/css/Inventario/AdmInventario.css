@@ -80,7 +80,7 @@ label {
 }
 
 .section2__table {
-    width: 900px;
+    width: 95%;
     border: 1px solid black;
 }
 
@@ -90,6 +90,7 @@ th {
     color: #F4F5F3;
 }
 
+
 td {
     padding: 8px;
     /* border: 0.1px solid gray; */
@@ -97,24 +98,53 @@ td {
     background-color: white;
 }
 
-tbody tr:hover {
-    background: rgba(99, 98, 98, 0.4);
-}
-
-.section2__table__id {
+.section2__table_id {
     width: 80px;
 }
 
-.section2__table__nombre {
+.section2__table_nombre {
+    width: 80px;
+}
+
+.section2__table_descrip {
     width: 200px;
 }
 
-.section2__table__edit {
+.section2__table_categoria {
     width: 80px;
 }
 
-.section2__table__deshabilitar {
+.section2__table_subcategoria {
     width: 100px;
+}
+
+.section2__table_precio {
+    width: 80px;
+}
+
+.section2__table_vencimiento {
+    width: 80px;
+}
+
+.section2__table_stockact {
+    width: 80px;
+}
+
+.section2__table_stockmin {
+    width: 80px;
+}
+
+.section2__table_stockmax {
+    width: 80px;
+}
+
+.section2__table_edit {
+    width: 80px;
+}
+
+
+tbody tr:hover {
+    background: rgba(99, 98, 98, 0.4);
 }
 
 .edit-btn { 
@@ -123,49 +153,19 @@ tbody tr:hover {
     background:#034783; 
     border: none; 
     cursor: pointer; 
-    transition: transform 0.2s, background 0.3s; /* Transición suave para el tamaño y el fondo */
+    transition: transform 0.2s, background 0.3s; 
 }
 
 .edit-btn .material-symbols-outlined {
     color: white; 
     font-size: 24px; 
-    transition: color 0.3s; /* Transición suave para el color del ícono */
+    transition: color 0.3s; 
 }
 
 .edit-btn:hover {
-    background: grey; /* Cambia el fondo a gris al pasar el ratón */
+    background: grey; 
 }
 
 .edit-btn:hover .material-symbols-outlined {
-    color: black; /* Mantiene el color del ícono en blanco (puedes cambiarlo si lo deseas) */
-}
-
-.btnHabDesh {
-    cursor: pointer;
-    width: 40px; 
-    height: 40px; 
-    background: green; /* Fondo para habilitado por defecto */
-    border-radius: 50%; 
-    border: none; 
-    display: flex;
-    align-items: center; 
-    justify-content: center; 
-    color: white; 
-    transition: background 0.3s; 
-}
-
-.btnHabDesh.habilitado {
-    background: green; /* Fondo para el botón habilitado */
-}
-
-.btnHabDesh.deshabilitado {
-    background: red; /* Fondo para el botón deshabilitado */
-}
-
-.btnHabDesh:hover {
-    background: grey; /* Fondo al pasar el ratón sobre el botón */
-}
-
-.btnHabDesh:hover .material-symbols-outlined {
-    color: black; /* Color del icono al pasar el ratón sobre el botón */
+    color: black; 
 }

@@ -12,8 +12,30 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <?php
+        include_once '../../../model/UsuarioDao.php';
+        session_start();
+        
+        $correo = $_SESSION['CorreoElectronico'];
+        $usuario = null;
+        $usuarioDao = new usuarioDao();
+        $resultado = $usuarioDao->filtrarUsuarioPorCorreo($correo);
 
+        if (!empty($resultado)) {
+            $usuario = $resultado[0];
+        }
+    ?>
     <script>
+        function registrarPerfil() {
+            if (!document.form.reportValidity()) {
+                return;
+            }
+            document.form.action = "../../../controller/PerfilControlador.php";
+            document.form.op.value = "1";
+            document.form.method = "GET";
+            document.form.submit();
+        }
+        
         
         function confirmarCancelar() {
             Swal.fire({
@@ -35,7 +57,6 @@
         function cerrarSesion() {
             window.location.href = "../../../controller/logout.php"; // Cambia la ruta según tu estructura de carpetas
         }
-        
     </script>
     
 </head>
@@ -50,7 +71,7 @@
         <div class="aside__head">
             <div class="aside__head__profile">
                 <img class="aside__head__profile__Userlogo" src="../../../public/img/LogoPrueba.jpg" alt="logoUser">
-                <p class="aside__head__nameUser">User</p>
+                <p class="aside__head__nameUser"><?php echo $usuario ? htmlspecialchars($usuario['Nombres']) : ''; ?></p>
             </div>
             <span class="material-symbols-outlined logMenu" id="menu">menu</span>
         </div>
@@ -135,13 +156,13 @@
                 <form name="form" class="section1__form">
                     <input type="hidden" name="op">
                         <label>Nombre de Perfil:</label>
-                        <input class="control form__nombre" type="text" name="Nombres" required>
+                        <input class="control form__nombre" type="text" name="Nombre" required>
                         <label>Descripción:</label>
-                        <input class="control form__descripcion" type="text" name="ApellidoPaterno" required>
+                        <input class="control form__descripcion" type="text" name="Descripcion" required>
                     <hr></hr>
                     <div class="form__content__buttons">
                         <button class="form__button__cancel" type="button" onclick="confirmarCancelar()">Cancelar</button>
-                        <button class="form__button__update" onclick="">Crear Perfil</button>
+                        <button class="form__button__update" onclick="registrarPerfil()">Crear Perfil</button>
                     </div>
                 </form>
             </div>

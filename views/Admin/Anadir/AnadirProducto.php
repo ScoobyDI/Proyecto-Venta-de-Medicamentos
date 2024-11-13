@@ -16,7 +16,7 @@
     <?php
         include_once '../../../model/UsuarioDao.php';
         session_start();
-        $_SESSION['previous_page'] = $_SERVER['REQUEST_URI']; // Almacena la URL actual
+       
         $correo = $_SESSION['CorreoElectronico'];
         $usuario = null;
         $usuarioDao = new usuarioDao();
@@ -27,7 +27,25 @@
         }
     ?>
 
+    <?php
+        include_once '../../../util/ConexionBD.php';
+        $objc = new ConexionBD();
+        $con = $objc->getConexionBD();
+        $sql = "SELECT * FROM subcategoria";
+        $rs = mysqli_query($con,$sql);
+    ?>
+
     <script>
+
+        function registrarProducto() {
+            if (!document.form.reportValidity()) {
+                return;
+            }
+            document.form.action = "../../../controller/ProductoControlador.php";
+            document.form.op.value = "1";
+            document.form.method = "GET";
+            document.form.submit();
+        }
 
         function confirmarCancelar() {
             Swal.fire({
@@ -149,23 +167,35 @@
                 <form name="form" class="section1__form">
                     <input type="hidden" name="op">
                         <label>Nombre:</label>
-                        <input class="control form__" type="text" name="" required>
+                        <input class="control form__" type="text" name="NombreProducto" required>
                         <label>Descripción:</label>
-                        <input class="control form__" type="text" name="" required>
-                        <label>Categoría:</label>
-                        <input class="control form__" type="text" name="" required>
+                        <input class="control form__" type="text" name="DescripcionProducto" required>
                         <label>Subcategoría:</label>
-                        <input class="control form__" type="text" name="" required>
+                        <select class="control form__" name="IdSubcategoria" required>
+                            <option value="" disabled selected>Seleccione una Subcategoria</option>
+                            <?php 
+                                while($row = mysqli_fetch_array($rs))
+                                {
+                                    $id= $row['IdSubcategoria'];
+                                    $nombre = $row['NombreSubcategoria'];
+                            ?>
+                            <option value="<?php echo $id ?>"><?php echo $nombre ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>   
                         <label>Precio:</label>
-                        <input class="control form__" type="text" name="" required>
-                        <label>Stock:</label>
-                        <input class="control form__" type="text" name="" required>
+                        <input class="control form__" type="text" name="Precio" required>
+                        <label>Stock Minimo:</label>
+                        <input class="control form__" type="text" name="StockMinimo" required>
+                        <label>Stock Maximo:</label>
+                        <input class="control form__" type="text" name="StockMaximo" required>
                         <label>Fecha de Vencimiento:</label>
-                        <input class="control form__" type="date" name="" required>
+                        <input class="control form__" type="date" name="FechaVencimiento" required>
                     <hr></hr>
                     <div class="form__content__buttons">
                         <button class="form__button__cancel" type="button" onclick="confirmarCancelar()">Cancelar</button>
-                        <button class="form__button__anadir" onclick="">Añadir Producto</button>
+                        <button class="form__button__anadir" onclick="registrarProducto()">Añadir Producto</button>
                     </div>
                 </form>
             </div>

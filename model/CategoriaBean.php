@@ -5,6 +5,9 @@
         public $nombreCategoria;
         public $descripcionCategoria;
         public $estadoCategoria;
+        public $idSubCategoria;
+        public $nombreSubCategoria;
+        public $estadoSubCategoria;
 
         //Métodos GET
         public function getIdCategoria(){
@@ -23,6 +26,18 @@
             return $this->estadoCategoria;
         }
 
+        public function getIdSubCategoria(){
+            return $this->idSubCategoria;
+        }
+
+        public function getNombreSubCategoria(){
+            return $this->nombreSubCategoria;
+        }
+
+        public function getEstadoSubCategoria(){
+            return $this->estadoSubCategoria;
+        }
+
         //Métodos SET
         public function setIdCategoria($idCategoria){
             $this->idCategoria = $idCategoria;
@@ -38,6 +53,18 @@
 
         public function setEstadoCategoria($estadoCategoria){
             $this->estadoCategoria = $estadoCategoria;
+        }
+
+        public function setIdSubCategoria($idSubCategoria){
+            $this->idSubCategoria = $idSubCategoria;
+        }
+
+        public function setNombreSubCategoria($nombreSubCategoria){
+            $this->nombreSubCategoria = $nombreSubCategoria;
+        }
+
+        public function setEstadoSubCategoria($estadoSubCategoria){
+            $this->estadoSubCategoria = $estadoSubCategoria;
         }
     }
 ?>

@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="../../../public/css/asideAndHeader.css">
     <link rel="stylesheet" href="../../../public/css/AdmPerfiles.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
-
     <?php
        include_once '../../../model/UsuarioDao.php';
        session_start();
@@ -24,12 +23,30 @@
        }
     ?>
     <script>
+        function toggleUserStatus(perfilId, currentStatus) {
+            const newStatus = (currentStatus === 'Habilitado') ? 'deshabilitado' : 'habilitado'; // Cambio de estado
+            const xhr = new XMLHttpRequest();
+            
+            // Corregir la URL concatenando los parámetros
+            xhr.open("GET", "../../../controller/PerfilControlador.php?op=4&IdPerfil=" + perfilId + "&NuevoEstado=" + newStatus, true);
+    
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    location.reload(); // Recargar la página para actualizar la tabla
+                }
+            };
+
+            xhr.send();
+        }
 
         function cerrarSesion() {
             window.location.href = "../../../controller/logout.php"; // Cambia la ruta según tu estructura de carpetas
         }
+        function buscarPorNombre() {
+            const nombrePerfil = document.getElementById('searchNombre').value;
+            window.location.href = `?nombrePerfil=${encodeURIComponent(nombrePerfil)}`;
+        }
     </script>
-
 </head>
 
 <body>
@@ -127,8 +144,8 @@
                 <div class="section1__filter">
                     <div class="form-buscar-id">
                         <label>Buscar:</label>
-                        <input class="control" id="searchIdUsuario" placeholder="Filtrar" required>
-                        <button class="section1__filter__btn" onclick="">Buscar</button>
+                        <input class="control" id="searchIdNombre"  placeholder="Filtrar" required>
+                        <button class="section1__filter__btn" onclick="buscarPorId()">Buscar</button>
                     </div>
                 </div>
                 <div class="section1__options">
@@ -148,7 +165,6 @@
             <table id="perfilesTable" class="section2__table">
                 <thead>
                     <tr>
-                        <th class="section2__table__id">Id Perfil</th>
                         <th class="section2__table__nombre">Nombres</th>
                         <th class="section2__table__descripcion">Descripción</th>
                         <th class="section2__table__descripcion">Estado de Registro</th>
@@ -157,25 +173,53 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
                         <?php 
                             while($resultado = mysqli_fetch_array($rs)){
                         ?>
                         <tr>
-                            <td><?php echo $resultado['IdPerfil'] ?></td>
+                            <?php $link = "../Editar/editarPerfil.php?idPerfil=" . $resultado['IdPerfil'];?>  
+
                             <td><?php echo $resultado['Nombre'] ?></td>
                             <td><?php echo $resultado['Descripcion'] ?></td>
-                            <td><?php echo $resultado['EstadoRegistro'] ?></td>
-                            <td><img src="../../../public/img/btnEditar.png" class="imgBtnActualizar" onclick="location.href='<?php echo $link ?>'"  alt="bntEditar"></td>
-                            <td><button class="btnHabDesh"><span class="material-symbols-outlined">radio_button_checked</span></button></td>
+                            <td><?php echo ($resultado['EstadoRegistro'] == 1) ? 'Habilitado' : 'Deshabilitado'; ?></td>
+                            <td>
+                                <button onclick="location.href='<?php echo $link ?>'" class="edit-btn">
+                                    <span class="material-symbols-outlined">edit</span>
+                                </button>
+                            </td>
+                            <td>
+                                <button class="btnHabDesh <?php echo ($resultado['EstadoRegistro'] == 1) ? 'habilitado' : 'deshabilitado'; ?> " 
+                                    onclick="toggleUserStatus(<?php echo $resultado['IdPerfil']; ?>, '<?php echo ($resultado['EstadoRegistro'] == 1) ? 'Habilitado' : 'Deshabilitado'; ?>')">
+                                    <span class="material-symbols-outlined">
+                                        <?php echo ($resultado['EstadoRegistro'] == 1) ? 'toggle_on' : 'toggle_off'; ?>
+                                    </span>
+                                </button>
+                            </td>
                         </tr>
-                        <?php }?>
-                    </tr>
+                    <?php } ?>
                 </tbody>
             </table>
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
-        
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#perfilesTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/Spanish.json",
+                    "emptyTable": "No se encontraron registros coincidentes",
+                    "zeroRecords": "No se encontraron registros coincidentes"
+                },
+                "dom": 'rtip' // Eliminar el campo de búsqueda global
+            });
+        });
+
+            function buscarPorId() {
+                event.preventDefault();
+                var id = $('#searchIdNombre').val();
+                var table = $('#perfilesTable').DataTable();
+                table.columns(0).search(id).draw(); // Filtrar solo por la primera columna (ID Usuario)
+            }
+    </script>                   
         </div>
     </main>
 </body>

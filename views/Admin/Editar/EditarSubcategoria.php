@@ -13,6 +13,12 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <script>
+        function actualizarSubCategoria() {
+            document.form.action = "../../../controller/CategoriaControlador.php";
+            document.form.op.value = "4";
+            document.form.method = "GET";
+            document.form.submit();
+        }
 
         function confirmarCancelar() {
             Swal.fire({
@@ -34,8 +40,32 @@
         function cerrarSesion() {
             window.location.href = "../../../controller/logout.php"; // Cambia la ruta según tu estructura de carpetas
         }
-
     </script>
+
+    <?php
+        include_once '../../../model/CategoriaDao.php';
+
+        // Obtener el idUsuario desde la URL
+        $id_SubCategoria = isset($_GET['idSubCategoria']) ? $_GET['idSubCategoria'] : '';
+
+        $subcategoria = null;
+        if ($id_SubCategoria) {
+            $categoriaDao = new CategoriaDao();
+            $resultado2 = $categoriaDao->filtrarSubCategoriaPorId($id_SubCategoria);
+        
+            if (!empty($resultado2)) {
+                $subcategoria = $resultado2[0];
+            }
+        }
+    ?>
+
+    <?php
+        include_once '../../../util/ConexionBD.php';
+        $objc = new ConexionBD();
+        $con = $objc->getConexionBD();
+        $sql = "SELECT * FROM categoria";
+        $rs = mysqli_query($con,$sql);
+    ?>
 </head>
 
 <body>
@@ -134,15 +164,30 @@
                 <input type="hidden" name="op">
                     <div>
                         <label>ID:</label>
-                        <input class="control form_id" type="text" name="" required>
-                        <label>Categoría:</label>
-                        <input class="control form_id" type="text" name="" required>
-                        <label>Nombre de subcategoría:</label>
-                        <input class="control form__nombre" type="text" name="" required>
+                        <input class="control form_id" type="text" name="IdSubCategoria" value="<?php echo $subcategoria ? htmlspecialchars($subcategoria['IdSubcategoria']) : ''; ?>" readonly>
+                        <label>Nombre de Categoría:</label>
+                        <select class="control form_id" name="IdCategoria">
+                            <option value="" selected>Seleccione una Categoria: </option>
+                            <?php 
+                                while($row = mysqli_fetch_array($rs))
+                                {
+                                    $idCategoria= $row['IdCategoria'];
+                                    $nombreCategoria = $row['NombreCategoria'];
+
+                                    if ($subcategoria['IdCategoria'] == $idCategoria) {  // Ajuste de comparación correcto
+                                        echo "<option value='$idCategoria' selected>$nombreCategoria</option>"; // Marcar como seleccionado
+                                    } else {
+                                        echo "<option value='$idCategoria'>$nombreCategoria</option>"; // No seleccionado
+                                    }
+                                }
+                            ?>
+                        </select> 
+                        <label>Nombre de Subcategoría:</label>
+                        <input class="control form__nombre" type="text" name="NombreSubCategoria" value="<?php echo $subcategoria ? htmlspecialchars($subcategoria['NombreSubcategoria']) : ''; ?>" required>
                     </div>
                     <div class="form__content__buttons">
                         <button class="form__button__cancel" type="button" onclick="confirmarCancelar()">Cancelar</button>
-                        <button class="form__button__update" onclick="actualizarSubcategoria()">Actualizar</button>  
+                        <button class="form__button__update" onclick="actualizarSubCategoria()">Actualizar</button>  
                     </div>   
             </form>      
         </div>

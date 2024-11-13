@@ -132,14 +132,58 @@ tbody tr:hover {
     height: 28px;
 }
 
+.edit-btn { 
+    width: 35px;
+    height: 35px;
+    background:#034783; 
+    border: none; 
+    cursor: pointer; 
+    transition: transform 0.2s, background 0.3s; /* Transición suave para el tamaño y el fondo */
+}
+
+.edit-btn .material-symbols-outlined {
+    color: white; 
+    font-size: 24px; 
+    transition: color 0.3s; /* Transición suave para el color del ícono */
+}
+
+.edit-btn:hover {
+    background: grey; /* Cambia el fondo a gris al pasar el ratón */
+}
+
+.edit-btn:hover .material-symbols-outlined {
+    color: black; /* Mantiene el color del ícono en blanco (puedes cambiarlo si lo deseas) */
+}
+
 .btnHabDesh {
-    margin: auto;
     cursor: pointer;
+    width: 40px; 
+    height: 40px; 
+    background: green; 
+    border-radius: 50%; 
+    border: none; 
     display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
-    width: 50px;
-    height: 30px;
-    background-color: red;
+    align-items: center; 
+    justify-content: center; 
+    color: white; 
+    transition: background 0.3s; 
+}
+
+.btnHabDesh.habilitado {
+    background: green; /* Color de fondo para habilitado */
+}
+
+.btnHabDesh.deshabilitado {
+    background: red; /* Color de fondo para deshabilitado */
+}
+
+.btnHabDesh:hover {
+    background: grey; /* Color de fondo en hover */
+}
+.btnHabDesh:hover .material-symbols-outlined {
+    color: black; /* Mantiene el color del ícono en blanco*/
+}
+
+.tdCenter {
+    text-align: center;
 }

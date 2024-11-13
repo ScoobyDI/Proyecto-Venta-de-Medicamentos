@@ -1,0 +1,285 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Calibri;
+}
+
+body {
+    background-image: url("../img/Background_Admin.png");
+}
+
+.headercatalogo {
+    z-index: 1;
+    width: 100%;
+    height: 120px;
+    background:rgba(0, 77, 171, 100);
+    position: fixed;
+    display: flex;
+    justify-content: space-between; /* Espacios entre los elementos*/ 
+}
+
+.headercatalogo img {
+    height: 115px;
+    margin-left: 30px;
+    margin: auto;
+}
+
+.header_logo{
+    width: 70%;
+}
+
+.header_perfil {
+    width: 25%;
+    display: flex;
+    justify-content: space-between; /* Espacios entre los elementos*/ 
+    align-items: center; /* Centra los elementos verticalmente */
+    padding: 0 10px; /* Añade espacio horizontal */
+}
+
+.header_perfil .Boton{
+    width: 120px;
+    height: 50px;
+    background-color:  #012340;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    gap: 5px; /* Espacio entre el ícono y el texto */
+    margin: 0 5px; /* Espacio entre botones */
+    transition: background-color 0.3s ease;
+}
+
+.header_perfil .Boton:hover {
+    background-color: #b8d1e7;
+}
+
+
+/* Estilos generales del aside */
+.aside-filter {
+    width: 600px;
+    margin-top: 120px;
+    margin-left: 30px;
+    background-color: #f9f9f9;
+    color: #012340;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 20px;
+    left: 20px;
+}
+.aside_filter_titlo{
+    font-size: 30px;
+    text-align: center;
+}
+
+.categories-container {
+    margin-top: 10px;
+    display: block;
+}
+
+.category-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.category-item {
+    padding: 10px;
+    cursor: pointer;
+    position: relative;
+    border-bottom: 1px solid #ccc;
+    font-size: 23px;
+    color: #012340;
+}
+
+/* Estilos para las subcategorías (inicialmente ocultas) */
+.subcategories-popup {
+    display: none; /* Oculta las subcategorías por defecto */
+    margin-top: 5px;
+    padding-left: 20px;
+}
+
+.category-item:hover .subcategories-popup {
+    display: block; /* Muestra las subcategorías al pasar el ratón */
+}
+
+.subcategories-popup ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.subcategories-popup li {
+    margin: 5px 0;
+    font-size: 20px;
+    color: #555;
+    cursor: pointer;
+}
+
+
+/*MAIN*/
+.main {
+    margin-left: 700px;
+    padding-top: 120px;
+    display: flex;
+    flex-direction: column;
+}
+
+.section1 {
+    padding: 20px 0;
+    width: 95%;
+}
+
+.section1__title {
+    padding-bottom: 20px;
+    font-size: 40px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.section1__content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.section1__options {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.section1__filter {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+.section1__filter__btn {
+    width: 150px;
+    height: 60px;
+    padding: 10px;
+    background:#cde3e8;
+    border-radius: 4px;
+    border: 1px solid black;
+    font-weight: bold;
+    font-size: 25px;
+    color:black;
+}
+
+.section1__addProduct__btn {
+    cursor: pointer;
+    width: 180px;
+     height: 60px;
+    padding: 10px;
+    background:green;
+    border-radius: 4px;
+    border: 1px solid black;
+    font-size: 20px;
+    color:white;
+    align-items: center;
+}
+
+.control {
+    height: 60px;
+    width: 800px;
+    background:#F4F5F3;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid black;
+    font-size: 20px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    font-size: 20px;
+}
+
+
+/* Estilos de la cuadrícula de productos */
+.section2 {
+    width: 95%;
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilos para la grilla de productos */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1000px;
+}
+
+/* Estilos para cada tarjeta de producto */
+.product-card {
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    width: 340px;
+    height: 450px; 
+
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-card img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.product-card h3 {
+    font-size: 24px;
+    margin: 10px 0 5px;
+}
+
+.product-card p {
+    font-size: 20px;
+    color: #666;
+}
+
+.price {
+    display: block;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: red;
+}
+
+.add-btn {
+    width: 200px;
+    height: 70px;
+    background-color: white;
+    color:#ff1744;
+    font-weight: bold;
+    font-size: 30px;
+    border-color: #ff1744;
+    padding: 8px 15px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-btn:hover {
+    background-color: #ff1744;
+    color: white;
+}
+

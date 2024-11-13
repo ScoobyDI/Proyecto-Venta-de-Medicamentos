@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrar Productos</title>
+    <title>Administrar Inventarios</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="../../../public/css/asideAndHeader.css">
-    <link rel="stylesheet" href="../../../public/css/AdmProductos.css">
+    <link rel="stylesheet" href="../../../public/css/Inventario/AdmInventario.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+
 
     <?php
         include_once '../../../model/UsuarioDao.php';
-        include_once '../../../util/ConexionBD.php';
-
         session_start();
         $_SESSION['previous_page'] = $_SERVER['REQUEST_URI']; // Almacena la URL actual
         $correo = $_SESSION['CorreoElectronico'];
@@ -24,19 +23,11 @@
         if (!empty($resultado)) {
             $usuario = $resultado[0];
         }
-
-        // Conexión a la base de datos y obtención de los productos
-        $objc = new ConexionBD();
-        $con = $objc->getConexionBD();
-        $sql = "SELECT p.IdProducto, p.NombreProducto, p.DescripcionProducto, p.Precio, p.StockMinimo, p.StockMaximo, s.NombreSubcategoria, p.EstadoRegistro 
-        FROM producto p 
-        JOIN subcategoria s ON p.IdSubcategoria = s.IdSubcategoria";
-        $rs = mysqli_query($con, $sql);
     ?>
 
     <script>
         function cerrarSesion() {
-            window.location.href = "../../../controller/logout.php";
+            window.location.href = "../../../controller/logout.php"; // Cambia la ruta según tu estructura de carpetas
         }
     </script>
 
@@ -45,7 +36,7 @@
 <body>
 
     <header class="header">
-        <img src="../../../public/img/logo.png" alt="Logo">
+        <img src="../../../public/img/logo.png">
     </header>
 
     <aside class="aside" id="aside">
@@ -126,109 +117,48 @@
         <div class="aside__down">
             <button class="aside__btnLogOut" onclick="cerrarSesion()">Cerrar Sesión</button>
         </div>
-
+        
         <script src="../../../public/js/aside.js"></script>
     </aside>
     
     <main class="main">
         <div class="section1">
-            <h1 class="section1__title">Administrar Productos</h1>
+            <h1 class="section1__title">Administrar Inventarios</h1>
             <div class="section1__content">
                 <div class="section1__filter">
                     <div class="form-buscar-id">
                         <label>Buscar:</label>
-                        <input id="searchProducto" class="control" placeholder="Filtrar por nombre" required>
-                        <button class="section1__filter__btn" onclick="filtrarPorNombre()">Buscar</button>
+                        <input class="control" placeholder="Filtrar" required>
+                        <button class="section1__filter__btn" onclick="">Buscar</button>
                     </div>
                 </div>
-                <div class="section1__options">
-                    <button class="section1__addProduct__btn" onclick="location.href='../Anadir/AnadirProducto.php'">Nuevo Producto</button>
-                </div>
+  
             </div>
         </div>
 
         <div class="section2">
-        <table id="productosTable" class="section2__table">
-        <thead>
-            <tr>
-                <th>Id Producto</th>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Precio</th>
-                <th>Stock Mínimo</th>
-                <th>Stock Máximo</th>
-                <th>Subcategoría</th>
-                <th>Editar</th> <!-- Nueva columna -->
-                <th>Habilitar / Deshabilitar</th> <!-- Nueva columna -->
-            </tr>
-        </thead>
-        <tbody>
-            <?php while($producto = mysqli_fetch_assoc($rs)) { ?>
-                <tr>
-                    <td><?php echo $producto['IdProducto']; ?></td>
-                    <td><?php echo htmlspecialchars($producto['NombreProducto']); ?></td>
-                    <td><?php echo htmlspecialchars($producto['DescripcionProducto']); ?></td>
-                    <td><?php echo htmlspecialchars($producto['Precio']); ?></td>
-                    <td><?php echo htmlspecialchars($producto['StockMinimo']); ?></td>
-                    <td><?php echo htmlspecialchars($producto['StockMaximo']); ?></td>
-                    <td><?php echo htmlspecialchars($producto['NombreSubcategoria']); ?></td>
-                    <!-- Botón de Editar -->
-                    <td>
-                        <button onclick="location.href='../Editar/editarProducto.php?idProducto=<?php echo $producto['IdProducto']; ?>'" class="edit-btn">
-                            <span class="material-symbols-outlined">edit</span>
-                        </button>
-                    </td>
-                    <!-- Botón de Habilitar/Deshabilitar -->
-                    <td>
-                        <button class="btnHabDesh <?php echo ($producto['EstadoRegistro'] == 1) ? 'habilitado' : 'deshabilitado'; ?>" 
-                                onclick="toggleProductStatus(<?php echo $producto['IdProducto']; ?>, '<?php echo ($producto['EstadoRegistro'] == 1) ? 'Habilitado' : 'Deshabilitado'; ?>')">
-                            <span class="material-symbols-outlined">
-                                <?php echo ($producto['EstadoRegistro'] == 1) ? 'toggle_on' : 'toggle_off'; ?>
-                            </span>
-                        </button>
-                    </td>
-                </tr>
-            <?php } ?>
-        </tbody>
-        </table>
+            <table id="productosTable" class="section2__table">
+                <thead>
+                    <tr>
+                        <th class="section2__table_id">Id Producto</th>
+                        <th class="section2__table_nombre">Nombre</th>
+                        <th class="section2__table_descrip">Descripción</th>
+                        <th class="section2__table_categoria">Categoría</th>
+                        <th class="section2__table_subcategoria">Subcategoría</th>
+                        <th class="section2__table_precio">Precio </th>
+                        <th class="section2__table_vencimiento">Fecha de Vencimiento</th>
+                        <th class="section2__table_stockact">Stock Actual</th>
+                        <th class="section2__table_stockmin">Stock Mínimo</th>
+                        <th class="section2__table_stockmax">Stock Máximo</th>
+                        <th class="section2__table_edit">Editar Lote</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </main>
-
-    <!-- Scripts de DataTables -->
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#productosTable').DataTable({
-                "language": {
-                    "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/Spanish.json",
-                    "emptyTable": "No se encontraron productos"
-                },
-                "dom": 'rtip'
-            });
-        });
-
-        function filtrarPorNombre() {
-            var nombreProducto = $('#searchProducto').val();
-            var table = $('#productosTable').DataTable();
-            table.columns(1).search(nombreProducto).draw(); // Filtra por la columna de Nombre
-        }
-    </script>
-    <script>
-    function toggleProductStatus(productId, currentStatus) {
-        const newStatus = (currentStatus === 'Habilitado') ? 'deshabilitado' : 'habilitado';
-        const xhr = new XMLHttpRequest();
-        
-        xhr.open("GET", "../../../controller/ProductoControlador.php?op=4&IdProducto=" + productId + "&NuevoEstado=" + newStatus, true);
-
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                location.reload(); // Recargar la página para actualizar la tabla
-            }
-        };
-
-        xhr.send();
-    }
-</script>
 </body>
 </html>

@@ -110,7 +110,8 @@ class UsuarioDao {
                     'FechaCreacion' => $row['FechaCreacion'],
                     'UsuarioModificacion' => $row['UsuarioModificacion'],
                     'FechaModificacion' => $row['FechaModificacion'],
-                    'EstadoRegistro' => $row['EstadoRegistro']
+                    'EstadoRegistro' => $row['EstadoRegistro'],
+                    'IdPerfil' => $row['IdPerfil'],
                 ));
             }
     

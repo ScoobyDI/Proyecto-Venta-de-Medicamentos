@@ -14,6 +14,7 @@
         include_once '../../../model/UsuarioDao.php';
         session_start();
         $_SESSION['previous_page'] = $_SERVER['REQUEST_URI']; // Almacena la URL actual
+
         $correo = $_SESSION['CorreoElectronico'];
         $usuario = null;
         $usuarioDao = new usuarioDao();
@@ -24,8 +25,41 @@
         }
     ?>
 
-    <script>
 
+
+    <script>
+        // categorias
+        function toggleUserStatus(categoriaId, currentStatus) {
+            const newStatus = (currentStatus === 'Habilitado') ? 'deshabilitado' : 'habilitado'; // Cambio de estado
+            const xhr = new XMLHttpRequest();
+            
+            // Corregir la URL concatenando los parámetros
+            xhr.open("GET", "../../../controller/CategoriaControlador.php?op=5&IdCategoria=" + categoriaId + "&NuevoEstado=" + newStatus, true);
+    
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    location.reload(); // Recargar la página para actualizar la tabla
+                }
+            };
+
+            xhr.send();
+        }
+
+        function toggleUserStatus(subcategoriaId, currentStatus) {
+            const newStatus = (currentStatus === 'Habilitado') ? 'deshabilitado' : 'habilitado'; // Cambio de estado
+            const xhr = new XMLHttpRequest();
+            
+            // Corregir la URL concatenando los parámetros
+            xhr.open("GET", "../../../controller/CategoriaControlador.php?op=6&IdSubCategoria=" + subcategoriaId + "&NuevoEstado=" + newStatus, true);
+    
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    location.reload(); // Recargar la página para actualizar la tabla
+                }
+            };
+
+            xhr.send();
+        }
         function cerrarSesion() {
             window.location.href = "../../../controller/logout.php"; // Cambia la ruta según tu estructura de carpetas
         }
@@ -171,9 +205,20 @@
 
                         <td><?php echo $resultado['NombreCategoria'] ?></td>
                         <td><?php echo $resultado['DescripcionCategoria'] ?></td>
-                        <td class="tdCenter"><?php echo $resultado['EstadoCategoria'] ?></td>
-                        <td class="tdCenter"><img src="../../../public/img/btnEditar.png" class="imgBtnActualizar" onclick="location.href='<?php echo $link ?>'"  alt="bntEditar"></td>
-                        <td class="tdCenter"><button class="btnHabDesh"><span class="material-symbols-outlined">radio_button_checked</span></button></td>
+                        <td><?php echo ($resultado['EstadoCategoria'] == 1) ? 'Habilitado' : 'Deshabilitado'; ?></td>
+                        <td>
+                            <button onclick="location.href='<?php echo $link ?>'" class="edit-btn">
+                            <span class="material-symbols-outlined">edit</span>
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btnHabDesh <?php echo ($resultado['EstadoCategoria'] == 1) ? 'habilitado' : 'deshabilitado'; ?> " 
+                            onclick="toggleUserStatus(<?php echo $resultado['IdCategoria']; ?>, '<?php echo ($resultado['EstadoCategoria'] == 1) ? 'Habilitado' : 'Deshabilitado'; ?>')">
+                                <span class="material-symbols-outlined">
+                                <?php echo ($resultado['EstadoCategoria'] == 1) ? 'toggle_on' : 'toggle_off'; ?>
+                                </span>
+                            </button>
+                        </td>
                     </tr>
                     <?php }?>
                 </tbody>
@@ -188,7 +233,9 @@
                     "language": {
                         "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/Spanish.json",
                         "emptyTable": "No se encontraron registros coincidentes",
-                        "zeroRecords": "No se encontraron registros coincidentes"
+                        "zeroRecords": "No se encontraron registros coincidentes",
+                        "info": "" ,     // Oculta la información de "Showing X to Y of Z entries"
+                        "paging": true     // Mantiene la paginación visible
                     },
                     "dom": 'rtip' // Eliminar el campo de búsqueda global
                 });
@@ -213,23 +260,70 @@
         </div>
 
         <div class="section2">
-            <table id="categoriasTable" class="section2__table">
+            <?php
+                include_once '../../../util/ConexionBD.php';
+                $objc = new ConexionBD();
+                $con = $objc->getConexionBD();
+                $sql2 = "SELECT u.IdCategoria, u.IdSubCategoria, u.NombreSubcategoria, u.EstadoSubCategoria, c.NombreCategoria
+                FROM subcategoria u INNER JOIN categoria c ON u.IdCategoria = c.IdCategoria";
+                $rs2 = mysqli_query($con, $sql2);
+            ?>
+            <table id="subcategoriasTable" class="section2__table">
                 <thead>
                     <tr>
-                        <th class="section2__table__id">Id Categoría</th>
-                        <th class="section2__table__id">Id Subcategoría</th>
-                        <th class="section2__table__nombre">Nombre</th>
+                        <th class="">Categoría</th>
+                        <th class="">Subcategoría</th>
+                        <th class="">Estado Sub Categoría</th>
                         <th class="section2__table__edit">Editar</th>
                         <th class="section2__table__deshabilitar">Deshabilitar</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <?php 
+                        while($resultado2 = mysqli_fetch_array($rs2)){
+                    ?>
                     <tr>
-                        
+
+                        <?php $link2 = "../Editar/editarSubCategoria.php?idSubCategoria=" . $resultado2['IdSubCategoria'];?>
+
+                        <td><?php echo $resultado2['NombreCategoria'] ?></td>
+                        <td><?php echo $resultado2['NombreSubcategoria'] ?></td>
+                        <td><?php echo ($resultado2['EstadoSubCategoria'] == 1) ? 'Habilitado' : 'Deshabilitado'; ?></td>
+                        <td>
+                            <button onclick="location.href='<?php echo $link ?>'" class="edit-btn">
+                            <span class="material-symbols-outlined">edit</span>
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btnHabDesh <?php echo ($resultado2['EstadoSubCategoria'] == 1) ? 'habilitado' : 'deshabilitado'; ?> " 
+                            onclick="toggleUserStatus(<?php echo $resultado2['IdSubCategoria']; ?>, '<?php echo ($resultado2['EstadoSubCategoria'] == 1) ? 'Habilitado' : 'Deshabilitado'; ?>')">
+                                <span class="material-symbols-outlined">
+                                <?php echo ($resultado2['EstadoSubCategoria'] == 1) ? 'toggle_on' : 'toggle_off'; ?>
+                                </span>
+                            </button>
+                        </td>
                     </tr>
+                    <?php }?>
                 </tbody>
             </table>       
         </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#subcategoriasTable').DataTable({
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/Spanish.json",
+                        "emptyTable": "No se encontraron registros coincidentes",
+                        "zeroRecords": "No se encontraron registros coincidentes",
+                        "info": "" ,     // Oculta la información de "Showing X to Y of Z entries"
+                        "paging": true     // Mantiene la paginación visible
+                    },
+                    "dom": 'rtip' // Eliminar el campo de búsqueda global
+                });
+                
+            });
+        </script>
 
     </main>
 </body>
