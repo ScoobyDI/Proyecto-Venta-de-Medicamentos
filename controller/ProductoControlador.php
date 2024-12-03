@@ -12,8 +12,6 @@ switch ($op) {
         // Agregar un nuevo producto
         $nombreProducto = $_GET["NombreProducto"];
         $descripcionProducto = $_GET["DescripcionProducto"];
-        $stockMinimo = $_GET["StockMinimo"];
-        $stockMaximo = $_GET["StockMaximo"];
         $precio = $_GET["Precio"];
         $fechaVencimiento = $_GET["FechaVencimiento"];
         $idSubcategoria = $_GET["IdSubcategoria"];
@@ -23,8 +21,6 @@ switch ($op) {
         $objProductoBean = new ProductoBean();
         $objProductoBean->setNombreProducto($nombreProducto);
         $objProductoBean->setDescripcionProducto($descripcionProducto);
-        $objProductoBean->setStockMinimo($stockMinimo);
-        $objProductoBean->setStockMaximo($stockMaximo);
         $objProductoBean->setPrecio($precio);
         $objProductoBean->setFechaVencimiento($fechaVencimiento);
         $objProductoBean->setIdSubcategoria($idSubcategoria);
@@ -70,24 +66,18 @@ switch ($op) {
         $idProducto = $_GET["IdProducto"];
         $nombreProducto = $_GET["NombreProducto"];
         $descripcionProducto = $_GET["DescripcionProducto"];
-        $stockMinimo = $_GET["StockMinimo"];
-        $stockMaximo = $_GET["StockMaximo"];
         $precio = $_GET["Precio"];
         $fechaVencimiento = $_GET["FechaVencimiento"];
         $idSubcategoria = $_GET["IdSubcategoria"];
-        $imagenProducto = $_GET["ImagenProducto"];
 
         // Crear objeto ProductoBean
         $objProductoBean = new ProductoBean();
         $objProductoBean->setIdProducto($idProducto);
         $objProductoBean->setNombreProducto($nombreProducto);
         $objProductoBean->setDescripcionProducto($descripcionProducto);
-        $objProductoBean->setStockMinimo($stockMinimo);
-        $objProductoBean->setStockMaximo($stockMaximo);
         $objProductoBean->setPrecio($precio);
         $objProductoBean->setFechaVencimiento($fechaVencimiento);
         $objProductoBean->setIdSubcategoria($idSubcategoria);
-        $objProductoBean->setImagenProducto($imagenProducto);
 
         // Instanciar el ProductoDao
         $objProductoDao = new ProductoDao();

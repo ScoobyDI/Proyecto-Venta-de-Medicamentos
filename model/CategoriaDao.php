@@ -44,7 +44,6 @@ class CategoriaDao {
             $sql = "UPDATE categoria 
                     SET NombreCategoria = '$nombreCategoria', 
                     DescripcionCategoria = '$descripcionCategoria'
-                    
                     WHERE IdCategoria = '$idCategoria'";
     
             $rs = mysqli_query($con, $sql);

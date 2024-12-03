@@ -45,7 +45,7 @@
             xhr.send();
         }
 
-        function toggleUserStatus(subcategoriaId, currentStatus) {
+        function toggleUserStatus2(subcategoriaId, currentStatus) {
             const newStatus = (currentStatus === 'Habilitado') ? 'deshabilitado' : 'habilitado'; // Cambio de estado
             const xhr = new XMLHttpRequest();
             
@@ -296,7 +296,7 @@
                         </td>
                         <td>
                             <button class="btnHabDesh <?php echo ($resultado2['EstadoSubCategoria'] == 1) ? 'habilitado' : 'deshabilitado'; ?> " 
-                            onclick="toggleUserStatus(<?php echo $resultado2['IdSubCategoria']; ?>, '<?php echo ($resultado2['EstadoSubCategoria'] == 1) ? 'Habilitado' : 'Deshabilitado'; ?>')">
+                            onclick="toggleUserStatus2(<?php echo $resultado2['IdSubCategoria']; ?>, '<?php echo ($resultado2['EstadoSubCategoria'] == 1) ? 'Habilitado' : 'Deshabilitado'; ?>')">
                                 <span class="material-symbols-outlined">
                                 <?php echo ($resultado2['EstadoSubCategoria'] == 1) ? 'toggle_on' : 'toggle_off'; ?>
                                 </span>

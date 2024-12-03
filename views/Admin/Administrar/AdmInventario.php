@@ -137,24 +137,23 @@
         </div>
 
         <div class="section2">
-            <table id="productosTable" class="section2__table">
+            <table id="InventarioTable" class="section2__table">
                 <thead>
                     <tr>
-                        <th class="section2__table_id">Id Producto</th>
                         <th class="section2__table_nombre">Nombre</th>
-                        <th class="section2__table_descrip">Descripción</th>
-                        <th class="section2__table_categoria">Categoría</th>
-                        <th class="section2__table_subcategoria">Subcategoría</th>
-                        <th class="section2__table_precio">Precio </th>
-                        <th class="section2__table_vencimiento">Fecha de Vencimiento</th>
-                        <th class="section2__table_stockact">Stock Actual</th>
-                        <th class="section2__table_stockmin">Stock Mínimo</th>
-                        <th class="section2__table_stockmax">Stock Máximo</th>
+                        <th class="section2__table_stockTotal">Stock Total</th>
                         <th class="section2__table_edit">Editar Lote</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <button onclick="" class="edit-btn">
+                                <span class="material-symbols-outlined">edit</span>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>

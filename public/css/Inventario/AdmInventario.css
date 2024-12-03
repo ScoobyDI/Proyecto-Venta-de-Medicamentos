@@ -5,6 +5,133 @@
     flex-direction: column;
 }
 
+
+/**/
+.ventana_agregar_lote{
+    background:#EEEDED;
+    width:43%;
+    color: black;
+    border: 1px solid black;
+    border-color: black;
+    font-size: 18px;
+    text-align: center;
+    padding: 33px;
+    min-height: 250px;
+    border-radius: 22px;
+    position: absolute;
+    left: 36%;
+    top: 22%;
+    display: none;
+}
+
+#cerrar{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+
+}
+
+.cerrar_ventana_btn{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-color: red;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 24px;
+    border: 1px solid black;
+    cursor: pointer;       /* Cambia el cursor a mano cuando pasas sobre el botón */
+    transition: background-color 0.3s ease;  /* Suaviza el cambio de color al pasar el cursor */
+}
+
+.cerrar_ventana_btn:hover {
+    background-color:darkred;/* Cambia el color cuando el usuario pasa el mouse sobre el botón */
+}
+
+
+
+.ventana__title {
+    color: red;
+    margin-bottom: 30px;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.ventana__container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;     
+    width: 100%;         
+    padding: 20px; 
+    
+}
+
+.ventana_formulario {
+    width: 100%;  
+    display: flex;
+    flex-direction: column; 
+    gap: 20px; 
+}
+
+label {
+    font-weight: bold;
+    display: block;  
+    font-size: 20px;
+    padding-bottom: 5px; 
+    text-align: left; 
+    margin-left: 5px; 
+    width: 100%;  
+}
+
+.input_ventana{
+    width: 100%;      
+    background: #F4F5F3;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid black;
+    font-size: 20px;
+}
+
+
+.form__content__buttons{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.form__button__anadir {
+    cursor: pointer;
+    width: 150px;
+    padding: 10px;
+    background:green;
+    border-radius: 4px;
+    border: 1px solid black;
+    font-size: 20px;
+    color: white;
+}
+
+.form__button__cancel {
+    cursor: pointer;
+    width: 150px;
+    padding: 10px;
+    background:gray;
+    border-radius: 4px;
+    border: 1px solid black;
+    font-size: 20px;
+    color: white;
+}
+
+
+/**/
+
+
 .section1 {
     padding: 20px 0;
     width: 95%;
@@ -22,6 +149,22 @@
     display: flex;
     justify-content: space-between;
 }
+
+/**/
+.section1__content_lote {
+    display: flex;
+    justify-content: flex-end; /* Alinea los hijos al extremo derecho */
+    align-items: center;
+    width: 100%; 
+    margin-bottom: 20px;
+}
+
+.section1__options_lote {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+/**/
 
 .section1__options {
     display: flex;
@@ -80,66 +223,43 @@ label {
 }
 
 .section2__table {
-    width: 95%;
+    width: 1000px;
     border: 1px solid black;
+    border-collapse: collapse;
 }
 
 th {
-    height: 40px;
+    height: 60px;
     background: gray;
     color: #F4F5F3;
 }
 
-
 td {
     padding: 8px;
-    /* border: 0.1px solid gray; */
     text-align: center;
     background-color: white;
 }
 
-.section2__table_id {
-    width: 80px;
+tbody tr:hover {
+    background: rgba(99, 98, 98, 0.4);
 }
+
+/**/
+.seccion2_th_basic{
+    width:20%;
+}
+/**/
 
 .section2__table_nombre {
     width: 80px;
 }
 
-.section2__table_descrip {
-    width: 200px;
-}
-
-.section2__table_categoria {
-    width: 80px;
-}
-
-.section2__table_subcategoria {
-    width: 100px;
-}
-
-.section2__table_precio {
-    width: 80px;
-}
-
-.section2__table_vencimiento {
-    width: 80px;
-}
-
-.section2__table_stockact {
-    width: 80px;
-}
-
-.section2__table_stockmin {
-    width: 80px;
-}
-
-.section2__table_stockmax {
+.section2__table_stockTotal {
     width: 80px;
 }
 
 .section2__table_edit {
-    width: 80px;
+    width: 40px;
 }
 
 
@@ -169,3 +289,31 @@ tbody tr:hover {
 .edit-btn:hover .material-symbols-outlined {
     color: black; 
 }
+
+
+/**/
+.btn-delete{
+    height: 40px;
+    background-color: #ff4d4d; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-delete .material-symbols-outlined {
+    color: white; 
+    font-size: 24px; 
+    transition: color 0.3s; 
+}
+
+.btn-delete:hover {
+    background-color: grey; 
+}
+
+.btn-delete:hover .material-symbols-outlined {
+    color: black; 
+}
+/**/

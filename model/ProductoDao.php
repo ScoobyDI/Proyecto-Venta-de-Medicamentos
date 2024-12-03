@@ -12,15 +12,11 @@ class ProductoDao {
 
             $nombreProducto = mysqli_real_escape_string($con, $productoObj->getNombreProducto());
             $descripcionProducto = mysqli_real_escape_string($con, $productoObj->getDescripcionProducto());
-            $stockMinimo = mysqli_real_escape_string($con, $productoObj->getStockMinimo());
-            $stockMaximo = mysqli_real_escape_string($con, $productoObj->getStockMaximo());
             $precio = mysqli_real_escape_string($con, $productoObj->getPrecio());
-            $fechaVencimiento = mysqli_real_escape_string($con, $productoObj->getFechaVencimiento()); // Nuevo campo
             $idSubcategoria = mysqli_real_escape_string($con, $productoObj->getIdSubcategoria());
-            $imagenProducto = mysqli_real_escape_string($con, $productoObj->getImagenProducto());
 
-            $sql = "INSERT INTO producto (NombreProducto, DescripcionProducto, StockMinimo, StockMaximo, Precio, FechaVencimiento, IdSubcategoria, ImagenProducto)
-                    VALUES ('$nombreProducto', '$descripcionProducto', '$stockMinimo', '$stockMaximo', '$precio', '$fechaVencimiento', '$idSubcategoria', '$imagenProducto')";
+            $sql = "INSERT INTO producto (NombreProducto, DescripcionProducto, Precio, IdSubcategoria)
+                    VALUES ('$nombreProducto', '$descripcionProducto', '$precio', '$idSubcategoria')";
             $rs = mysqli_query($con, $sql);
             mysqli_close($con);
         } catch (Exception $e) {
@@ -39,17 +35,11 @@ class ProductoDao {
             $idProducto = mysqli_real_escape_string($con, $productoObj->getIdProducto());
             $nombreProducto = mysqli_real_escape_string($con, $productoObj->getNombreProducto());
             $descripcionProducto = mysqli_real_escape_string($con, $productoObj->getDescripcionProducto());
-            $stockMinimo = mysqli_real_escape_string($con, $productoObj->getStockMinimo());
-            $stockMaximo = mysqli_real_escape_string($con, $productoObj->getStockMaximo());
             $precio = mysqli_real_escape_string($con, $productoObj->getPrecio());
-            $fechaVencimiento = mysqli_real_escape_string($con, $productoObj->getFechaVencimiento()); // Nuevo campo
             $idSubcategoria = mysqli_real_escape_string($con, $productoObj->getIdSubcategoria());
-            $imagenProducto = mysqli_real_escape_string($con, $productoObj->getImagenProducto());
 
-            $sql = "UPDATE producto SET NombreProducto = '$nombreProducto', DescripcionProducto = '$descripcionProducto',
-                    StockMinimo = '$stockMinimo', StockMaximo = '$stockMaximo', Precio = '$precio', FechaVencimiento = '$fechaVencimiento',
-                    IdSubcategoria = '$idSubcategoria', ImagenProducto = '$imagenProducto'
-                    WHERE IdProducto = '$idProducto'";
+            $sql = "UPDATE producto SET NombreProducto = '$nombreProducto', DescripcionProducto = '$descripcionProducto', Precio = '$precio',
+                    IdSubcategoria = '$idSubcategoria' WHERE IdProducto = '$idProducto'";
             $rs = mysqli_query($con, $sql);
             mysqli_close($con);
         } catch (Exception $e) {
@@ -78,12 +68,8 @@ class ProductoDao {
                     'IdProducto' => $row['IdProducto'],
                     'NombreProducto' => $row['NombreProducto'],
                     'DescripcionProducto' => $row['DescripcionProducto'],
-                    'StockMinimo' => $row['StockMinimo'],
-                    'StockMaximo' => $row['StockMaximo'],
                     'Precio' => $row['Precio'],
-                    'FechaVencimiento' => $row['FechaVencimiento'], // Nuevo campo
                     'IdSubcategoria' => $row['IdSubcategoria'],
-                    'ImagenProducto' => $row['ImagenProducto']
                 );
             }
 
@@ -116,12 +102,8 @@ class ProductoDao {
                     'IdProducto' => $row['IdProducto'],
                     'NombreProducto' => $row['NombreProducto'],
                     'DescripcionProducto' => $row['DescripcionProducto'],
-                    'StockMinimo' => $row['StockMinimo'],
-                    'StockMaximo' => $row['StockMaximo'],
                     'Precio' => $row['Precio'],
-                    'FechaVencimiento' => $row['FechaVencimiento'], // Nuevo campo
                     'IdSubcategoria' => $row['IdSubcategoria'],
-                    'ImagenProducto' => $row['ImagenProducto']
                 );
             }
 

@@ -92,7 +92,6 @@ th {
 
 td {
     padding: 8px;
-    /* border: 0.1px solid gray; */
     text-align: center;
     background-color: white;
 }
@@ -168,4 +167,9 @@ tbody tr:hover {
 
 .btnHabDesh:hover .material-symbols-outlined {
     color: black; /* Color del icono al pasar el ratón sobre el botón */
+}
+
+.tdCenter {
+    display: flex;
+    justify-content: center;
 }

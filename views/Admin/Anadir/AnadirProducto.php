@@ -186,12 +186,6 @@
                         </select>   
                         <label>Precio:</label>
                         <input class="control form__" type="text" name="Precio" required>
-                        <label>Stock Minimo:</label>
-                        <input class="control form__" type="text" name="StockMinimo" required>
-                        <label>Stock Maximo:</label>
-                        <input class="control form__" type="text" name="StockMaximo" required>
-                        <label>Fecha de Vencimiento:</label>
-                        <input class="control form__" type="date" name="FechaVencimiento" required>
                     <hr></hr>
                     <div class="form__content__buttons">
                         <button class="form__button__cancel" type="button" onclick="confirmarCancelar()">Cancelar</button>

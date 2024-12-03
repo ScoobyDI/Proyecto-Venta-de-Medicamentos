@@ -205,12 +205,6 @@
                         <label>Precio:</label>
                         <input class="control form__" type="text" name="Precio" value="<?php echo $producto ? htmlspecialchars($producto['Precio']) : ''; ?>" required>
                         
-                        <label>Stock Mínimo:</label>
-                        <input class="control form__" type="text" name="StockMinimo" value="<?php echo $producto ? htmlspecialchars($producto['StockMinimo']) : ''; ?>" required>
-                        
-                        <label>Stock Máximo:</label>
-                        <input class="control form__" type="text" name="StockMaximo" value="<?php echo $producto ? htmlspecialchars($producto['StockMaximo']) : ''; ?>" required>
-                        
                         <label>Fecha de Vencimiento:</label>
                         <input class="control form__" type="date" name="FechaVencimiento" value="<?php echo $producto ? htmlspecialchars($producto['FechaVencimiento']) : ''; ?>" required>
                     </div>
