@@ -128,7 +128,7 @@
                                         $cantidad = $row['Cantidad'];
                                         $precio = $row['Precio'];
                                         $subtotal = $precio*$cantidad;
-                                    }
+                                    
                                 ?>
                                 <tr>
                                     <td><?php echo $row['Nombre']; ?></td>
@@ -136,6 +136,7 @@
                                     <td><?php echo $cantidad ?></td>
                                     <td><?php echo $subtotal ?></td>
                                 </tr>
+                                <?php } ?>
                             </tbody>
                         </table> 
                     </div>
