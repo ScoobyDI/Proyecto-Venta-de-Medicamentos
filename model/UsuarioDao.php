@@ -254,6 +254,7 @@ class UsuarioDao {
             return false;
         }
     }
+    
     public function obtenerIdPerfil($objUsuarioBean) {
         try {
             $objc = new ConexionBD();
@@ -271,6 +272,32 @@ class UsuarioDao {
         
             if ($stmt->fetch()) {
                 return $idPerfil;
+            } else {
+                return null;
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+
+    public function obtenerIdUsuario($objUsuarioBean) {
+        try {
+            $objc = new ConexionBD();
+            $con = $objc->getConexionBD();
+
+            $idUsuario = $objUsuarioBean->getCorreoElectronico();
+            
+        
+            $sql = "SELECT IdUsuario FROM usuario WHERE CorreoElectronico = ?";
+            
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param("s", $idUsuario);
+            $stmt->execute();
+            $stmt->bind_result($idUsuario);
+        
+            if ($stmt->fetch()) {
+                return $idUsuario;
             } else {
                 return null;
             }

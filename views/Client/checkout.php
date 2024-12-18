@@ -18,6 +18,28 @@
         $lista_carrito[] = $sql->fetch(PDO::FETCH_ASSOC);
         }
     }
+
+    include_once '../../model/UsuarioDao.php';
+        
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start(); // Iniciar sesión solo si no está iniciada
+    }
+    // Verificar si la sesión está iniciada
+    if (isset($_SESSION['CorreoElectronico']) && !empty($_SESSION['CorreoElectronico'])) {
+        // Si la sesión está iniciada, obtener el correo electrónico y buscar el usuario
+        $correo = $_SESSION['CorreoElectronico'];
+        $usuario = null;
+        $usuarioDao = new usuarioDao();
+        $resultado2 = $usuarioDao->filtrarUsuarioPorCorreo($correo);
+
+        if (!empty($resultado2)) {
+            $usuario = $resultado2[0];
+        }
+    } else {
+        // Si no hay sesión iniciada, seguir en la misma página (index.php)
+        // No es necesario hacer nada, el flujo continúa normalmente en index.php
+        $usuario = null;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -32,6 +54,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="../../public/css/asideAndHeader.css">
     <link rel="stylesheet" href="../../public/css/Carrito.css">
+    <script>
+        function cerrarSesion() {
+            window.location.href = "../../controller/logout.php"; // Cambia la ruta según tu estructura de carpetas
+        }
+    </script>
 </head>
 <body>
 
@@ -47,12 +74,30 @@
             </a>
             <a class="Boton" href="">
                 <span class="material-symbols-outlined iconOption">account_circle</span>
-                <span class="option"> Perfil </span>
+                <span class="option"> 
+                    <?php 
+                        // Verifica si el usuario está logueado
+                        if ($usuario) {
+                            echo htmlspecialchars($usuario['Nombres']); // Muestra el nombre del usuario
+                        } else {
+                            echo 'Cuenta'; // Muestra "Cuenta" si no hay sesión iniciada
+                        }
+                    ?> 
+                </span>
             </a>
-            <a class="Boton"  href="../../views/Auth/login.php">
+            <?php if ($usuario): ?>
+            <!-- Si el usuario está logueado, muestra "Cerrar sesión" -->
+            <a class="Boton" href="../../index.php">
+                <span class="material-symbols-outlined iconOption">logout</span>
+                <span class="option" onclick="cerrarSesion()">Cerrar sesión</span>
+            </a>
+            <?php else: ?>
+            <!-- Si no está logueado, muestra "Iniciar sesión" -->
+            <a class="Boton" href="../../views/Auth/login.php">
                 <span class="material-symbols-outlined iconOption">login</span>
-                <span class="option"> Inicar Sesión </span>
+                <span class="option">Iniciar sesión</span>
             </a>
+            <?php endif; ?>
         </div>
     </header>
 
@@ -118,11 +163,17 @@
             </div>  
 
             <?php if($lista_carrito != null){ ?>
-                <div class="row">
-                    <div class="pay">
+            <div class="row">
+                <div class="pay">
+                    <?php if (!$usuario): ?>
+                        <!-- Si no hay sesión iniciada, redirige al login -->
+                        <a href="../../views/Auth/login.php" class="btn btn-primary btn-lg">Realizar pago</a>
+                    <?php else: ?>
+                        <!-- Si el usuario está logueado, permite realizar el pago -->
                         <a href="pago.php" class="btn btn-primary btn-lg">Realizar pago</a>
-                    </div>
+                    <?php endif; ?>
                 </div>
+            </div>
             <?php } ?>
         </div>
     </main>
@@ -228,4 +279,3 @@
     
 </body>
 </html>
-

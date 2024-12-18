@@ -25,6 +25,20 @@ body {
     margin: auto;
 }
 
+.header_buscar{
+    display: flex;
+    align-items: center;
+}
+
+.btn-sm {
+    display: flex;
+    align-items: center;
+}
+
+.input-group {
+    width: 300px;
+}
+
 .header_logo{
     width: 70%;
 }
@@ -77,3 +91,5 @@ main>.container {
 .list-group {
     z-index: 1;
 }
+
+

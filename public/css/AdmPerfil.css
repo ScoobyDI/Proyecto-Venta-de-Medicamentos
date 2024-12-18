@@ -1,0 +1,105 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.header_option {
+    display: flex;
+    align-items: center; /* Centra los elementos verticalmente */
+    padding: 0 10px; /* Añade espacio horizontal */
+}
+
+.header_option .Boton{
+    width: 200px;
+    height: 50px;
+    background-color:  #012340;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    gap: 5px; /* Espacio entre el ícono y el texto */
+    margin: 0 5px; /* Espacio entre botones */
+    transition: background-color 0.3s ease;
+    font-size: 15px;
+}
+
+.header_option .Boton:hover {
+    background-color: #b8d1e7;
+}
+
+.main {
+    margin-left: 350px;
+    padding-top: 120px;
+}
+
+.section1 {
+    padding-top: 10px;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section1__container__title{
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.section1__title {
+    text-align: center;
+    width: 500px;
+    background-color: #D2E8F8;
+    border-radius: 10px;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.section1__container__datos {
+    border: 1px solid black;
+    background-color: #ffffbf;
+    border-radius: 10px;
+    padding: 10px 20px 20px;
+}
+
+.section1__datos {
+    font-size: 20px;
+    padding: 20px;
+    border-collapse: collapse;
+}
+
+tr {
+    border-bottom: solid 2px gray;
+}
+
+th {
+    width: 300px;
+    text-align: left;
+    padding: 10px;
+}
+
+td { 
+    width: 300px;
+}
+
+hr {
+    margin: 20px; 
+    border: 0.1px solid gray;
+}
+
+.section1__container__button {
+    width: 95%;
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.section1__button__actDatos {
+    cursor: pointer;
+    background-color: #ECB751;
+    padding: 10px ;
+    font-size: 20px;
+}

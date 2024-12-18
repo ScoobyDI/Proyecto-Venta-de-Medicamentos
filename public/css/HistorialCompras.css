@@ -1,0 +1,58 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.header_option {
+    display: flex;
+    align-items: center; /* Centra los elementos verticalmente */
+    padding: 0 10px; /* Añade espacio horizontal */
+}
+
+.header_option .Boton{
+    width: 200px;
+    height: 50px;
+    background-color:  #012340;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    gap: 5px; /* Espacio entre el ícono y el texto */
+    margin: 0 5px; /* Espacio entre botones */
+    transition: background-color 0.3s ease;
+    font-size: 15px;
+}
+
+.header_option .Boton:hover {
+    background-color: #b8d1e7;
+}
+
+.main {
+    margin-left: 350px;
+    padding-top: 120px;
+}
+
+.section1 {
+    padding-top: 10px;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+hr {
+    margin: 20px; 
+    border: 0.1px solid gray;
+}
+
+.aside__list{
+    padding: 0px;
+}
+

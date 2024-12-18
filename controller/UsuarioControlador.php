@@ -25,13 +25,17 @@ switch($op) {
         if ($rs) {
             // Obtener IdPerfil del usuario
             $idPerfil = $objUsuarioDao->obtenerIdPerfil($objUsuarioBean);
+            $idUsuario = $objUsuarioDao->obtenerIdUsuario($objUsuarioBean);
     
             $_SESSION['CorreoElectronico'] = $objUsuarioBean->getCorreoElectronico(); 
             $_SESSION['IdPerfil'] = $idPerfil;
+            $_SESSION['IdUsuario'] = $idUsuario;
     
             // Redirigir según el IdPerfil
-            if ($idPerfil == 1 || $idPerfil == 2) {
+            if ($idPerfil == 1) {
                 $pagina = "../views/Admin/perfilAdmin.php";
+            } else if ($idPerfil == 2) {
+                $pagina = "../views/Seller/AdmPerfil.php";
             } else if ($idPerfil == 3) {
                 $pagina = "../index.php";
             } else {
@@ -125,7 +129,7 @@ switch($op) {
         // Manejar el resultado de la actualización
         if ($rs) {
             $_SESSION['mensaje'] = "Usuario actualizado correctamente"; // Mensaje de éxito
-            $pagina = isset($_SESSION['previous_page']) ? $_SESSION['previous_page'] : "../views/Auth/login.html"; // Redirigir a la página anterior
+            $pagina = isset($_SESSION['previous_page']) ? $_SESSION['previous_page'] : "../views/Admin/Administrar/AdmUsuarios.php"; // Redirigir a la página anterior
         } else {
             $_SESSION['mensaje'] = "Error al actualizar el usuario"; // Mensaje de error
             $pagina = isset($_SESSION['previous_page']) ? $_SESSION['previous_page'] : "../views/index.php"; // Redirigir a otra página
