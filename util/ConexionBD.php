@@ -24,5 +24,29 @@ class ConexionBD                                                      // Declara
         }
         return $this->cn;                                           // Devolvemos la conexión (puede ser nula si no se pudo conectar)
     }
+
+    private $Servidor = "localhost";                                     // Servidor de la base de datos
+    private $Usuario = "root";                                           // Usuario de la base de datos
+    private $Password = "";                                              // Contraseña del usuario de la base de datos
+    private $Database = "farmacia_online"; 
+    private $Charset = "utf8";
+
+    public function conectar()
+    {
+        try{
+            $Conexion ="mysql:host=" . $this->Servidor . "; dbname=" . $this-> Database ."; charset=" . $this-> Charset;
+            $Options = [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_EMULATE_PREPARES => false
+            ];
+
+            $pdo = new PDO($Conexion, $this->Usuario, $this->Password, $Options);
+
+            return $pdo;
+        }catch(PDOException $e){
+            echo 'Error Conexion: '. $e->getMessage();
+            exit;
+        }
+    }
 }
 ?>

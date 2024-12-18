@@ -254,6 +254,31 @@ class UsuarioDao {
             return false;
         }
     }
+    public function obtenerIdPerfil($objUsuarioBean) {
+        try {
+            $objc = new ConexionBD();
+            $con = $objc->getConexionBD();
+
+            $correo = $objUsuarioBean->getCorreoElectronico();
+            
+        
+            $sql = "SELECT IdPerfil FROM usuario WHERE CorreoElectronico = ?";
+            
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param("s", $correo);
+            $stmt->execute();
+            $stmt->bind_result($idPerfil);
+        
+            if ($stmt->fetch()) {
+                return $idPerfil;
+            } else {
+                return null;
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+    }
 
 }
 ?>

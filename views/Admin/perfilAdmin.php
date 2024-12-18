@@ -91,7 +91,7 @@
                     </a>
                 </ul>
             </li>
-            <a href="">
+            <a href="Administrar/AdmInventario.php">
                 <li class="aside__list__options">
                     <span class="material-symbols-outlined iconOption">inventory</span>
                     <span class="option"> Stock de Productos </span>

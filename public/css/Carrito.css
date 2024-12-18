@@ -10,7 +10,7 @@ body {
 }
 
 .headercatalogo {
-    z-index: 3;
+    z-index: 1;
     width: 100%;
     height: 120px;
     background:rgba(0, 77, 171, 100);
@@ -51,7 +51,6 @@ body {
     gap: 5px; /* Espacio entre el ícono y el texto */
     margin: 0 5px; /* Espacio entre botones */
     transition: background-color 0.3s ease;
-    font-size: 15px;
 }
 
 .header_perfil .Boton:hover {
@@ -60,20 +59,50 @@ body {
 
 /*MAIN*/
 
-main{
-    width: 100%;
+.section1__title{
+    font-weight: 700;
+    color: #012340;
+}
+
+.container{
+    height: 500px;
+    position: relative;
+    top: 200px;
+    border-radius: 5px;
+    background-color: white;
+    border: 2px #cdcdcd solid;
+    padding: 20px;
+}
+
+td {
     
 }
 
-main>.container {
-    padding-top: 140px;
-   
+.btnEliminarProduct {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+}
+
+.pay{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.pay > button{
+    width: 200px;
+    height: 50px;
+    font-size: 25px;
+    border-radius: 5px;
 }
 
 .imgProductCatalog {
     height: 400px;
 }
 
-.list-group {
-    z-index: 1;
+.input-table{
+    width: 80px;
 }

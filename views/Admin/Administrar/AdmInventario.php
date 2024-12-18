@@ -7,7 +7,8 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="../../../public/css/asideAndHeader.css">
-    <link rel="stylesheet" href="../../../public/css/Inventario/AdmInventario.css">
+    <link rel="stylesheet" href="../../../public/css/AdmInventario.css">
+
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
 
 
@@ -94,7 +95,7 @@
                     </a>
                 </ul>
             </li>
-            <a href="">
+            <a href="AdmInventario.php">
                 <li class="aside__list__options">
                     <span class="material-symbols-outlined iconOption">inventory</span>
                     <span class="option"> Stock de Productos </span>
@@ -128,36 +129,74 @@
                 <div class="section1__filter">
                     <div class="form-buscar-id">
                         <label>Buscar:</label>
-                        <input class="control" placeholder="Filtrar" required>
-                        <button class="section1__filter__btn" onclick="">Buscar</button>
+                        <input class="control" id="searchNombreProducto" placeholder="Filtrar" required>
+                        <button class="section1__filter__btn" onclick="buscarPorNombre()">Buscar</button>
                     </div>
+                    
+                </div>
+                <div class="section1__AdmLotes">
+                    <button class="section1__AdmLotes__btn" onclick="window.location.href='AdmLotes.php'">Administrar Lotes</button>
                 </div>
   
             </div>
         </div>
 
         <div class="section2">
-            <table id="InventarioTable" class="section2__table">
-                <thead>
-                    <tr>
-                        <th class="section2__table_nombre">Nombre</th>
-                        <th class="section2__table_stockTotal">Stock Total</th>
-                        <th class="section2__table_edit">Editar Lote</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <button onclick="" class="edit-btn">
-                                <span class="material-symbols-outlined">edit</span>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="section2_container">
+                <?php 
+                         // Conexión a la base de datos y obtención de los productos
+                        $objc = new ConexionBD();
+                        $con = $objc->getConexionBD();
+                        $sql = "SELECT p.NombreProducto AS Nombre,SUM(i.Cantidad) AS StockTotal FROM inventario i
+                                INNER JOIN producto p ON i.IdProducto = p.IdProducto
+                                GROUP BY i.IdProducto;";
+                        $rs = mysqli_query($con, $sql);
+                ?>
+                <table id="InventarioTable" class="section2__table">
+                    <thead>
+                        <tr>
+                            <th class="section2__table_nombre">Nombre</th>
+                            <th class="section2__table_stockTotal">Stock Total</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while($inventario = mysqli_fetch_assoc($rs)) { ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($inventario['Nombre']); ?></td>
+                                <td class="tdCenter"><?php echo htmlspecialchars($inventario['StockTotal']); ?></td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </main>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+<script>
+
+       $(document).ready(function() {
+            $('#InventarioTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json",
+                    "emptyTable": "No se encontraron registros coincidentes",
+                    "zeroRecords": "No se encontraron registros coincidentes"
+                },
+                "dom": 'rtip' // Eliminar el campo de búsqueda global
+            });
+        });
+
+        function buscarPorNombre() {
+            event.preventDefault();
+            var nombre = $('#searchNombreProducto').val();
+            var table = $('#InventarioTable').DataTable();
+            table.columns(0).search(nombre).draw(); // BUSCA LA PRIMERA COLUMNA Q ES DE NOMBRE }:V
+        }
+
+
+</script>
 </html>
+
+

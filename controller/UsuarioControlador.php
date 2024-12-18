@@ -9,24 +9,37 @@ $op = $_GET['op'];
 switch($op) {
 
     case 1: {
-        //Verificar usuario
+        // Verificar usuario
         $correo = $_GET['Correo'];
         $contrasena = $_GET['Contrasena'];
         
         $objUsuarioBean = new UsuarioBean();
         $objUsuarioBean->setCorreoElectronico($correo);
         $objUsuarioBean->setContrasena($contrasena);
-
+    
         $objUsuarioDao = new UsuarioDao();
-
+    
+        // Verificar si el usuario está registrado
         $rs = $objUsuarioDao->estaRegistradoUsuario($objUsuarioBean);
-
+    
         if ($rs) {
-            session_start();
+            // Obtener IdPerfil del usuario
+            $idPerfil = $objUsuarioDao->obtenerIdPerfil($objUsuarioBean);
+    
             $_SESSION['CorreoElectronico'] = $objUsuarioBean->getCorreoElectronico(); 
- 
-            $pagina = "../views/Admin/perfilAdmin.php";
+            $_SESSION['IdPerfil'] = $idPerfil;
+    
+            // Redirigir según el IdPerfil
+            if ($idPerfil == 1 || $idPerfil == 2) {
+                $pagina = "../views/Admin/perfilAdmin.php";
+            } else if ($idPerfil == 3) {
+                $pagina = "../index.php";
+            } else {
+                // Si el IdPerfil no es válido
+                $pagina = "../indexz.php";
+            }
         } else {
+            // Usuario no registrado
             $pagina = "../index.php";
         }
     

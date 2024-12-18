@@ -5,12 +5,8 @@
     font-family: Calibri;
 }
 
-body {
-    background-image: url("../img/Background_Admin.png");
-}
-
 .headercatalogo {
-    z-index: 3;
+    z-index: 1;
     width: 100%;
     height: 120px;
     background:rgba(0, 77, 171, 100);
@@ -59,21 +55,62 @@ body {
 }
 
 /*MAIN*/
-
-main{
-    width: 100%;
-    
+main {
+    padding-top: 160px;
 }
 
 main>.container {
-    padding-top: 140px;
-   
+    padding: 60px 0;
 }
 
-.imgProductCatalog {
-    height: 400px;
+.container {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: white;
+    border: 3px #cdcdcd solid;
+    border-radius: 20px;
 }
 
-.list-group {
-    z-index: 1;
+.ContainerDescription {
+    width: 500px;
+    justify-content: center;
 }
+
+.imgDescripProduct {
+    height: 550px;
+    width: 550px;
+}
+
+.nombreProducto {
+    color: #004ea5;
+    font-weight: 800;
+}
+
+.precioProducto {
+    color: #004ea5;
+}
+
+.ContainerButtons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 30px
+}
+
+.btn {
+    padding: 10px 30px;
+    font-size: 18px;
+}
+
+.btnComprar {
+    background-color: #d7291c;
+    border-color: black;
+}
+
+.btnAgregarCarrito{
+    background-color: white;
+    border-color: black;
+    color: black;
+}
+
+
