@@ -1,8 +1,6 @@
 
 <?php
-    // if(!isset($_SESSION["pay"])){
-    //   //redirigir a otra vista  
-    // }
+  
     require '../../util/config.php';
     require '../../util/ConexionBD.php';
 
@@ -59,7 +57,7 @@
             </a>
             <a class="Boton" href="">
                 <span class="material-symbols-outlined iconOption">account_circle</span>
-                <span class="option"> Perfil </span>
+                <span class="option"> <?php echo $usuario ? htmlspecialchars($usuario['Nombres']) : ''; ?> </span>
             </a>
             <?php if(!isset($usuario["IdUsuario"])){?>
             <a class="Boton"  href="../../views/Auth/login.php">

@@ -154,18 +154,7 @@
                     <span class="option"> Stock de Productos </span>
                 </li>
             </a>
-            <a href="">
-                <li class="aside__list__options">
-                    <span class="material-symbols-outlined iconOption">sell</span>
-                    <span class="option"> Precios </span>
-                </li>
-            </a>
-            <a href="">
-                <li class="aside__list__options">
-                    <span class="material-symbols-outlined iconOption">order_approve</span>
-                    <span class="option"> Pedidos </span>
-                </li>
-            </a>
+            
         </ul>
 
         <div class="aside__down">

@@ -115,18 +115,7 @@
                             <span class="option"> Adm. Distritos </span>
                         </li>
                     </a>
-                    <a href="../Administrar/AdmProductos.php">
-                        <li class="aside__list__inside">
-                            <span class="material-symbols-outlined iconOption">medication</span>
-                            <span class="option"> Adm. Productos </span>
-                        </li>
-                    </a>
-                    <a href="../Administrar/AdmCategorias.php">
-                        <li class="aside__list__inside">
-                        <span class="material-symbols-outlined iconOption">category</span>
-                            <span class="option"> Adm. Categorías </span>
-                        </li>
-                    </a>
+                    
                 </ul>
             </li>
             <a href="">

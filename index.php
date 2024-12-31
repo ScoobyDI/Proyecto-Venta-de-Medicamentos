@@ -106,25 +106,7 @@
     </script>
 </head>
 
-<body>
-<!--ventana flotante-->
-    <div class="modal fade" id="modalSuccessFull" tabindex="-1" aria-labelledby="modalSuccessFullLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="modalSuccessFullLabel">Compra Exitosa</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Gracias por su compra!!!
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-            </div>
-        </div>
-    </div>
-<!---->    
+<body>    
     <header class="headercatalogo">
         <div class="header_logo">
             <img src="../../../public/img/logo.png">
@@ -269,18 +251,7 @@
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script>
-    //Funcion para la ventana flotante
-        window.onload = () => {
-                const flag = "<?php echo isset($_SESSION["pay"])?$_SESSION["pay"]:false; ?>"
-                if(flag){
-                    const modal = new bootstrap.Modal('#modalSuccessFull')
-                    modal.show()
-                }
-                <?php unset($_SESSION["pay"]); ?>
-                
-        }                                   
-    //    
+    <script>    
         function addProducto(id, token){
             let url = '../../controller/CarritoCompraControlador.php'
             let formData = new FormData()
